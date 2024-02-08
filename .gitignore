@@ -68,6 +68,4 @@ allure-results/
 schema/
 allure-report/
 *.properties
-AutomationExercise/browsers.json
-AutomationExercise/mvnw
 *.cmd
