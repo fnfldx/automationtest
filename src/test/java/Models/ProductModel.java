@@ -19,7 +19,7 @@ public class ProductModel {
 	public String category;
 	public Boolean isOnSale;
 	public Double priceBeforeSale;
-	public Boolean isAvailable;
+	public Boolean isOutOfStock;
 	public String imageUrl;
 	public List<String> tags;
 }
