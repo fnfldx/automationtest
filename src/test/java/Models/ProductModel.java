@@ -18,6 +18,7 @@ public class ProductModel {
 	public String description;
 	public String category;
 	public Boolean isOnSale;
+	public Double priceBeforeSale;
 	public Boolean isAvailable;
 	public String imageUrl;
 	public List<String> tags;
