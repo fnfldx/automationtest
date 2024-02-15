@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class ChromeDriverManager {
     public WebDriver getDriver() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/java/resources/chromedriver.exe");
 
         ChromeOptions options = new ChromeOptions();
 
@@ -17,6 +17,6 @@ public class ChromeDriverManager {
         options.addArguments("--disable-popup-blocking");
         options.addArguments("--incognito");
 
-        return (WebDriver) new ChromeDriverManager();
+        return new ChromeDriver(options);
     }
 }

@@ -1,2 +1,6 @@
-package Enums;public enum BrowserName {
+package Enums;
+
+public enum BrowserName {
+    Chrome,
+    Firefox
 }

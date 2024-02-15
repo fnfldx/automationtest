@@ -1,3 +1,5 @@
+import Drivers.WebDriverFactory;
+import Enums.BrowserName;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -10,8 +12,7 @@ import java.time.Duration;
 public class OpenPageTest {
     @Test
     public void openPage() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = WebDriverFactory.getWebDriver(BrowserName.Firefox);
 
         String url = "https://automationteststore.com/";
         driver.navigate().to(url);
