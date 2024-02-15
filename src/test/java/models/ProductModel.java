@@ -1,6 +1,6 @@
-package Models;
+package models;
 
-import Enums.Currency;
+import enums.Currency;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
