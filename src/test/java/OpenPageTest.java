@@ -1,3 +1,4 @@
+import models.CustomerModel;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -5,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 
 public class OpenPageTest {
@@ -21,7 +23,6 @@ public class OpenPageTest {
         wait.until(ExpectedConditions.visibilityOfElementLocated(welcomeMsg));
 
         Assert.assertEquals(url, driver.getCurrentUrl());
-
         driver.quit();
     }
 }
