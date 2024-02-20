@@ -1,0 +1,3 @@
+*Please create a config.properties file and define paths to both webdrivers as shown below:
+CHROME_DRIVER = please/put/your/path/to/chromedriver.exe
+FIREFOX_DRIVER = please/put/your/path/to/geckodriver.exe
