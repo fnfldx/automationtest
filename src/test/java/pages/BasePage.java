@@ -1,29 +1,19 @@
 package pages;
 
+import engine.config.reader.ConfigReader;
+import enums.CategoryMenuButton;
+import enums.FooterHyperLink;
+import enums.NavbarButton;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
-// page_url = https://automationteststore.com/
 public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected String baseUrl;
-
-    static public final String SPECIALS_NAVBAR_BUTTON_TEXT = "Specials";
-    static public final String ACCOUNT_NAVBAR_BUTTON_TEXT = "Account";
-    static public final String CART_NAVBAR_BUTTON_TEXT = "Cart";
-    static public final String CHECKOUT_NAVBAR_BUTTON_TEXT = "Checkout";
-    static public final String HOME_CATEGORYMENU_BUTTON_TEXT = "Home";
-    static public final String APPAREL_CATEGORYMENU_BUTTON_TEXT = "Apparel & accessories";
-    static public final String MAKEUP_CATEGORYMENU_BUTTON_TEXT = "Makeup";
-    static public final String SKINCARE_CATEGORYMENU_BUTTON_TEXT = "Skincare";
-    static public final String FRAGRANCE_CATEGORYMENU_BUTTON_TEXT = "Fragrance";
-    static public final String MEN_CATEGORYMENU_BUTTON_TEXT = "Men";
-    static public final String HAIRCARE_CATEGORYMENU_BUTTON_TEXT = "Hair Care";
-    static public final String BOOKS_CATEGORYMENU_BUTTON_TEXT = "Books";
 
     protected final String navbarXpath = "//div[@role='navigation']";
     protected final String categoryMenuXpath = "//section[@id='categorymenu']";
@@ -40,21 +30,23 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        this.baseUrl = "https://automationteststore.com/";
+        int baseWaitInSeconds = Integer.parseInt(ConfigReader.getProperty(ConfigReader.PropertyKeys.BASE_WAIT_IN_SECONDS));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(baseWaitInSeconds));
+        this.baseUrl = ConfigReader.getProperty(ConfigReader.PropertyKeys.BASE_URL);
     }
 
-    public By buttonNavbarLocatorByText(String text) {
-        return By.xpath(navbarXpath + "//span[text()='" + text + "']");
+    public By buttonNavbarLocatorByDataId(NavbarButton button) {
+        return By.xpath(navbarXpath + "//li[@data-id='"+ button.getDataId() +"']//span[@class='menu_text']");
     }
 
-    public By buttonCategoryMenuLocatorByText(String text) {
-        return By.xpath(categoryMenuXpath + "//a[contains(text(), '" + text + "')]");
+    public By buttonCategoryMenuLocatorByText(CategoryMenuButton button) {
+        return By.xpath(categoryMenuXpath + "//a[contains(text(), '" + button.getText() + "')]");
     }
 
-    public By hyperLinkFooterLinksLocatorByText(String text) {
-        return By.xpath(footerlinksXpath + "//a[text()='" + text + "']");
+    public By hyperLinkFooterLocatorByText(FooterHyperLink link) {
+        return By.xpath(footerlinksXpath + "//a[text()='" + link.getText() + "']");
     }
+
     public void openUrl(String url) {
         driver.get(url);
     }
@@ -62,6 +54,7 @@ public class BasePage {
     public void refresh() {
         driver.navigate().refresh();
     }
+
     public void clickOnElement(By locator) {
         locateElement(locator).click();
     }

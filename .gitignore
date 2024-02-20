@@ -69,3 +69,4 @@ schema/
 allure-report/
 *.properties
 *.cmd
+*.exe
