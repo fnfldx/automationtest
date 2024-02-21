@@ -4,10 +4,14 @@ import engine.config.reader.ConfigReader;
 import enums.CategoryMenuButton;
 import enums.FooterHyperLink;
 import enums.NavbarButton;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 
 public class BasePage {
@@ -19,7 +23,7 @@ public class BasePage {
     protected final String categoryMenuXpath = "//section[@id='categorymenu']";
     protected final String footersocialXpath = "//section[@class='footersocial']";
     protected final String footerlinksXpath = "//section[@class='footerlinks']";
-    public By searchInputLocator = By.xpath("//input[@id='filter_keyword']");
+    public By searchInputLocator = By.id("filter_keyword");
     public By searchButtonLocator = By.xpath("//i[@class='fa fa-search']");
     public By loginAndRegisterButtonLocator = By.xpath("//div[@class='navbar']//a");
     public By homeLinkByLogoLocator = By.xpath("//a[@class='logo']");
@@ -51,10 +55,6 @@ public class BasePage {
         driver.get(url);
     }
 
-    public void refresh() {
-        driver.navigate().refresh();
-    }
-
     public void clickOnElement(By locator) {
         locateElement(locator).click();
     }
@@ -73,33 +73,37 @@ public class BasePage {
 
     public void selectCheckbox(By locator) {
         WebElement element = locateElement(locator);
-        if (!element.isSelected()) {
-            element.click();
+        if (element.isSelected()) {
+            throw new IllegalStateException("Checkbox is already selected");
         }
+        element.click();
     }
 
-    public void deselectCheckbox(By locator) {
+    public void unselectCheckbox(By locator) {
         WebElement element = locateElement(locator);
-        if (element.isSelected()) {
-            element.click();
+        if (!element.isSelected()) {
+            throw new IllegalStateException("Checkbox is already unselected");
         }
+        element.click();
     }
 
     public void selectRadioButton(By locator) {
         WebElement element = locateElement(locator);
-        if (!element.isSelected()) {
-            element.click();
+        if (element.isSelected()) {
+            throw new IllegalStateException("Radio button is already selected");
         }
+        element.click();
     }
 
     public void setCheckboxState(By locator, boolean state) {
         WebElement element = locateElement(locator);
-        if (element.isSelected() != state) {
-            element.click();
+        if (element.isSelected() == state) {
+            throw new IllegalStateException("Checkbox is already in the desired state");
         }
+        element.click();
     }
 
-    public void sendKeysToElement(By locator, String text) {
+    public void enterTextToElement(By locator, String text) {
         locateElement(locator).sendKeys(text);
     }
 
@@ -107,20 +111,12 @@ public class BasePage {
         return locateElement(locator).getText();
     }
 
-    public String getAttributeFromElement(By locator, String attribute) {
-        return locateElement(locator).getAttribute(attribute);
-    }
-
-    public String getTagNameFromElement(By locator) {
-        return locateElement(locator).getTagName();
-    }
-
     public void clearTextFromElement(By locator) {
         locateElement(locator).clear();
     }
-    public void clearAndType(By locator, String text) {
+    public void clearAndTypeTextToElement(By locator, String text) {
         clearTextFromElement(locator);
-        sendKeysToElement(locator, text);
+        enterTextToElement(locator, text);
     }
 
     public boolean isElementDisplayed(By locator) {

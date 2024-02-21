@@ -1,5 +1,5 @@
 *Please create a config.properties file (default path: src/main/java/resources/config.properties) and define paths to both webdrivers as shown below:
-CHROME_DRIVER = please/put/your/path/to/chromedriver.exe
-FIREFOX_DRIVER = please/put/your/path/to/geckodriver.exe
+CHROME_DRIVER=please/put/your/path/to/chromedriver.exe
+FIREFOX_DRIVER=please/put/your/path/to/geckodriver.exe
 BASE_URL=https://automationteststore.com/
-GLOBAL_WAIT=10
+GLOBAL_WAIT=3
