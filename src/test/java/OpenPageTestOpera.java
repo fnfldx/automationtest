@@ -8,10 +8,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
-public class OpenPageTestChrome {
+public class OpenPageTestOpera {
     @Test
     public void openPage() {
-        WebDriver driver = WebDriverFactory.getWebDriver(BrowserName.CHROME);
+        WebDriver driver = WebDriverFactory.getWebDriver(BrowserName.OPERA);
 
         String url = "https://automationteststore.com/";
         driver.navigate().to(url);
