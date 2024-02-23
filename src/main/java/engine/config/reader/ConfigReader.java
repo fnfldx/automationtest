@@ -7,7 +7,7 @@ import java.util.Properties;
 public class ConfigReader {
   public static String getProperty(PropertyKeys key) {
     var properties = new Properties();
-    var configPath = "src/main/java/resources/config.properties";
+    var configPath = "src/main/resources/config.properties";
     try (FileInputStream input = new FileInputStream(configPath)) {
         properties.load(input);
     } catch (IOException ex) {
@@ -22,7 +22,7 @@ public class ConfigReader {
 
     public enum PropertyKeys {
       CHROME_DRIVER,
-      FIREFOX_DRIVER
+      FIREFOX_DRIVER,
       BASE_URL,
       BASE_WAIT_IN_SECONDS
   }
