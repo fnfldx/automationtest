@@ -1,6 +1,6 @@
 package engine.drivers;
 
-import customexceptions.UnsupportedBrowserException;
+import engine.exceptions.UnsupportedBrowserException;
 import enums.BrowserName;
 import lombok.SneakyThrows;
 import org.openqa.selenium.WebDriver;

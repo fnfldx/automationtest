@@ -1,4 +1,4 @@
-package customexceptions;
+package engine.exceptions;
 
 import enums.BrowserName;
 

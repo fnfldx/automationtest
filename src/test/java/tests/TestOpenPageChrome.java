@@ -1,5 +1,8 @@
+package tests;
+
 import engine.drivers.WebDriverFactory;
 import enums.BrowserName;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -8,12 +11,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
-public class OpenPageTestOpera {
+import static engine.config.reader.ConfigReader.PropertyKeys.BASE_URL;
+import static engine.config.reader.ConfigReader.getProperty;
+
+public class TestOpenPageChrome {
     @Test
     public void openPage() {
-        WebDriver driver = WebDriverFactory.getWebDriver(BrowserName.OPERA);
+        WebDriver driver = WebDriverFactory.getWebDriver(BrowserName.CHROME);
 
-        String url = "https://automationteststore.com/";
+        String url = getProperty(BASE_URL);
         driver.navigate().to(url);
 
         var welcomeMsg = By.xpath("//div[@class='welcome_msg']");

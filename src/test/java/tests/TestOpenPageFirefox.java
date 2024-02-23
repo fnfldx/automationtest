@@ -1,3 +1,5 @@
+package tests;
+
 import engine.drivers.WebDriverFactory;
 import enums.BrowserName;
 import org.junit.Assert;
@@ -8,12 +10,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
-public class OpenPageTestFirefox {
+import static engine.config.reader.ConfigReader.PropertyKeys.BASE_URL;
+import static engine.config.reader.ConfigReader.getProperty;
+
+public class TestOpenPageFirefox {
     @Test
     public void openPage() {
         WebDriver driver = WebDriverFactory.getWebDriver(BrowserName.FIREFOX);
 
-        String url = "https://automationteststore.com/";
+        String url = getProperty(BASE_URL);
         driver.navigate().to(url);
 
         var welcomeMsg = By.xpath("//div[@class='welcome_msg']");
