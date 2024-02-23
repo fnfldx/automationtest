@@ -1,10 +1,10 @@
-package engine.config.reader;
+package engine.property.manager;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ConfigReader {
+public class PropertyManager {
   public static String getProperty(PropertyKeys key) {
     var properties = new Properties();
     var configPath = "src/main/resources/config.properties";

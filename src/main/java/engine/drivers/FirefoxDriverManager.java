@@ -3,9 +3,9 @@ package engine.drivers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import static engine.config.reader.ConfigReader.PropertyKeys.FIREFOX_DRIVER;
-import static engine.config.reader.ConfigReader.getProperty;
-import static engine.config.reader.ConfigReader.setProperty;
+import static engine.property.manager.PropertyManager.PropertyKeys.FIREFOX_DRIVER;
+import static engine.property.manager.PropertyManager.getProperty;
+import static engine.property.manager.PropertyManager.setProperty;
 import static enums.BrowserName.FIREFOX;
 
 public class FirefoxDriverManager implements WebDriverInterface {

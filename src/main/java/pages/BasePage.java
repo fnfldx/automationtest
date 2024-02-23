@@ -1,6 +1,6 @@
 package pages;
 
-import engine.config.reader.ConfigReader;
+import engine.property.manager.PropertyManager;
 import enums.CategoryMenuButton;
 import enums.FooterHyperLink;
 import enums.NavbarButton;
@@ -34,9 +34,9 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        int baseWaitInSeconds = Integer.parseInt(ConfigReader.getProperty(ConfigReader.PropertyKeys.BASE_WAIT_IN_SECONDS));
+        int baseWaitInSeconds = Integer.parseInt(PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_WAIT_IN_SECONDS));
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(baseWaitInSeconds));
-        this.baseUrl = ConfigReader.getProperty(ConfigReader.PropertyKeys.BASE_URL);
+        this.baseUrl = PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_URL);
     }
 
     public By buttonNavbarLocatorByDataId(NavbarButton button) {
