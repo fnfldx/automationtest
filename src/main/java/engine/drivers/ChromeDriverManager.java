@@ -9,6 +9,7 @@ import static engine.config.reader.ConfigReader.setProperty;
 import static enums.BrowserName.CHROME;
 
 public class ChromeDriverManager implements WebDriverInterface {
+
     @Override
     public void setWebDriverPath() {
         setProperty(CHROME.webDriverPathProperty, getProperty(CHROME_DRIVER));

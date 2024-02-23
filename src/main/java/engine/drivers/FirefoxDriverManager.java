@@ -9,6 +9,7 @@ import static engine.config.reader.ConfigReader.setProperty;
 import static enums.BrowserName.FIREFOX;
 
 public class FirefoxDriverManager implements WebDriverInterface {
+
     @Override
     public void setWebDriverPath() {
         setProperty(FIREFOX.webDriverPathProperty, getProperty(FIREFOX_DRIVER));

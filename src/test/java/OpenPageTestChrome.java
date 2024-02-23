@@ -11,7 +11,7 @@ import java.time.Duration;
 public class OpenPageTestChrome {
     @Test
     public void openPage() {
-        WebDriver driver = WebDriverFactory.getWebDriver(BrowserName.CHROME);
+        WebDriver driver = WebDriverFactory.getWebDriver(BrowserName.OPERA);
 
         String url = "https://automationteststore.com/";
         driver.navigate().to(url);
