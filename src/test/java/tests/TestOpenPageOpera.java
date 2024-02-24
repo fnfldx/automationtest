@@ -12,10 +12,12 @@ import java.time.Duration;
 
 import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
 import static engine.property.manager.PropertyManager.getProperty;
+import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
 
 public class TestOpenPageOpera {
     @Test
     public void openPage() {
+        getPropertyManagerInstance();
         WebDriver driver = WebDriverFactory.getWebDriver(BrowserName.OPERA);
 
         String url = getProperty(BASE_URL);

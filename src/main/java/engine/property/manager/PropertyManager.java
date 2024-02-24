@@ -27,7 +27,7 @@ public class PropertyManager {
     // Private constructor to prevent instantiation from outside
   }
 
-  public static synchronized PropertyManager getInstance() {
+  public static synchronized PropertyManager getPropertyManagerInstance() {
     if (instance == null) {
       instance = new PropertyManager();
     }
