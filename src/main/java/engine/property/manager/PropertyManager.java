@@ -5,11 +5,13 @@ import lombok.Getter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Getter
 public class PropertyManager {
   private static PropertyManager instance;
-  private static Properties properties;
+  private static final Properties properties;
 
   static {
     properties = new Properties();
@@ -17,7 +19,7 @@ public class PropertyManager {
     try (FileInputStream input = new FileInputStream(configPath)) {
       properties.load(input);
     } catch (IOException ex) {
-      ex.printStackTrace();
+      Logger.getLogger(PropertyManager.class.getName()).log(Level.SEVERE, "Error loading properties", ex);
     }
   }
 
