@@ -1,4 +1,3 @@
-import models.CustomerModel;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -23,6 +22,7 @@ public class OpenPageTest {
         wait.until(ExpectedConditions.visibilityOfElementLocated(welcomeMsg));
 
         Assert.assertEquals(url, driver.getCurrentUrl());
+
         driver.quit();
     }
 }
