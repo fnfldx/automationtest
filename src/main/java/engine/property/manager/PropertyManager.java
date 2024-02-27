@@ -40,6 +40,7 @@ public class PropertyManager {
   public static void setProperty(String systemProperty, String systemStringValue) {
     System.setProperty(systemProperty, systemStringValue);
   }
+
   public enum PropertyKeys {
     CHROME_DRIVER,
     FIREFOX_DRIVER,
