@@ -1,6 +1,8 @@
 package engine.property.manager;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertyManager {
   private static PropertyManager instance;
   private static final Properties properties;
@@ -21,10 +24,6 @@ public class PropertyManager {
     } catch (IOException ex) {
       Logger.getLogger(PropertyManager.class.getName()).log(Level.SEVERE, "Error loading properties", ex);
     }
-  }
-
-  private PropertyManager() {
-    // Private constructor to prevent instantiation from outside
   }
 
   public static synchronized PropertyManager getPropertyManagerInstance() {
