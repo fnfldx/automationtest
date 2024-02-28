@@ -10,12 +10,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
-import static engine.config.reader.ConfigReader.PropertyKeys.BASE_URL;
-import static engine.config.reader.ConfigReader.getProperty;
+import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
+import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
+import static engine.property.manager.PropertyManager.getProperty;
 
 public class TestOpenPageFirefox {
     @Test
     public void openPage() {
+        getPropertyManagerInstance();
         WebDriver driver = WebDriverFactory.getWebDriver(BrowserName.FIREFOX);
 
         String url = getProperty(BASE_URL);
