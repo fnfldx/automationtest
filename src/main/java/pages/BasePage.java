@@ -1,6 +1,8 @@
 package pages;
 
+import engine.drivers.WebDriverFactory;
 import engine.property.manager.PropertyManager;
+import enums.BrowserName;
 import enums.CategoryMenuButton;
 import enums.FooterHyperLink;
 import enums.NavbarButton;
@@ -32,9 +34,9 @@ public class BasePage {
     public By newsletterInputLocator = By.xpath(footersocialXpath + "//input[@id='appendedInputButton']");
     public By newsletterButtonLocator = By.xpath(footersocialXpath + "//button[@class='btn btn-orange']");
 
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
-        int baseWaitInSeconds = Integer.parseInt(PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_WAIT_IN_SECONDS));
+    public BasePage(BrowserName browserName) {
+        this.driver = WebDriverFactory.getWebDriver(browserName);
+        int baseWaitInSeconds = Integer.parseInt(PropertyManager.getProperty(PropertyManager.PropertyKeys.GLOBAL_WAIT));
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(baseWaitInSeconds));
         this.baseUrl = PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_URL);
     }

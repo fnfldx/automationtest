@@ -1,44 +1,40 @@
 package pages;
 
+import enums.BrowserName;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-public class LoginPage {
-    private WebDriver driver;
+public class LoginPage extends BasePage {
 
-    public LoginPage (WebDriver driver) {
-        this.driver = driver;
+    // Constructor:
+    public LoginPage(BrowserName browserName) {
+        super(browserName);
     }
 
-    private By emailInput = By.id("loginFrm_loginname");
-    private By passwordInput = By.id("loginFrm_password");
-    private By loginButton = By.cssSelector("button[title='Login']");
-    private By registerAccountButton = By.id("accountFrm_accountregister");
-    private By guestCheckoutButton = By.id("accountFrm_accountguest");
+    // Locators:
+    private By loginInputLocator = By.xpath("//*[@id=\"loginFrm_loginname\"]");
+    private By passwordInputLocator = By.xpath("//*[@id=\"loginFrm_password\"]");
+    private By loginButtonLocator = By.xpath("//*[@id=\"loginFrm\"]/fieldset/button");
+    private By registerAccountButtonLocator = By.xpath("//*[@id=\"accountFrm_accountregister\"]");
+    private By guestCheckoutButtonLocator = By.xpath("//*[@id=\"accountFrm_accountguest\"]");
 
-    public void enterEmail (String email) {
-        WebElement emailField = driver.findElement(emailInput);
-        emailField.sendKeys(email);
+    // Methods:
+    public void enterEmail(String email) {
+        enterTextToElement(loginInputLocator, email);
     }
 
-    public void enterPassword (String password) {
-        WebElement passwordField = driver.findElement(passwordInput);
-        passwordField.sendKeys(password);
+    public void enterPassword(String password) {
+        enterTextToElement(passwordInputLocator, password);
     }
 
     public void clickLoginButton() {
-        WebElement loginBtn = driver.findElement(loginButton);
-        loginBtn.click();
+        clickOnElement(loginButtonLocator);
     }
 
     public void registerAccountOption() {
-        WebElement registerAccountBtn = driver.findElement(registerAccountButton);
-        registerAccountBtn.click();
+        clickOnElement(registerAccountButtonLocator);
     }
 
     public void guestAccountOption() {
-        WebElement guestCheckoutBtn = driver.findElement(guestCheckoutButton);
-        guestCheckoutBtn.click();
+        clickOnElement(guestCheckoutButtonLocator);
     }
 }
