@@ -46,9 +46,20 @@ public class TestOpenPageChrome {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         var cartTable = new ShoppingCartTable(driver);
-        int test = cartTable.getRowCount();
-        int test2 = cartTable.getColumnIndex("Name");
-        int test3 = cartTable.getColumnCount();
+        int debug = cartTable.getRowCount();
+        int debug2 = cartTable.getColumnCount();
+        int debug3 = cartTable.getColumnIndex("Name");
+        var debug4 = cartTable.getColumnHeaders();
+        var debug5 = cartTable.getRowIndex("Benefit Bella Bamba");
+        var debug6 = cartTable.getRowNumber("Benefit Bella Bamba");
+        var debug7 = cartTable.getRowContent(2);
+        var debug8 = cartTable.getColumnContent(3);
+        var debug9 = cartTable.getColumnContent("Quantity");
+        var debug10 = cartTable.getCellContent(3, 3);
+        var debug11 = cartTable.getCellContent(3, "Name");
+
+        var debug12 = cartTable.getUnitPriceWithCurrencyCharacter(1);
+        var debug13 = cartTable.getUnitPrice(1);
 
         driver.quit();
     }

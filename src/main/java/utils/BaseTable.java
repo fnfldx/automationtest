@@ -6,6 +6,9 @@ public interface BaseTable {
     public int getRowCount();
     public int getColumnCount();
     public int getColumnIndex(String columnHeader);
+    public int getColumnNumber(String columnHeader);
+    public int getRowIndex(String text);
+    public int getRowNumber(String text);
     public List<String> getColumnHeaders();
     public List<String> getRowContent(int rowNumber);
     public List<String> getColumnContent(int columnNumber);
