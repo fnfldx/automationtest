@@ -1,5 +1,6 @@
 package utils;
 
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,16 +10,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCartTable extends BasePage implements BaseTable{
+public class ShoppingCartTable extends BasePage implements BaseTable {
     private final String tableXpath = "//div[contains(@class, 'product-list')]/table";
 
     public By tableLocator = By.xpath(tableXpath);
     public By cartEmptyMessagePanel = By.xpath("//div[@class='contentpanel1']");
     public By headerRow = By.xpath(tableXpath + "/tbody/tr");
-    public By deleteItemButton = By.xpath("//i[contains(@class, 'fa-trash-o')]/parent::a");
-    public By quantityItemDiv = By.xpath("//div[@class='input-group input-group-sm']");
-    public By quantityItemInput = By.xpath("//input[contains(@id, 'cart_quantity')]");
-    public By imageItem = By.xpath(tableXpath + "//img");
+    public By deleteItemButton = By.xpath(".//i[contains(@class, 'fa-trash-o')]/parent::a");
+    public By quantityItemInput = By.xpath(".//input[contains(@id, 'cart_quantity')]");
     public By cartUpdateButton = By.id("cart_update");
     public By cartCheckoutButton = By.id("cart_checkout1");
 
@@ -44,7 +43,11 @@ public class ShoppingCartTable extends BasePage implements BaseTable{
     }
 
     public int getColumnNumber(String columnHeader) {
-        return getColumnIndex(columnHeader) + 1;
+        int rowIndex = getColumnIndex(columnHeader);
+        if (rowIndex == -1) {
+            return -1;
+        }
+        return rowIndex + 1;
     }
 
     public int getRowIndex(String text) {
@@ -61,7 +64,11 @@ public class ShoppingCartTable extends BasePage implements BaseTable{
     }
 
     public int getRowNumber(String text) {
-        return getRowIndex(text) + 1;
+        int rowIndex = getRowIndex(text);
+        if (rowIndex == -1) {
+            return -1;
+        }
+        return rowIndex + 1;
     }
 
     public List<String> getColumnHeaders() {
@@ -69,29 +76,85 @@ public class ShoppingCartTable extends BasePage implements BaseTable{
         List<WebElement> headerColumns = headerRowElement.findElements(By.tagName("th"));
 
         List<String> headerTexts = new ArrayList<>();
-        for(WebElement headerColumn : headerColumns) {
+        for (WebElement headerColumn : headerColumns) {
             headerTexts.add(headerColumn.getText());
         }
         return headerTexts;
     }
 
-    public List<String> getRowContent(int rowNumber) {
+    protected WebElement getRow(int rowNumber) {
         WebElement table = locateElement(tableLocator);
         List<WebElement> rows = table.findElements(By.tagName("tr"));
 
         if (rowNumber > 0 && rowNumber < rows.size()) {
+            return rows.get(rowNumber - 1);
+        } else {
+            throw new IllegalArgumentException("Row number [" + rowNumber + "] is out of range");
+        }
+    }
+
+    private WebElement getCell(int rowNumber, int columnNumber) {
+        List<WebElement> rows = driver.findElements(By.xpath(tableXpath + "//tr[.//td]"));
+
+        if (rowNumber > 0 && rowNumber <= rows.size()) {
             WebElement targetRow = rows.get(rowNumber - 1);
             List<WebElement> cells = targetRow.findElements(By.tagName("td"));
 
-            List<String> rowData = new ArrayList<>();
-            for (WebElement cell : cells) {
-                rowData.add(cell.getText());
+            if (columnNumber > 0 && columnNumber <= cells.size()) {
+                return cells.get(columnNumber - 1);
+            } else {
+                throw new IllegalArgumentException("Column number [" + columnNumber + "] is out of range");
             }
-            return rowData;
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Row number [" + rowNumber + "] is out of range");
         }
+    }
+
+    private String getCellContent(WebElement cell) {
+        if (hasQuantityInput(cell)) {
+            return getQuantityInputValue(cell);
+        } else if (hasImageItem(cell)) {
+            return getImageItemSrc(cell);
+        } else if (hasDeleteButton(cell)) {
+            return getDeleteButtonHref(cell);
+        } else {
+            return cell.getText();
+        }
+    }
+
+    private boolean hasQuantityInput(WebElement cell) {
+        return !cell.findElements(quantityItemInput).isEmpty();
+    }
+
+    private String getQuantityInputValue(WebElement cell) {
+        return cell.findElements(quantityItemInput).getFirst().getAttribute("value");
+    }
+
+    private boolean hasImageItem(WebElement cell) {
+        return !cell.findElements(By.xpath(".//img")).isEmpty();
+    }
+
+    private String getImageItemSrc(WebElement cell) {
+        return cell.findElements(By.xpath(".//img")).getFirst().getAttribute("src");
+    }
+
+    private boolean hasDeleteButton(WebElement cell) {
+        return !cell.findElements(deleteItemButton).isEmpty();
+    }
+
+    private String getDeleteButtonHref(@NotNull WebElement cell) {
+        return cell.findElement(By.xpath("./a")).getAttribute("href");
+    }
+
+    public List<String> getRowContent(int rowNumber) {
+        WebElement row = getRow(rowNumber);
+        List<WebElement> cells = row.findElements(By.tagName("td"));
+
+        List<String> cellData = new ArrayList<>();
+        for (WebElement cell : cells) {
+            cellData.add(getCellContent(cell));
+        }
+        return cellData;
     }
 
     public List<String> getColumnContent(int columnNumber) {
@@ -103,9 +166,8 @@ public class ShoppingCartTable extends BasePage implements BaseTable{
             List<WebElement> cells = row.findElements(By.tagName("td"));
 
             if (columnNumber > 0 && columnNumber <= cells.size()) {
-                columnData.add(cells.get(columnNumber - 1).getText());
-            }
-            else {
+                columnData.add(getCellContent(cells.get(columnNumber - 1)));
+            } else {
                 throw new IllegalArgumentException("Column number [" + columnNumber + "] is out of range");
             }
         }
@@ -119,22 +181,8 @@ public class ShoppingCartTable extends BasePage implements BaseTable{
     }
 
     public String getCellContent(int rowNumber, int columnNumber) {
-        List<WebElement> rows = driver.findElements(By.xpath(tableXpath + "//tr[.//td]"));
-
-        if (rowNumber > 0 && rowNumber <= rows.size()) {
-            WebElement targetRow = rows.get(rowNumber - 1);
-            List<WebElement> cells = targetRow.findElements(By.tagName("td"));
-
-            if (columnNumber > 0 && columnNumber <= cells.size()) {
-                return cells.get(columnNumber - 1).getText();
-            }
-            else {
-                throw new IllegalArgumentException("Column number [" + columnNumber + "] is out of range");
-            }
-        }
-        else {
-            throw new IllegalArgumentException("Row number [" + rowNumber + "] is out of range");
-        }
+        WebElement cell = getCell(rowNumber, columnNumber);
+        return getCellContent(cell);
     }
 
     public String getCellContent(int rowNumber, String columnName) {
@@ -159,6 +207,36 @@ public class ShoppingCartTable extends BasePage implements BaseTable{
     }
 
     public int getQuantity(int rowNumber) {
-        return -1;
+        String quantity = getCellContent(rowNumber, getColumnNumber("Quantity"));
+        return Integer.parseInt(quantity);
+    }
+
+    public int getQuantity(String productName) {
+        int rowNumber = getRowNumber(productName);
+        return getQuantity(rowNumber);
+    }
+
+    public void setQuantity(int rowNumber, int quantity) {
+        WebElement cell = getCell(rowNumber, getColumnNumber("Quantity"));
+        WebElement input = cell.findElement(quantityItemInput);
+        input.clear();
+        input.sendKeys(String.valueOf(quantity));
+    }
+
+    public void deleteItem(int rowNumber) {
+        WebElement row = getRow(rowNumber);
+        row.findElement(deleteItemButton).click();
+    }
+
+    public void clickCartUpdateButton() {
+        locateElement(cartUpdateButton).click();
+    }
+
+    public void clickCartCheckoutButton() {
+        locateElement(cartCheckoutButton).click();
+    }
+
+    public boolean isCartEmpty() {
+        return isElementDisplayed(cartEmptyMessagePanel);
     }
 }
