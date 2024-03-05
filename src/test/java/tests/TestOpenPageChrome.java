@@ -75,6 +75,9 @@ public class TestOpenPageChrome {
 
         var debug12 = cartTable.getUnitPriceWithCurrencyCharacter(1);
         var debug13 = cartTable.getUnitPrice(1);
+        var debug14 = cartTable.getTotalPriceWithCurrencyCharacter(1);
+        var debug15 = cartTable.getTotalPrice(1);
+        var debug16 = cartTable.getQuantity(1);
 
         cartTable.setQuantity(3, 10);
         cartTable.deleteItem(2);

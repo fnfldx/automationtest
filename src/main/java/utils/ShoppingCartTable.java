@@ -141,7 +141,7 @@ public class ShoppingCartTable extends BasePage implements BaseTable {
         return !cell.findElements(deleteItemButton).isEmpty();
     }
 
-    private String getDeleteButtonHref(@NotNull WebElement cell) {
+    private String getDeleteButtonHref(WebElement cell) {
         return cell.findElement(By.xpath("./a")).getAttribute("href");
     }
 
@@ -203,6 +203,21 @@ public class ShoppingCartTable extends BasePage implements BaseTable {
     public BigDecimal getUnitPrice(String productName) {
         int rowNumber = getRowNumber(productName);
         return getUnitPrice(rowNumber);
+    }
+
+    public String getTotalPriceWithCurrencyCharacter(int rowNumber) {
+        return getCellContent(rowNumber, getColumnNumber("Total Price"));
+    }
+
+    public BigDecimal getTotalPrice(int rowNumber) {
+        String totalPriceWithCurrency = getTotalPriceWithCurrencyCharacter(rowNumber);
+        String totalPriceWithoutCurrency = totalPriceWithCurrency.substring(1);
+        return new BigDecimal(totalPriceWithoutCurrency);
+    }
+
+    public BigDecimal getTotalPrice(String productName) {
+        int rowNumber = getRowNumber(productName);
+        return getTotalPrice(rowNumber);
     }
 
     public int getQuantity(int rowNumber) {
