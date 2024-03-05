@@ -15,8 +15,8 @@ import utils.ShoppingCartTable;
 import java.time.Duration;
 
 import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
-import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
 import static engine.property.manager.PropertyManager.getProperty;
+import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
 
 public class TestOpenPageChrome {
     @Test
