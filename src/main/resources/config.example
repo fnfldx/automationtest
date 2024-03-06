@@ -2,4 +2,4 @@
 CHROME_DRIVER=please/put/your/path/to/chromedriver.exe
 FIREFOX_DRIVER=please/put/your/path/to/geckodriver.exe
 BASE_URL=https://automationteststore.com/
-GLOBAL_WAIT=3
+BASE_WAIT_IN_SECONDS=3

@@ -45,6 +45,6 @@ public class PropertyManager {
     CHROME_DRIVER,
     FIREFOX_DRIVER,
     BASE_URL,
-    GLOBAL_WAIT
+    BASE_WAIT_IN_SECONDS
   }
 }

@@ -36,7 +36,7 @@ public class BasePage {
 
     public BasePage(BrowserName browserName) {
         this.driver = WebDriverFactory.getWebDriver(browserName);
-        int baseWaitInSeconds = Integer.parseInt(PropertyManager.getProperty(PropertyManager.PropertyKeys.GLOBAL_WAIT));
+        int baseWaitInSeconds = Integer.parseInt(PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_WAIT_IN_SECONDS));
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(baseWaitInSeconds));
         this.baseUrl = PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_URL);
     }
