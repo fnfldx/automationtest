@@ -11,7 +11,7 @@ import pages.LoginPage;
 
 import java.time.Duration;
 
-import static engine.drivers.WebDriverFactory.getWebDriver;
+import static engine.drivers.WebDriverFactory.*;
 import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
 import static engine.property.manager.PropertyManager.getProperty;
 import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
@@ -20,7 +20,7 @@ public class TestOpenPageChrome {
     @Test
     public void openPage() {
         getPropertyManagerInstance();
-        WebDriver driver = getWebDriver(BrowserName.CHROME);
+        WebDriver driver = getWebDriverInstance(BrowserName.CHROME);
         LoginPage loginPage = new LoginPage(BrowserName.CHROME);
 
         String url = getProperty(BASE_URL);

@@ -35,7 +35,7 @@ public class BasePage {
     public By newsletterButtonLocator = By.xpath(footersocialXpath + "//button[@class='btn btn-orange']");
 
     public BasePage(BrowserName browserName) {
-        this.driver = WebDriverFactory.getWebDriver(browserName);
+        this.driver = WebDriverFactory.createWebDriver(browserName);
         int baseWaitInSeconds = Integer.parseInt(PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_WAIT_IN_SECONDS));
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(baseWaitInSeconds));
         this.baseUrl = PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_URL);

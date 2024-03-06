@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertyManager {
-  private static PropertyManager instance;
+  private static PropertyManager propertyManagerInstance;
   private static final Properties properties;
 
   static {
@@ -27,10 +27,10 @@ public class PropertyManager {
   }
 
   public static synchronized PropertyManager getPropertyManagerInstance() {
-    if (instance == null) {
-      instance = new PropertyManager();
+    if (propertyManagerInstance == null) {
+      propertyManagerInstance = new PropertyManager();
     }
-    return instance;
+    return propertyManagerInstance;
   }
 
   public static String getProperty(PropertyKeys key) {

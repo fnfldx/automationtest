@@ -2,13 +2,25 @@ package engine.drivers;
 
 import engine.exceptions.UnsupportedBrowserException;
 import enums.BrowserName;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import org.openqa.selenium.WebDriver;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class WebDriverFactory {
+    private static WebDriver webDriverInstance;
 
     @SneakyThrows
-    public static WebDriver getWebDriver(BrowserName browserName) {
+    public static synchronized WebDriver getWebDriverInstance(BrowserName browserName) {
+        if (webDriverInstance == null) {
+            webDriverInstance = createWebDriver(browserName);
+        }
+        return webDriverInstance;
+    }
+
+    @SneakyThrows
+    public static WebDriver createWebDriver(BrowserName browserName) {
         return switch (browserName) {
             case CHROME -> new ChromeDriverManager().getDriver();
             case FIREFOX -> new FirefoxDriverManager().getDriver();

@@ -8,8 +8,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.LoginPage;
+
 import java.time.Duration;
 
+import static engine.drivers.WebDriverFactory.createWebDriver;
+import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
 import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
 import static engine.property.manager.PropertyManager.getProperty;
@@ -18,7 +22,8 @@ public class TestOpenPageFirefox {
     @Test
     public void openPage() {
         getPropertyManagerInstance();
-        WebDriver driver = WebDriverFactory.getWebDriver(BrowserName.FIREFOX);
+        WebDriver driver = getWebDriverInstance(BrowserName.CHROME);
+        LoginPage loginPage = new LoginPage(BrowserName.CHROME);
 
         String url = getProperty(BASE_URL);
         driver.navigate().to(url);
