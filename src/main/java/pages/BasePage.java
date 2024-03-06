@@ -110,6 +110,7 @@ public class BasePage {
     public String getTextFromElement(By locator) {
         return locateElement(locator).getText();
     }
+
     public String getValueFromElement(By locator) {
         return locateElement(locator).getAttribute("value");
     }

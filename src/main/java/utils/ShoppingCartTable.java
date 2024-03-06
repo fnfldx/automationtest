@@ -1,5 +1,6 @@
 package utils;
 
+import models.ProductModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -82,6 +83,9 @@ public class ShoppingCartTable extends BasePage implements BaseTable {
     }
 
     protected WebElement getRow(int rowNumber) {
+        if (rowNumber == 1) {
+            throw new IllegalArgumentException("Row number 1 is a header row, not valid for this operation");
+        }
         WebElement table = locateElement(tableLocator);
         List<WebElement> rows = table.findElements(By.tagName("tr"));
 
@@ -93,6 +97,9 @@ public class ShoppingCartTable extends BasePage implements BaseTable {
     }
 
     private WebElement getCell(int rowNumber, int columnNumber) {
+        if (rowNumber == 1) {
+            throw new IllegalArgumentException("Row number 1 is a header row, not valid for this operation");
+        }
         List<WebElement> rows = driver.findElements(By.xpath(tableXpath + "//tr[.//td]"));
 
         if (rowNumber > 0 && rowNumber <= rows.size()) {
@@ -205,6 +212,11 @@ public class ShoppingCartTable extends BasePage implements BaseTable {
         return getUnitPrice(rowNumber);
     }
 
+    public BigDecimal getUnitPrice(ProductModel product) {
+        int rowNumber = getRowNumber(product.getName());
+        return getUnitPrice(rowNumber);
+    }
+
     public String getTotalPriceWithCurrencyCharacter(int rowNumber) {
         return getCellContent(rowNumber, getColumnNumber("Total Price"));
     }
@@ -220,6 +232,11 @@ public class ShoppingCartTable extends BasePage implements BaseTable {
         return getTotalPrice(rowNumber);
     }
 
+    public BigDecimal getTotalPrice(ProductModel product) {
+        int rowNumber = getRowNumber(product.getName());
+        return getTotalPrice(rowNumber);
+    }
+
     public int getQuantity(int rowNumber) {
         String quantity = getCellContent(rowNumber, getColumnNumber("Quantity"));
         return Integer.parseInt(quantity);
@@ -227,6 +244,11 @@ public class ShoppingCartTable extends BasePage implements BaseTable {
 
     public int getQuantity(String productName) {
         int rowNumber = getRowNumber(productName);
+        return getQuantity(rowNumber);
+    }
+
+    public int getQuantity(ProductModel product) {
+        int rowNumber = getRowNumber(product.getName());
         return getQuantity(rowNumber);
     }
 
@@ -240,6 +262,16 @@ public class ShoppingCartTable extends BasePage implements BaseTable {
     public void deleteItem(int rowNumber) {
         WebElement row = getRow(rowNumber);
         row.findElement(deleteItemButton).click();
+    }
+
+    public void deleteItem(String productName) {
+        int rowNumber = getRowNumber(productName);
+        deleteItem(rowNumber);
+    }
+
+    public void deleteItem(ProductModel product) {
+        int rowNumber = getRowNumber(product.getName());
+        deleteItem(rowNumber);
     }
 
     public void clickCartUpdateButton() {
