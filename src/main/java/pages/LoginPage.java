@@ -19,11 +19,11 @@ public class LoginPage {
     }
 
     // Methods:
-    public void registerAccountOption() {
+    public void selectRegisterAccountOption() {
         basePage.isElementDisplayed(registerAccountButtonLocator);
     }
 
-    public void guestAccountOption() {
+    public void selectGuestAccountOption() {
         if (basePage.isElementDisplayed(guestCheckoutButtonLocator)) {
             basePage.clickOnElement(guestCheckoutButtonLocator);
         } else {
