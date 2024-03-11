@@ -9,7 +9,7 @@ public class LoginPage {
     private BasePage basePage;
 
     // Locators:
-    public By registerAccountButtonLocator = By.id("accountFrm_accountregister");
+    public By registerAccountButtonLocator = By.id("accountFrm_accountregister");   
     public By guestCheckoutButtonLocator = By.id("accountFrm_accountguest");
     public By loginInputLocator = By.id("loginFrm_loginname");
     public By passwordInputLocator = By.id("loginFrm_password");
@@ -18,7 +18,6 @@ public class LoginPage {
     public LoginPage(BrowserName browserName) {
     }
 
-    // Methods:
     public void selectRegisterAccountOption() {
         basePage.isElementDisplayed(registerAccountButtonLocator);
     }
