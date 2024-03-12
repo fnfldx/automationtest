@@ -14,13 +14,13 @@ public class WebDriverFactory {
     @SneakyThrows
     public static synchronized WebDriver getWebDriverInstance(BrowserName browserName) {
         if (webDriverInstance == null) {
-            webDriverInstance = createWebDriver(browserName);
+            webDriverInstance = createWebDriverInstance(browserName);
         }
         return webDriverInstance;
     }
 
     @SneakyThrows
-    public static WebDriver createWebDriver(BrowserName browserName) {
+    public static WebDriver createWebDriverInstance(BrowserName browserName) {
         return switch (browserName) {
             case CHROME -> new ChromeDriverManager().getDriver();
             case FIREFOX -> new FirefoxDriverManager().getDriver();

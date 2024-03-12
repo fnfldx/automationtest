@@ -1,6 +1,5 @@
 package temp.tests;
 
-import engine.drivers.WebDriverFactory;
 import enums.BrowserName;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +11,6 @@ import pages.LoginPage;
 
 import java.time.Duration;
 
-import static engine.drivers.WebDriverFactory.createWebDriver;
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
 import static engine.property.manager.PropertyManager.getPropertyManagerInstance;

@@ -1,21 +1,25 @@
 package pages;
 
+import engine.drivers.WebDriverFactory;
 import enums.BrowserName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
-
-    private BasePage basePage;
+    protected BasePage basePage;
+    protected WebDriver driver;
 
     // Locators:
-    public By registerAccountButtonLocator = By.id("accountFrm_accountregister");   
+    public By registerAccountButtonLocator = By.id("accountFrm_accountregister");
     public By guestCheckoutButtonLocator = By.id("accountFrm_accountguest");
     public By loginInputLocator = By.id("loginFrm_loginname");
     public By passwordInputLocator = By.id("loginFrm_password");
     public By loginButtonLocator = By.xpath("//*[@id='loginFrm']/button");
+    public By continueButtonLocator = By.xpath("//*[@id='accountFrm']/fieldset/button");
 
     public LoginPage(BrowserName browserName) {
+        this.driver = WebDriverFactory.getWebDriverInstance(browserName);
     }
 
     public void selectRegisterAccountOption() {
