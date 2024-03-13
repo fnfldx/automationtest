@@ -1,14 +1,11 @@
 package pages;
 
-import engine.drivers.WebDriverFactory;
 import enums.BrowserName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
     protected BasePage basePage;
-    protected WebDriver driver;
 
     // Locators:
     public By registerAccountButtonLocator = By.id("accountFrm_accountregister");
@@ -19,7 +16,7 @@ public class LoginPage {
     public By continueButtonLocator = By.xpath("//*[@id='accountFrm']/fieldset/button");
 
     public LoginPage(BrowserName browserName) {
-        this.driver = WebDriverFactory.getWebDriverInstance(browserName);
+        this.basePage = new BasePage(browserName);
     }
 
     public void selectRegisterAccountOption() {

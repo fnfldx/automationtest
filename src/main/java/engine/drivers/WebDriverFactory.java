@@ -27,4 +27,11 @@ public class WebDriverFactory {
             default -> throw new UnsupportedBrowserException(browserName.toString());
         };
     }
+
+    @SneakyThrows
+    public static void quitWebDriver() {
+        if (webDriverInstance != null) {
+            webDriverInstance.quit();
+        }
+    }
 }

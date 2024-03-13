@@ -1,8 +1,14 @@
 package temp.tests;
 
 import enums.BrowserName;
-import org.junit.*;
-import org.openqa.selenium.*;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasePage;
@@ -10,7 +16,7 @@ import pages.LoginPage;
 
 import java.time.Duration;
 
-import static engine.drivers.WebDriverFactory.getWebDriverInstance;
+import static engine.drivers.WebDriverFactory.quitWebDriver;
 import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
 import static engine.property.manager.PropertyManager.getProperty;
 import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
@@ -23,16 +29,13 @@ public class TestGuestCheckout {
     @BeforeClass
     public static void setUp() {
         getPropertyManagerInstance();
-        driver = getWebDriverInstance(BrowserName.CHROME);
-        loginPage = new LoginPage(BrowserName.CHROME);
         basePage = new BasePage(BrowserName.CHROME);
+        loginPage = new LoginPage(BrowserName.CHROME);
     }
 
     @AfterClass
     public static void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+        quitWebDriver();
     }
 
     @Test
