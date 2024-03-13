@@ -1,6 +1,5 @@
 package temp.tests;
 
-import enums.BrowserName;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -27,8 +26,8 @@ public class TestGuestCheckout {
     @BeforeClass
     public static void setUp() {
         getPropertyManagerInstance();
-        basePage = new BasePage(BrowserName.CHROME);
-        loginPage = new LoginPage(BrowserName.CHROME);
+        basePage = new BasePage();
+        loginPage = new LoginPage();
     }
 
     @AfterClass

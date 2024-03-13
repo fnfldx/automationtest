@@ -20,6 +20,7 @@ public class BasePage {
     public WebDriver driver;
     protected WebDriverWait wait;
     protected String baseUrl;
+    protected BrowserName browserName;
 
     protected final String navbarXpath = "//div[@role='navigation']";
     protected final String categoryMenuXpath = "//section[@id='categorymenu']";
@@ -34,7 +35,8 @@ public class BasePage {
     public By newsletterInputLocator = By.xpath(footersocialXpath + "//input[@id='appendedInputButton']");
     public By newsletterButtonLocator = By.xpath(footersocialXpath + "//button[@class='btn btn-orange']");
 
-    public BasePage(BrowserName browserName) {
+    public BasePage() {
+        this.browserName = BrowserName.valueOf(PropertyManager.getProperty(PropertyManager.PropertyKeys.BROWSER_NAME));
         this.driver = WebDriverFactory.getWebDriverInstance(browserName);
         int baseWaitInSeconds = Integer.parseInt(PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_WAIT_IN_SECONDS));
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(baseWaitInSeconds));

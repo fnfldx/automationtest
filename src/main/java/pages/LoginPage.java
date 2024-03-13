@@ -1,6 +1,5 @@
 package pages;
 
-import enums.BrowserName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
@@ -15,8 +14,8 @@ public class LoginPage {
     public By loginButtonLocator = By.xpath("//*[@id='loginFrm']/button");
     public By continueButtonLocator = By.xpath("//*[@id='accountFrm']/fieldset/button");
 
-    public LoginPage(BrowserName browserName) {
-        this.basePage = new BasePage(browserName);
+    public LoginPage() {
+        this.basePage = new BasePage();
     }
 
     public void selectRegisterAccountOption() {

@@ -44,6 +44,7 @@ public class PropertyManager {
   public enum PropertyKeys {
     CHROME_DRIVER,
     FIREFOX_DRIVER,
+    BROWSER_NAME,
     BASE_URL,
     BASE_WAIT_IN_SECONDS
   }

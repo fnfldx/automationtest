@@ -21,7 +21,7 @@ public class TestOpenPageOpera {
     public void openPage() {
         getPropertyManagerInstance();
         WebDriver driver = getWebDriverInstance(BrowserName.CHROME);
-        LoginPage loginPage = new LoginPage(BrowserName.CHROME);
+        LoginPage loginPage = new LoginPage();
 
         String url = getProperty(BASE_URL);
         driver.navigate().to(url);
