@@ -1,20 +1,16 @@
 package engine.drivers;
 
 import engine.exceptions.UnsupportedBrowserException;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import org.openqa.selenium.WebDriver;
-import pages.BasePage;
 
 import static engine.property.manager.PropertyManager.getBrowserName;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class WebDriverFactory {
-
-    protected BasePage basePage;
     private static WebDriver webDriverInstance;
-
-    public WebDriverFactory() {
-        this.basePage = new BasePage();
-    }
 
     @SneakyThrows
     public static synchronized WebDriver getWebDriverInstance() {
