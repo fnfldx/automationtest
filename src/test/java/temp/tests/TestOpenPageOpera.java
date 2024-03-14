@@ -1,6 +1,5 @@
 package temp.tests;
 
-import enums.BrowserName;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -20,7 +19,7 @@ public class TestOpenPageOpera {
     @Test
     public void openPage() {
         getPropertyManagerInstance();
-        WebDriver driver = getWebDriverInstance(BrowserName.CHROME);
+        WebDriver driver = getWebDriverInstance();
         LoginPage loginPage = new LoginPage();
 
         String url = getProperty(BASE_URL);

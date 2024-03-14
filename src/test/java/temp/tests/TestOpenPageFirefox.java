@@ -1,6 +1,5 @@
 package temp.tests;
 
-import enums.BrowserName;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -13,14 +12,14 @@ import java.time.Duration;
 
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
-import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
 import static engine.property.manager.PropertyManager.getProperty;
+import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
 
 public class TestOpenPageFirefox {
     @Test
     public void openPage() {
         getPropertyManagerInstance();
-        WebDriver driver = getWebDriverInstance(BrowserName.CHROME);
+        WebDriver driver = getWebDriverInstance();
         LoginPage loginPage = new LoginPage();
 
         String url = getProperty(BASE_URL);

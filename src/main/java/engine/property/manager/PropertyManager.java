@@ -1,5 +1,6 @@
 package engine.property.manager;
 
+import enums.BrowserName;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +40,10 @@ public class PropertyManager {
 
   public static void setProperty(String systemProperty, String systemStringValue) {
     System.setProperty(systemProperty, systemStringValue);
+  }
+
+  public static BrowserName getBrowserName() {
+    return BrowserName.valueOf(getProperty(PropertyKeys.BROWSER_NAME));
   }
 
   public enum PropertyKeys {

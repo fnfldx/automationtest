@@ -16,6 +16,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static engine.property.manager.PropertyManager.getBrowserName;
+
 public class BasePage {
     public WebDriver driver;
     protected WebDriverWait wait;
@@ -36,8 +38,8 @@ public class BasePage {
     public By newsletterButtonLocator = By.xpath(footersocialXpath + "//button[@class='btn btn-orange']");
 
     public BasePage() {
-        this.browserName = BrowserName.valueOf(PropertyManager.getProperty(PropertyManager.PropertyKeys.BROWSER_NAME));
-        this.driver = WebDriverFactory.getWebDriverInstance(browserName);
+        this.browserName = getBrowserName();
+        this.driver = WebDriverFactory.getWebDriverInstance();
         int baseWaitInSeconds = Integer.parseInt(PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_WAIT_IN_SECONDS));
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(baseWaitInSeconds));
         this.baseUrl = PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_URL);
