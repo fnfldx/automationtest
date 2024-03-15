@@ -1,20 +1,16 @@
 package pages.cartPage;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import pages.BasePage;
 
 public class ApplyCouponCodeTable {
 
-    protected WebDriver driver;
-    public String couponCode = "";
+    protected BasePage basePage;
     public final By applyCouponCodeTable = By.id("coupon");
     public By couponLocator = By.id("coupon_coupon");
     public By applyCouponButtonLocator = By.id("apply_coupon_btn");
 
-    BasePage basePage = new BasePage(driver);
-
-    void enterCouponCode() {
+    void enterCouponCode(String couponCode) {
         basePage.enterTextToElement(couponLocator, couponCode);
     }
 
