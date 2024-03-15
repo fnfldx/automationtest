@@ -1,4 +1,4 @@
-package temp.tests;
+package temporary.tests;
 
 import org.junit.Assert;
 import org.junit.Test;

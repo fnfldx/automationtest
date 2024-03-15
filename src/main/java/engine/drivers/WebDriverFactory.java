@@ -12,7 +12,6 @@ import static engine.property.manager.PropertyManager.getBrowserName;
 public class WebDriverFactory {
     private static WebDriver webDriverInstance;
 
-    @SneakyThrows
     public static synchronized WebDriver getWebDriverInstance() {
         if (webDriverInstance == null) {
             webDriverInstance = createWebDriverInstance();
@@ -29,10 +28,10 @@ public class WebDriverFactory {
         };
     }
 
-    @SneakyThrows
     public static void quitWebDriver() {
         if (webDriverInstance != null) {
             webDriverInstance.quit();
+            webDriverInstance = null;
         }
     }
 }

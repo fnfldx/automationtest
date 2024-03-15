@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 
 public class LoginPage {
     protected BasePage basePage;
@@ -19,15 +18,11 @@ public class LoginPage {
     }
 
     public void selectRegisterAccountOption() {
-        basePage.isElementDisplayed(registerAccountButtonLocator);
+        basePage.selectRadioButton(registerAccountButtonLocator);
     }
 
     public void selectGuestAccountOption() {
-        if (basePage.isElementDisplayed(guestCheckoutButtonLocator)) {
-            basePage.clickOnElement(guestCheckoutButtonLocator);
-        } else {
-            throw new NoSuchElementException("Guest Checkout button is not present when there are no items in the cart. You need to add at least one item to cart.");
-        }
+        basePage.selectRadioButton(guestCheckoutButtonLocator);
     }
 
     public void enterEmail(String email) {
@@ -40,5 +35,13 @@ public class LoginPage {
 
     public void clickLoginButton() {
         basePage.clickOnElement(loginButtonLocator);
+    }
+
+    public void clickContinueButton() {
+        basePage.clickOnElement(continueButtonLocator);
+    }
+
+    public boolean isGuestCheckoutButtonVisible() {
+        return basePage.isElementDisplayed(guestCheckoutButtonLocator);
     }
 }

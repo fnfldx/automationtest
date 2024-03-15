@@ -14,43 +14,43 @@ import java.util.logging.Logger;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertyManager {
-  private static PropertyManager propertyManagerInstance;
-  private static final Properties properties;
+    private static PropertyManager propertyManagerInstance;
+    private static final Properties properties;
 
-  static {
-    properties = new Properties();
-    var configPath = "src/main/resources/config.properties";
-    try (FileInputStream input = new FileInputStream(configPath)) {
-      properties.load(input);
-    } catch (IOException ex) {
-      Logger.getLogger(PropertyManager.class.getName()).log(Level.SEVERE, "Error loading properties", ex);
+    static {
+        properties = new Properties();
+        var configPath = "src/main/resources/config.properties";
+        try (FileInputStream input = new FileInputStream(configPath)) {
+            properties.load(input);
+        } catch (IOException ex) {
+            Logger.getLogger(PropertyManager.class.getName()).log(Level.SEVERE, "Error loading properties", ex);
+        }
     }
-  }
 
-  public static synchronized PropertyManager getPropertyManagerInstance() {
-    if (propertyManagerInstance == null) {
-      propertyManagerInstance = new PropertyManager();
+    public static synchronized PropertyManager getPropertyManagerInstance() {
+        if (propertyManagerInstance == null) {
+            propertyManagerInstance = new PropertyManager();
+        }
+        return propertyManagerInstance;
     }
-    return propertyManagerInstance;
-  }
 
-  public static String getProperty(PropertyKeys key) {
-    return properties.getProperty(key.toString());
-  }
+    public static String getProperty(PropertyKeys key) {
+        return properties.getProperty(key.toString());
+    }
 
-  public static void setProperty(String systemProperty, String systemStringValue) {
-    System.setProperty(systemProperty, systemStringValue);
-  }
+    public static void setProperty(String systemProperty, String systemStringValue) {
+        System.setProperty(systemProperty, systemStringValue);
+    }
 
-  public static BrowserName getBrowserName() {
-    return BrowserName.valueOf(getProperty(PropertyKeys.BROWSER_NAME));
-  }
+    public static BrowserName getBrowserName() {
+        return BrowserName.valueOf(getProperty(PropertyKeys.BROWSER_NAME));
+    }
 
-  public enum PropertyKeys {
-    CHROME_DRIVER,
-    FIREFOX_DRIVER,
-    BROWSER_NAME,
-    BASE_URL,
-    BASE_WAIT_IN_SECONDS
-  }
+    public enum PropertyKeys {
+        CHROME_DRIVER,
+        FIREFOX_DRIVER,
+        BROWSER_NAME,
+        BASE_URL,
+        BASE_WAIT_IN_SECONDS
+    }
 }

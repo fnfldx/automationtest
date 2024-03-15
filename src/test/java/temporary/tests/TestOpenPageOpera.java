@@ -1,4 +1,4 @@
-package temp.tests;
+package temporary.tests;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
 import static engine.property.manager.PropertyManager.getProperty;
 import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
 
-public class TestOpenPageFirefox {
+public class TestOpenPageOpera {
     @Test
     public void openPage() {
         getPropertyManagerInstance();
