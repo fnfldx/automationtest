@@ -8,9 +8,9 @@ import lombok.ToString;
 @ToString
 @RequiredArgsConstructor
 public enum Currency {
-	EUR("€"),
-	GBP("£"),
-	USD("$");
+    EUR("€"),
+    GBP("£"),
+    USD("$");
 
-	public final String currencySymbol;
+    public final String currencySymbol;
 }
