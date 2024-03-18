@@ -11,6 +11,10 @@ public class CartPage {
     public By continueShoppingButtonLocator = By.xpath(".totals > a:nth-of-type(1)");
     public By finalCheckoutButtonLocator = By.id("cart_checkout2");
 
+    public CartPage() {
+        this.basePage = new BasePage();
+    }
+
     ApplyCouponCodeTable applyCouponCodeTable = new ApplyCouponCodeTable();
     EstimateShippingAndTaxesTable estimateShippingAndTaxesTable = new EstimateShippingAndTaxesTable();
     TotalsTable totalsTable = new TotalsTable();
