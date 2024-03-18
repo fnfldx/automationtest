@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
     protected BasePage basePage;
@@ -14,7 +15,8 @@ public class LoginPage {
     public By continueButtonLocator = By.xpath("//*[@id='accountFrm']/fieldset/button");
 
     public LoginPage() {
-        this.basePage = new BasePage();
+        WebDriver driver = null;
+        this.basePage = new BasePage(driver);
     }
 
     public void selectRegisterAccountOption() {
