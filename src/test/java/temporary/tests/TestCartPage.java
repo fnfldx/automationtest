@@ -1,4 +1,4 @@
-package temp.tests;
+package temporary;
 
 import engine.drivers.WebDriverFactory;
 import enums.BrowserName;
