@@ -30,7 +30,7 @@ public class TestCartPage extends BaseTest {
         goToCart();
 
         // When:
-        cartPage.clickOnFinalCheckoutButton();
+        goToCheckout();
 
         // Then:
         validateURL("https://automationteststore.com/index.php?rt=account/login");

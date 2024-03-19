@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.cartPage.CartPage;
 
 import java.time.Duration;
 
@@ -12,6 +13,8 @@ import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
 import static engine.property.manager.PropertyManager.getProperty;
 
 public class MainPageSteps {
+
+    protected static CartPage cartPage;
 
     public static void openPage() {
         var driver = getWebDriverInstance();
@@ -42,9 +45,16 @@ public class MainPageSteps {
         validateURL("https://automationteststore.com/index.php?rt=checkout/cart");
     }
 
+    public static void updateCart() {
+        cartPage = new CartPage();
+        cartPage.clickOnUpdateButton();
+
+        validateURL("https://automationteststore.com/index.php?rt=checkout/cart");
+    }
+
     public static void goToCheckout() {
-        var goToCheckout = getWebDriverInstance().findElement(By.xpath("//*[@id='cart_checkout2']"));
-        goToCheckout.click();
+        cartPage = new CartPage();
+        cartPage.clickOnFinalCheckoutButton();
 
         validateURL("https://automationteststore.com/index.php?rt=account/login");
     }
