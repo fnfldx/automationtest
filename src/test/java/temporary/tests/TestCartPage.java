@@ -6,7 +6,9 @@ import org.junit.Test;
 import pages.cartPage.CartPage;
 
 import static engine.drivers.WebDriverFactory.quitWebDriver;
-import static steps.MainPageSteps.*;
+import static steps.CartPageSteps.*;
+import static steps.MainPageSteps.addToCart;
+import static steps.MainPageSteps.goToCart;
 
 public class TestCartPage extends BaseTest {
 
