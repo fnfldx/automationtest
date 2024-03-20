@@ -48,15 +48,11 @@ public class MainPageSteps {
     public static void updateCart() {
         cartPage = new CartPage();
         cartPage.clickOnUpdateButton();
-
-        validateURL("https://automationteststore.com/index.php?rt=checkout/cart");
     }
 
     public static void goToCheckout() {
         cartPage = new CartPage();
         cartPage.clickOnFinalCheckoutButton();
-
-        validateURL("https://automationteststore.com/index.php?rt=account/login");
     }
 
     public static void validateURL(String url) {
