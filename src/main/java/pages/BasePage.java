@@ -1,18 +1,21 @@
 package pages;
 
+import engine.property.manager.PropertyManager;
 import enums.BrowserName;
 import enums.CategoryMenuButton;
 import enums.FooterHyperLink;
 import enums.NavbarButton;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
+import static engine.property.manager.PropertyManager.getBrowserName;
 
 public class BasePage {
     protected WebDriverWait wait;
@@ -32,14 +35,11 @@ public class BasePage {
     public By newsletterInputLocator = By.xpath(footersocialXpath + "//input[@id='appendedInputButton']");
     public By newsletterButtonLocator = By.xpath(footersocialXpath + "//button[@class='btn btn-orange']");
 
-    public BasePage(WebDriver driver) {
-        String someProperty = null; // get the property value
-        int someInt;
-        if (someProperty != null && !someProperty.isEmpty()) {
-            someInt = Integer.parseInt(someProperty);
-        } else {
-            someInt = 0; // or any default value
-        }
+    public BasePage() {
+        this.browserName = getBrowserName();
+        int baseWaitInSeconds = Integer.parseInt(PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_WAIT_IN_SECONDS));
+        this.wait = new WebDriverWait(getWebDriverInstance(), Duration.ofSeconds(baseWaitInSeconds));
+        this.baseUrl = PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_URL);
     }
 
     public By buttonNavbarLocatorByDataId(NavbarButton button) {
