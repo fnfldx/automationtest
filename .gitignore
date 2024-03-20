@@ -61,7 +61,7 @@ build/
 *.tar.gz
 *.rar
 *.err
-/temp
+temp/g
 .allure/
 allure-results/
 schema/
