@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class ProductModel {
 	public final String name;
+	public final String model;
 	public final Currency priceCurrency;
 	public final BigDecimal price;
 	public final Boolean isOnSale;

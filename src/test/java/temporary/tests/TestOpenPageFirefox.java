@@ -1,4 +1,4 @@
-package tests;
+package temporary.tests;
 
 import engine.drivers.WebDriverFactory;
 import enums.BrowserName;
@@ -8,18 +8,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
-import static engine.property.manager.PropertyManager.getProperty;
 import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
+import static engine.property.manager.PropertyManager.getProperty;
 
-public class TestOpenPageOpera {
+public class TestOpenPageFirefox {
     @Test
     public void openPage() {
         getPropertyManagerInstance();
-        WebDriver driver = WebDriverFactory.getWebDriver(BrowserName.OPERA);
+        WebDriver driver = WebDriverFactory.getWebDriver(BrowserName.FIREFOX);
 
         String url = getProperty(BASE_URL);
         driver.navigate().to(url);

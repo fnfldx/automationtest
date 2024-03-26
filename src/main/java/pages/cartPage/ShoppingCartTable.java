@@ -1,54 +1,60 @@
-package utils;
+package pages.cartPage;
 
+import enums.Currency;
 import models.ProductModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import pages.BasePage;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCartTable extends BasePage implements BaseTable {
-    private final String tableXpath = "//div[contains(@class, 'product-list')]/table";
-
-    public By tableLocator = By.xpath(tableXpath);
+public class ShoppingCartTable extends BaseTable {
     public By cartEmptyMessagePanel = By.xpath("//div[@class='contentpanel1']");
-    public By headerRow = By.xpath(tableXpath + "/tbody/tr");
     public By deleteItemButton = By.xpath(".//i[contains(@class, 'fa-trash-o')]/parent::a");
     public By quantityItemInput = By.xpath(".//input[contains(@id, 'cart_quantity')]");
     public By cartUpdateButton = By.id("cart_update");
     public By cartCheckoutButton = By.id("cart_checkout1");
 
     public ShoppingCartTable(WebDriver driver) {
-        super(driver);
+        super(driver, "//div[contains(@class, 'product-list')]/table");
     }
 
-    public int getRowCount() {
-        WebElement table = locateElement(tableLocator);
-        List<WebElement> rows = table.findElements(By.tagName("tr"));
-        return rows.size();
-    }
-
-    public int getColumnCount() {
-        WebElement headerRowElement = locateElement(headerRow);
-        List<WebElement> headerColumns = headerRowElement.findElements(By.tagName("th"));
-        return headerColumns.size();
-    }
-
-    public int getColumnIndex(String columnHeader) {
+    public List<ProductModel> getProducts() {
+        List<ProductModel> products = new ArrayList<>();
         List<String> columnHeaders = getColumnHeaders();
-        return columnHeaders.indexOf(columnHeader);
+        int imageIndex = columnHeaders.indexOf("Image");
+        int nameIndex = columnHeaders.indexOf("Name");
+        int modelIndex = columnHeaders.indexOf("Model");
+        int unitPriceIndex = columnHeaders.indexOf("Unit Price");
+        int quantityIndex = columnHeaders.indexOf("Quantity");
+        int totalPriceIndex = columnHeaders.indexOf("Total Price");
+
+        int rowCount = getRowCount();
+        for (int i = 2; i <= rowCount; i++) {
+            String imageUrl = getCellContent(i, imageIndex + 1);
+            String name = getCellContent(i, nameIndex + 1);
+            String model = getCellContent(i, modelIndex + 1);
+            Currency currency = getCurrency();
+            BigDecimal unitPrice = new BigDecimal(getCellContent(i, unitPriceIndex + 1).substring(1));
+
+            ProductModel product = new ProductModel
+                    (
+                            name,
+                            model,
+                            currency,
+                            unitPrice,
+                            null,
+                            null,
+                            null,
+                            imageUrl
+                    );
+            products.add(product);
+        }
+        return products;
     }
 
-    public int getColumnNumber(String columnHeader) {
-        int rowIndex = getColumnIndex(columnHeader);
-        if (rowIndex == -1) {
-            return -1;
-        }
-        return rowIndex + 1;
-    }
 
     public int getRowIndex(String text) {
         WebElement table = locateElement(tableLocator);
@@ -69,17 +75,6 @@ public class ShoppingCartTable extends BasePage implements BaseTable {
             return -1;
         }
         return rowIndex + 1;
-    }
-
-    public List<String> getColumnHeaders() {
-        WebElement headerRowElement = locateElement(headerRow);
-        List<WebElement> headerColumns = headerRowElement.findElements(By.tagName("th"));
-
-        List<String> headerTexts = new ArrayList<>();
-        for (WebElement headerColumn : headerColumns) {
-            headerTexts.add(headerColumn.getText());
-        }
-        return headerTexts;
     }
 
     protected WebElement getRow(int rowNumber) {
@@ -199,6 +194,11 @@ public class ShoppingCartTable extends BasePage implements BaseTable {
 
     public String getUnitPriceWithCurrencyCharacter(int rowNumber) {
         return getCellContent(rowNumber, getColumnNumber("Unit Price"));
+    }
+
+    public Currency getCurrency() {
+        char CurrencySymbol = getUnitPriceWithCurrencyCharacter(1).charAt(0);
+        return Currency.valueOf(Character.toString(CurrencySymbol));
     }
 
     public BigDecimal getUnitPrice(int rowNumber) {

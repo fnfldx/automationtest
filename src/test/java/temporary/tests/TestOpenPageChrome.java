@@ -1,4 +1,4 @@
-package tests;
+package temporary.tests;
 
 import engine.drivers.WebDriverFactory;
 import enums.BrowserName;
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasePage;
-import utils.ShoppingCartTable;
+import pages.cartPage.ShoppingCartTable;
 
 import java.time.Duration;
 
