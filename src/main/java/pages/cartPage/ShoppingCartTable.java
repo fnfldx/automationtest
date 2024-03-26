@@ -23,21 +23,18 @@ public class ShoppingCartTable extends BaseTable {
 
     public List<ProductModel> getProducts() {
         List<ProductModel> products = new ArrayList<>();
-        List<String> columnHeaders = getColumnHeaders();
-        int imageIndex = columnHeaders.indexOf("Image");
-        int nameIndex = columnHeaders.indexOf("Name");
-        int modelIndex = columnHeaders.indexOf("Model");
-        int unitPriceIndex = columnHeaders.indexOf("Unit Price");
-        int quantityIndex = columnHeaders.indexOf("Quantity");
-        int totalPriceIndex = columnHeaders.indexOf("Total Price");
+        int imageNumber = getColumnNumber("Image");
+        int nameNumber = getColumnNumber("Name");
+        int modelNumber = getColumnNumber("Model");
+        int unitPriceNumber = getColumnNumber("Unit Price");
 
         int rowCount = getRowCount();
         for (int i = 2; i <= rowCount; i++) {
-            String imageUrl = getCellContent(i, imageIndex + 1);
-            String name = getCellContent(i, nameIndex + 1);
-            String model = getCellContent(i, modelIndex + 1);
+            String imageUrl = getCellContent(i, imageNumber);
+            String name = getCellContent(i , nameNumber);
+            String model = getCellContent(i , modelNumber);
             Currency currency = getCurrency();
-            BigDecimal unitPrice = new BigDecimal(getCellContent(i, unitPriceIndex + 1).substring(1));
+            BigDecimal unitPrice = new BigDecimal(getCellContent(i, unitPriceNumber).substring(1));
 
             ProductModel product = new ProductModel
                     (
@@ -54,7 +51,6 @@ public class ShoppingCartTable extends BaseTable {
         }
         return products;
     }
-
 
     public int getRowIndex(String text) {
         WebElement table = locateElement(tableLocator);
@@ -95,10 +91,10 @@ public class ShoppingCartTable extends BaseTable {
         if (rowNumber == 1) {
             throw new IllegalArgumentException("Row number 1 is a header row, not valid for this operation");
         }
-        List<WebElement> rows = driver.findElements(By.xpath(tableXpath + "//tr[.//td]"));
+        List<WebElement> productRows = driver.findElements(By.xpath(tableXpath + "//tr[.//td]"));
 
-        if (rowNumber > 0 && rowNumber <= rows.size()) {
-            WebElement targetRow = rows.get(rowNumber - 1);
+        if (rowNumber > 0 && rowNumber <= productRows.size() + 1) {
+            WebElement targetRow = productRows.get(rowNumber - 2);
             List<WebElement> cells = targetRow.findElements(By.tagName("td"));
 
             if (columnNumber > 0 && columnNumber <= cells.size()) {
@@ -197,8 +193,8 @@ public class ShoppingCartTable extends BaseTable {
     }
 
     public Currency getCurrency() {
-        char CurrencySymbol = getUnitPriceWithCurrencyCharacter(1).charAt(0);
-        return Currency.valueOf(Character.toString(CurrencySymbol));
+        char currencySymbol = getUnitPriceWithCurrencyCharacter(2).charAt(0);
+        return Currency.fromSymbol(String.valueOf(currencySymbol));
     }
 
     public BigDecimal getUnitPrice(int rowNumber) {

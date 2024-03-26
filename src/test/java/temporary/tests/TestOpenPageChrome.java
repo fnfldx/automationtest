@@ -3,6 +3,7 @@ package temporary.tests;
 import engine.drivers.WebDriverFactory;
 import enums.BrowserName;
 import enums.NavbarButton;
+import models.ProductModel;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -13,6 +14,7 @@ import pages.BasePage;
 import pages.cartPage.ShoppingCartTable;
 
 import java.time.Duration;
+import java.util.List;
 
 import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
 import static engine.property.manager.PropertyManager.getProperty;
@@ -54,6 +56,8 @@ public class TestOpenPageChrome {
         basePage.clickOnElement(By.xpath("//a[@data-id=65]"));
         var cartButton = basePage.buttonNavbarLocatorByDataId(NavbarButton.CART);
         basePage.clickOnElement(cartButton);
+
+        List<ProductModel> productsList = cartTable.getProducts();
 
         int debug1 = cartTable.getRowCount();
         int debug2 = cartTable.getColumnCount();

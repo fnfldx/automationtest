@@ -13,4 +13,13 @@ public enum Currency {
 	USD("$");
 
 	public final String currencySymbol;
+
+	public static Currency fromSymbol(String symbol) {
+		for (Currency currency : values()) {
+			if (currency.getCurrencySymbol().equals(symbol)) {
+				return currency;
+			}
+		}
+		throw new IllegalArgumentException("No enum constant for symbol: " + symbol);
+	}
 }
