@@ -1,5 +1,6 @@
 package pages.cartPage;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +9,7 @@ import pages.BasePage;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class BaseTable extends BasePage {
     protected String tableXpath;
     public By tableLocator;

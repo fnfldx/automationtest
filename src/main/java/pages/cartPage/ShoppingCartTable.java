@@ -1,6 +1,8 @@
 package pages.cartPage;
 
 import enums.Currency;
+import lombok.Getter;
+import lombok.Setter;
 import models.ProductModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +12,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class ShoppingCartTable extends BaseTable {
     public By cartEmptyMessagePanel = By.xpath("//div[@class='contentpanel1']");
     public By deleteItemButton = By.xpath(".//i[contains(@class, 'fa-trash-o')]/parent::a");
