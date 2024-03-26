@@ -34,7 +34,7 @@ public class MainPageProduct extends BasePage {
 
 
     public void addToCart(String productId) {
-        WebElement addToCartButton = driver.findElement(By.cssSelector("a.productcart[data-id='" + productId + "']"));
+        WebElement addToCartButton = driver.findElement(By.xpath("//a[@class='productcart' and @data-id='" + productId + "']"));
         addToCartButton.click();
     }
 }
