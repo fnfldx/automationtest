@@ -15,26 +15,24 @@ public class MainPageProduct extends BasePage {
     private WebDriver driver;
 
     public MainPageProduct(WebDriver driver) {
+        super();
         this.driver = driver;
     }
 
-
-
-    public double getPrice() {
-        WebElement priceElement = driver.findElement(By.xpath("//a[@class='oneprice'"));;
-        String priceText = priceElement.getText();
+    public double getPrice(WebElement product) {
+        By priceElement = By.xpath("//a[@class='oneprice'");
+        String priceText = getTextFromElement(priceElement);
         price = Double.parseDouble(priceText);
         return price;
     }
 
-    public String getProductName() {
-        WebElement productNameElement = driver.findElement(By.xpath("//a[@class='prdocutname']"));
-        return productNameElement.getText();
+    public String getProductName(WebElement product) {
+        By productNameElement = By.xpath("//a[@class='prdocutname']");
+        return getTextFromElement(productNameElement);
     }
 
-
     public void addToCart(String productId) {
-        WebElement addToCartButton = driver.findElement(By.xpath("//a[@class='productcart' and @data-id='" + productId + "']"));
-        addToCartButton.click();
+        By addToCartButton = By.xpath("//a[@class='productcart' and @data-id='" + productId + "']");
+        clickOnElement(addToCartButton);
     }
 }

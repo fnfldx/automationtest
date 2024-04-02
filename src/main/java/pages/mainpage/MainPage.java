@@ -1,28 +1,22 @@
 package pages.mainpage;
 
 import enums.MainPageSectionId;
-import lombok.Getter;
-import lombok.Setter;
-import pages.BasePage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
-import java.util.List;
-@Setter
-public class MainPage extends BasePage {
-    private List<MainPageSection> sections;
+public class MainPage {
+    private WebDriver driver;
 
-    public MainPageSectionId getSection(int index) {
-        return sections.get(index).getSectionId();
+
+    public MainPage(WebDriver driver) {
+        this.driver = driver;
     }
 
-    public int countSections() {
-        return sections.size();
+    // Method to navigate to a specific section using the section ID from the enum
+    public void navigateToSection(MainPageSectionId sectionIdEnum) {
+        By sectionLocator = By.id(sectionIdEnum.getId());
+        driver.findElement(sectionLocator).click();
     }
 
-    public int countAllProducts() {
-        int total = 0;
-        for (MainPageSection section : sections) {
-            total += section.countProducts();
-        }
-        return total;
-    }
+    // Other methods specific to MainPage interactions...
 }
