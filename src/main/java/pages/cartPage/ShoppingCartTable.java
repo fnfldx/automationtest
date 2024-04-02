@@ -38,7 +38,7 @@ public class ShoppingCartTable extends BaseTable {
             String name = getCellContent(i , nameNumber);
             String model = getCellContent(i , modelNumber);
             Currency currency = getCurrency();
-            BigDecimal unitPrice = new BigDecimal(getCellContent(i, unitPriceNumber).substring(1));
+            BigDecimal unitPrice = getUnitPrice(i);
 
             ProductModel product = new ProductModel
                     (
@@ -77,7 +77,7 @@ public class ShoppingCartTable extends BaseTable {
         return rowIndex + 1;
     }
 
-    protected WebElement getRow(int rowNumber) {
+    private WebElement getRow(int rowNumber) {
         if (rowNumber == 1) {
             throw new IllegalArgumentException("Row number 1 is a header row, not valid for this operation");
         }
