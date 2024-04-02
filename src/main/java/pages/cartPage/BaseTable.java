@@ -15,8 +15,7 @@ public class BaseTable extends BasePage {
     public By tableLocator;
     public By headerRow;
 
-    public BaseTable(WebDriver driver, String tableXpath) {
-        super(driver);
+    public BaseTable(String tableXpath) {
         this.tableXpath = tableXpath;
         this.headerRow = By.xpath(tableXpath + "/tbody/tr");
         this.tableLocator = By.xpath(tableXpath);

@@ -15,6 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ShoppingCartTable extends BaseTable {
+    protected WebDriver driver;
     public By cartEmptyMessagePanel = By.xpath("//div[@class='contentpanel1']");
     public By deleteItemButton = By.xpath(".//i[contains(@class, 'fa-trash-o')]/parent::a");
     public By quantityItemInput = By.xpath(".//input[contains(@id, 'cart_quantity')]");
@@ -22,38 +23,30 @@ public class ShoppingCartTable extends BaseTable {
     public By cartCheckoutButton = By.id("cart_checkout1");
 
     public ShoppingCartTable(WebDriver driver) {
-        super(driver, "//div[contains(@class, 'product-list')]/table");
+        super("//div[contains(@class, 'product-list')]/table");
+        this.driver = driver;
     }
 
     public List<ProductModel> getProducts() {
         List<ProductModel> products = new ArrayList<>();
-        int imageNumber = getColumnNumber("Image");
-        int nameNumber = getColumnNumber("Name");
-        int modelNumber = getColumnNumber("Model");
-        int unitPriceNumber = getColumnNumber("Unit Price");
-
         int rowCount = getRowCount();
-        for (int i = 2; i <= rowCount; i++) {
-            String imageUrl = getCellContent(i, imageNumber);
-            String name = getCellContent(i , nameNumber);
-            String model = getCellContent(i , modelNumber);
-            Currency currency = getCurrency();
-            BigDecimal unitPrice = getUnitPrice(i);
 
-            ProductModel product = new ProductModel
-                    (
-                            name,
-                            model,
-                            currency,
-                            unitPrice,
-                            null,
-                            null,
-                            null,
-                            imageUrl
-                    );
-            products.add(product);
+        for (int i = 2; i <= rowCount; i++) {
+            products.add(createProductFromRow(i));
         }
+
         return products;
+    }
+
+    private ProductModel createProductFromRow(int rowNumber)
+    {
+        String imageUrl = getCellContent(rowNumber, getColumnNumber("Image"));
+        String name = getCellContent(rowNumber, getColumnNumber("Name"));
+        String model = getCellContent(rowNumber, getColumnNumber("Model"));
+        Currency currency = getCurrency();
+        BigDecimal unitPrice = getUnitPrice(rowNumber);
+
+        return new ProductModel(name, model, currency, unitPrice, null, null, null, imageUrl);
     }
 
     public int getRowIndex(String text) {
