@@ -8,14 +8,14 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @ToString
 public enum CategoryMenuButton {
-	HOME("Home"),
-	APPAREL_AND_ACCESSORIES("Apparel & accessories"),
-	MAKEUP("Makeup"),
-	SKINCARE("Skincare"),
-	FRAGRANCE("Fragrance"),
-	MEN("Men"),
-	HAIR_CARE("Hair Care"),
-	BOOKS("Books");
+    HOME("Home"),
+    APPAREL_AND_ACCESSORIES("Apparel & accessories"),
+    MAKEUP("Makeup"),
+    SKINCARE("Skincare"),
+    FRAGRANCE("Fragrance"),
+    MEN("Men"),
+    HAIR_CARE("Hair Care"),
+    BOOKS("Books");
 
-	private final String text;
+    private final String text;
 }

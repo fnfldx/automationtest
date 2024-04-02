@@ -1,12 +1,12 @@
 package pages;
 
 import engine.property.manager.PropertyManager;
+import enums.BrowserName;
 import enums.CategoryMenuButton;
 import enums.FooterHyperLink;
 import enums.NavbarButton;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,10 +14,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static engine.drivers.WebDriverFactory.getWebDriverInstance;
+import static engine.property.manager.PropertyManager.getBrowserName;
+
 public class BasePage {
-    protected WebDriver driver;
     protected WebDriverWait wait;
     protected String baseUrl;
+    protected BrowserName browserName;
 
     protected final String navbarXpath = "//div[@role='navigation']";
     protected final String categoryMenuXpath = "//section[@id='categorymenu']";
@@ -32,15 +35,15 @@ public class BasePage {
     public By newsletterInputLocator = By.xpath(footersocialXpath + "//input[@id='appendedInputButton']");
     public By newsletterButtonLocator = By.xpath(footersocialXpath + "//button[@class='btn btn-orange']");
 
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
+    public BasePage() {
+        this.browserName = getBrowserName();
         int baseWaitInSeconds = Integer.parseInt(PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_WAIT_IN_SECONDS));
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(baseWaitInSeconds));
+        this.wait = new WebDriverWait(getWebDriverInstance(), Duration.ofSeconds(baseWaitInSeconds));
         this.baseUrl = PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_URL);
     }
 
     public By buttonNavbarLocatorByDataId(NavbarButton button) {
-        return By.xpath(navbarXpath + "//li[@data-id='"+ button.getDataId() +"']//span[@class='menu_text']");
+        return By.xpath(navbarXpath + "//li[@data-id='" + button.getDataId() + "']//span[@class='menu_text']");
     }
 
     public By buttonCategoryMenuLocatorByText(CategoryMenuButton button) {
@@ -51,23 +54,19 @@ public class BasePage {
         return By.xpath(footerlinksXpath + "//a[text()='" + link.getText() + "']");
     }
 
-    public void openUrl(String url) {
-        driver.get(url);
-    }
-
     public void clickOnElement(By locator) {
         locateElement(locator).click();
     }
 
     public void scrollToElement(By locator) {
         WebElement element = locateElement(locator);
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) getWebDriverInstance();
         js.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
     public void hoverOverElement(By locator) {
         WebElement element = locateElement(locator);
-        Actions actions = new Actions(driver);
+        Actions actions = new Actions(getWebDriverInstance());
         actions.moveToElement(element).perform();
     }
 
@@ -118,13 +117,14 @@ public class BasePage {
     public void clearTextFromElement(By locator) {
         locateElement(locator).clear();
     }
+
     public void clearAndTypeTextToElement(By locator, String text) {
         clearTextFromElement(locator);
         enterTextToElement(locator, text);
     }
 
     public boolean isElementDisplayed(By locator) {
-        return !driver.findElements(locator).isEmpty() && driver.findElement(locator).isDisplayed();
+        return !getWebDriverInstance().findElements(locator).isEmpty() && getWebDriverInstance().findElement(locator).isDisplayed();
     }
 
     public boolean isElementDisplayedAfterWait(By locator) {
@@ -133,6 +133,6 @@ public class BasePage {
 
     protected WebElement locateElement(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        return driver.findElement(locator);
+        return getWebDriverInstance().findElement(locator);
     }
 }
