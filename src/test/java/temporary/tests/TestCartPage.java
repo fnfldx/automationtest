@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import pages.cartPage.CartPage;
-import steps.MainPageSteps;
 
 import static engine.drivers.WebDriverFactory.quitWebDriver;
 import static steps.CartPageSteps.goToCheckout;
@@ -13,7 +12,6 @@ import static steps.MainPageSteps.*;
 public class TestCartPage extends BaseTest {
 
     protected static CartPage cartPage;
-    protected static MainPageSteps mainPageSteps;
 
     @BeforeClass
     public static void setUp() {
@@ -36,7 +34,7 @@ public class TestCartPage extends BaseTest {
         goToCheckout();
 
         // Then:
-        MainPageSteps.validateURL("https://automationteststore.com/index.php?rt=account/login");
+        validateURL("https://automationteststore.com/index.php?rt=account/login");
     }
 
 }
