@@ -14,9 +14,7 @@ import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
 import static engine.property.manager.PropertyManager.getProperty;
 
 public class MainPageSteps {
-
     protected static CartPage cartPage;
-    protected static BasePage basePage;
 
     public static void openPage() {
         var driver = getWebDriverInstance();
@@ -41,10 +39,11 @@ public class MainPageSteps {
     }
 
     public static void addProductToCartById(String id) {
+        cartPage = new CartPage();
         String xpath = String.format("//a[@data-id='%s']", id);
         By productLocator = By.xpath(xpath);
-        if (basePage.isElementDisplayed(productLocator)) {
-            basePage.clickOnElement(productLocator);
+        if (cartPage.getBasePage().isElementDisplayed(productLocator)) {
+            cartPage.getBasePage().clickOnElement(productLocator);
         } else {
             Assert.fail("Product with id " + id + " was not found");
         }

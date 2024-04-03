@@ -1,8 +1,10 @@
 package pages.cartPage;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import pages.BasePage;
 
+@Getter
 public class CartPage {
 
     protected BasePage basePage;

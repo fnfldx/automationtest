@@ -60,7 +60,7 @@ public class TestCartPage extends BaseTest {
         ProductModel product1 = ProductModel.builder()
                 .name("Skinsheen Bronzer Stick")
                 .model("558003")
-                .priceCurrency(Currency.GBP)
+                .priceCurrency(Currency.USD)
                 .price(new BigDecimal("23.40"))
                 .isOnSale(null)
                 .priceBeforeSale(null)

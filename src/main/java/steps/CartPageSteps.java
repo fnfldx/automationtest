@@ -26,6 +26,6 @@ public class CartPageSteps {
     }
 
     public static void validateIfProductIsInTable(ProductModel product, List<ProductModel> products) {
-        Assert.assertNotNull(products.stream().filter(p -> p.getName().equals(product.getName())).findFirst().orElse(null));
+        Assert.assertTrue(products.stream().anyMatch(p -> p.equals(product)));
     }
 }
