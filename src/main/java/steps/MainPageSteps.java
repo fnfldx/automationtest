@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.BasePage;
 import pages.cartPage.CartPage;
 
 import java.time.Duration;
@@ -15,6 +16,7 @@ import static engine.property.manager.PropertyManager.getProperty;
 public class MainPageSteps {
 
     protected static CartPage cartPage;
+    protected static BasePage basePage;
 
     public static void openPage() {
         var driver = getWebDriverInstance();
@@ -38,7 +40,17 @@ public class MainPageSteps {
         addProductToCart.click();
     }
 
-    public static void goToCart() {
+    public static void addProductToCartById(String id) {
+        String xpath = String.format("//a[@data-id='%s']", id);
+        By productLocator = By.xpath(xpath);
+        if (basePage.isElementDisplayed(productLocator)) {
+            basePage.clickOnElement(productLocator);
+        } else {
+            Assert.fail("Product with id " + id + " was not found");
+        }
+    }
+
+     public static void goToCart() {
         var goToCart = getWebDriverInstance().findElement(By.xpath("/html/body/div/header/div[2]/div/div[3]/ul/li/a"));
         goToCart.click();
 

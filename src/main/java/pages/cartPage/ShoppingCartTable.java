@@ -12,19 +12,20 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static engine.drivers.WebDriverFactory.getWebDriverInstance;
+
 @Getter
 @Setter
 public class ShoppingCartTable extends BaseTable {
-    protected WebDriver driver;
+    protected WebDriver driver = getWebDriverInstance();
     public By cartEmptyMessagePanel = By.xpath("//div[@class='contentpanel1']");
     public By deleteItemButton = By.xpath(".//i[contains(@class, 'fa-trash-o')]/parent::a");
     public By quantityItemInput = By.xpath(".//input[contains(@id, 'cart_quantity')]");
     public By cartUpdateButton = By.id("cart_update");
     public By cartCheckoutButton = By.id("cart_checkout1");
 
-    public ShoppingCartTable(WebDriver driver) {
+    public ShoppingCartTable() {
         super("//div[contains(@class, 'product-list')]/table");
-        this.driver = driver;
     }
 
     public List<ProductModel> getProducts() {

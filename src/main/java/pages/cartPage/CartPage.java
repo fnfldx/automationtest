@@ -15,9 +15,10 @@ public class CartPage {
         this.basePage = new BasePage();
     }
 
-    ApplyCouponCodeTable applyCouponCodeTable = new ApplyCouponCodeTable();
-    EstimateShippingAndTaxesTable estimateShippingAndTaxesTable = new EstimateShippingAndTaxesTable();
-    TotalsTable totalsTable = new TotalsTable();
+    public ApplyCouponCodeTable applyCouponCodeTable = new ApplyCouponCodeTable();
+    public EstimateShippingAndTaxesTable estimateShippingAndTaxesTable = new EstimateShippingAndTaxesTable();
+    public TotalsTable totalsTable = new TotalsTable();
+    public ShoppingCartTable shoppingCartTable = new ShoppingCartTable();
 
     public void clickOnUpdateButton() {
         basePage.clickOnElement(updateButtonLocator);

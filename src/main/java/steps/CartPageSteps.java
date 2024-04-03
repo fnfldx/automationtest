@@ -1,10 +1,13 @@
 package steps;
 
 
+import models.ProductModel;
+import org.junit.Assert;
 import pages.cartPage.CartPage;
 
-public class CartPageSteps {
+import java.util.List;
 
+public class CartPageSteps {
     protected static CartPage cartPage;
 
     public static void updateCart() {
@@ -15,5 +18,14 @@ public class CartPageSteps {
     public static void goToCheckout() {
         cartPage = new CartPage();
         cartPage.clickOnFinalCheckoutButton();
+    }
+
+    public static List<ProductModel> getProductsFromShoppingTable() {
+        cartPage = new CartPage();
+        return cartPage.shoppingCartTable.getProducts();
+    }
+
+    public static void validateIfProductIsInTable(ProductModel product, List<ProductModel> products) {
+        Assert.assertNotNull(products.stream().filter(p -> p.getName().equals(product.getName())).findFirst().orElse(null));
     }
 }
