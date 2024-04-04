@@ -3,6 +3,8 @@ package pages.checkoutConfirmationPage;
 import org.openqa.selenium.By;
 import pages.BasePage;
 
+import java.math.BigDecimal;
+
 public class OrderSummaryTable {
 
     protected BasePage basePage;
@@ -11,15 +13,15 @@ public class OrderSummaryTable {
     public By flatShippingRateLocator = By.xpath(totalsTable + "/tbody/tr[2]/td[2]/span");
     public By totalLocator = By.xpath(totalsTable + "/tbody/tr[3]/td[2]/span");
 
-    void getSubTotalValue() {
-        basePage.getTextFromElement(subTotalLocator);
+    public BigDecimal getSubTotalValue() {
+        return new BigDecimal(basePage.getTextFromElement(subTotalLocator).trim());
     }
 
-    void getFlatShippingRateValue() {
-        basePage.getTextFromElement(flatShippingRateLocator);
+    public BigDecimal getFlatShippingRateValue() {
+        return new BigDecimal(basePage.getTextFromElement(flatShippingRateLocator).trim());
     }
 
-    void getTotalValue() {
-        basePage.getTextFromElement(totalLocator);
+    public BigDecimal getTotalValue() {
+        return new BigDecimal(basePage.getTextFromElement(totalLocator).trim());
     }
 }

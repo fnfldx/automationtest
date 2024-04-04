@@ -7,14 +7,14 @@ public class TableConfirmShippmentOptions {
 
     protected BasePage basePage;
 
-    public By EditShippingButtonLocator = By.xpath("//a[normalize-space()='Edit Shipping']");
+    public By editShippingButtonLocator = By.xpath("//a[normalize-space()='Edit Shipping']");
 
     public TableConfirmShippmentOptions() {
         this.basePage = new BasePage();
     }
 
     public void clickOnEditShippingButton() {
-        basePage.clickOnElement(EditShippingButtonLocator);
+        basePage.clickOnElement(editShippingButtonLocator);
     }
 
 

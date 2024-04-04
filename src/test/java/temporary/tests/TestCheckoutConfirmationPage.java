@@ -34,7 +34,7 @@ public class TestCheckoutConfirmationPage extends BaseTest {
         goToCheckout();
         loginPage.selectGuestAccountOption();
         loginPage.clickContinueButton();
-        //Ilona's part with entering data into the fields
+        //Ilona's part with entering the data into fields
         //Ilona's part with clicking a continue button
 
 
