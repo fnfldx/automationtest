@@ -15,7 +15,7 @@ public enum Currency {
 	public final String currencySymbol;
 
 	public static Currency fromSymbol(String symbol) {
-		for (Currency currency : values()) {
+		for (var currency : values()) {
 			if (currency.getCurrencySymbol().equals(symbol)) {
 				return currency;
 			}

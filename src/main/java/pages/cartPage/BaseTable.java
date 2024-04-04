@@ -8,10 +8,11 @@ import pages.BasePage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public class BaseTable extends BasePage {
-    protected String tableXpath;
+    public String tableXpath;
     public By tableLocator;
     public By headerRow;
 
@@ -22,37 +23,31 @@ public class BaseTable extends BasePage {
     }
 
     public int getRowCount() {
-        WebElement table = locateElement(tableLocator);
-        List<WebElement> rows = table.findElements(By.tagName("tr"));
-        return rows.size();
+        return locateElement(tableLocator)
+                .findElements(By.tagName("tr"))
+                .size();
     }
 
     public int getColumnCount() {
-        WebElement headerRowElement = locateElement(headerRow);
-        List<WebElement> headerColumns = headerRowElement.findElements(By.tagName("th"));
-        return headerColumns.size();
+        return locateElement(headerRow)
+                .findElements(By.tagName("th"))
+                .size();
     }
 
     public int getColumnIndex(String columnHeader) {
-        List<String> columnHeaders = getColumnHeaders();
-        return columnHeaders.indexOf(columnHeader);
+        return getColumnHeaders().indexOf(columnHeader);
     }
 
     public int getColumnNumber(String columnHeader) {
         int rowIndex = getColumnIndex(columnHeader);
-        if (rowIndex == -1) {
-            return -1;
-        }
-        return rowIndex + 1;
+        return (rowIndex == -1) ? -1 : rowIndex + 1;
     }
 
     public List<String> getColumnHeaders() {
-        WebElement headerRowElement = locateElement(headerRow);
-        List<WebElement> headerColumns = headerRowElement.findElements(By.tagName("th"));
-        List<String> columnHeaders = new ArrayList<>();
-        for (WebElement headerColumn : headerColumns) {
-            columnHeaders.add(headerColumn.getText());
-        }
-        return columnHeaders;
+        return locateElement(headerRow)
+                .findElements(By.tagName("th"))
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
     }
 }

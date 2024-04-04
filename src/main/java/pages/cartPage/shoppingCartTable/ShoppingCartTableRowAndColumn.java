@@ -1,12 +1,12 @@
-package pages.cartPage;
+package pages.cartPage.shoppingCartTable;
 
-import enums.Currency;
 import lombok.Getter;
 import lombok.Setter;
 import models.ProductModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import pages.cartPage.BaseTable;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -16,51 +16,14 @@ import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 
 @Getter
 @Setter
-public class ShoppingCartTable extends BaseTable {
+public class ShoppingCartTableRowAndColumn {
+    protected BaseTable baseTable;
     protected WebDriver driver = getWebDriverInstance();
-    public By cartEmptyMessagePanel = By.xpath("//div[@class='contentpanel1']");
     public By deleteItemButton = By.xpath(".//i[contains(@class, 'fa-trash-o')]/parent::a");
     public By quantityItemInput = By.xpath(".//input[contains(@id, 'cart_quantity')]");
-    public By cartUpdateButton = By.id("cart_update");
-    public By cartCheckoutButton = By.id("cart_checkout1");
 
-    public ShoppingCartTable() {
-        super("//div[contains(@class, 'product-list')]/table");
-    }
-
-    public List<ProductModel> getProducts() {
-        List<ProductModel> products = new ArrayList<>();
-        int rowCount = getRowCount();
-
-        for (int i = 2; i <= rowCount; i++) {
-            products.add(createProductFromRow(i));
-        }
-
-        return products;
-    }
-
-    private ProductModel createProductFromRow(int rowNumber)
-    {
-        String imageUrl = getCellContent(rowNumber, getColumnNumber("Image"));
-        String name = getCellContent(rowNumber, getColumnNumber("Name"));
-        String model = getCellContent(rowNumber, getColumnNumber("Model"));
-        Currency currency = getCurrency();
-        BigDecimal unitPrice = getUnitPrice(rowNumber);
-
-        return new ProductModel(name, model, currency, unitPrice, null, null, null, imageUrl);
-    }
-
-    public int getRowIndex(String text) {
-        WebElement table = locateElement(tableLocator);
-        List<WebElement> rows = table.findElements(By.tagName("tr"));
-
-        for (int i = 0; i < rows.size(); i++) {
-            WebElement row = rows.get(i);
-            if (row.getText().contains(text)) {
-                return i;
-            }
-        }
-        return -1;
+    public ShoppingCartTableRowAndColumn() {
+        this.baseTable = new BaseTable("//div[contains(@class, 'product-list')]/table");
     }
 
     public int getRowNumber(String text) {
@@ -71,11 +34,11 @@ public class ShoppingCartTable extends BaseTable {
         return rowIndex + 1;
     }
 
-    private WebElement getRow(int rowNumber) {
+    protected WebElement getRow(int rowNumber) {
         if (rowNumber == 1) {
             throw new IllegalArgumentException("Row number 1 is a header row, not valid for this operation");
         }
-        WebElement table = locateElement(tableLocator);
+        WebElement table = baseTable.locateElement(baseTable.tableLocator);
         List<WebElement> rows = table.findElements(By.tagName("tr"));
 
         if (rowNumber > 0 && rowNumber < rows.size()) {
@@ -85,11 +48,11 @@ public class ShoppingCartTable extends BaseTable {
         }
     }
 
-    private WebElement getCell(int rowNumber, int columnNumber) {
+    protected WebElement getCell(int rowNumber, int columnNumber) {
         if (rowNumber == 1) {
             throw new IllegalArgumentException("Row number 1 is a header row, not valid for this operation");
         }
-        List<WebElement> productRows = driver.findElements(By.xpath(tableXpath + "//tr[.//td]"));
+        List<WebElement> productRows = driver.findElements(By.xpath(baseTable.tableXpath + "//tr[.//td]"));
 
         if (rowNumber > 0 && rowNumber <= productRows.size() + 1) {
             WebElement targetRow = productRows.get(rowNumber - 2);
@@ -141,6 +104,19 @@ public class ShoppingCartTable extends BaseTable {
         return cell.findElement(By.xpath("./a")).getAttribute("href");
     }
 
+    public int getRowIndex(String text) {
+        WebElement table = baseTable.locateElement(baseTable.tableLocator);
+        List<WebElement> rows = table.findElements(By.tagName("tr"));
+
+        for (int i = 0; i < rows.size(); i++) {
+            WebElement row = rows.get(i);
+            if (row.getText().contains(text)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public List<String> getRowContent(int rowNumber) {
         WebElement row = getRow(rowNumber);
         List<WebElement> cells = row.findElements(By.tagName("td"));
@@ -153,7 +129,7 @@ public class ShoppingCartTable extends BaseTable {
     }
 
     public List<String> getColumnContent(int columnNumber) {
-        List<WebElement> rows = driver.findElements(By.xpath(tableXpath + "//tr[.//td]"));
+        List<WebElement> rows = driver.findElements(By.xpath(baseTable.tableXpath + "//tr[.//td]"));
 
         List<String> columnData = new ArrayList<>();
 
@@ -170,7 +146,7 @@ public class ShoppingCartTable extends BaseTable {
     }
 
     public List<String> getColumnContent(String columnName) {
-        List<String> columnHeaders = getColumnHeaders();
+        List<String> columnHeaders = baseTable.getColumnHeaders();
         int columnIndex = columnHeaders.indexOf(columnName);
         return getColumnContent(columnIndex + 1);
     }
@@ -181,58 +157,13 @@ public class ShoppingCartTable extends BaseTable {
     }
 
     public String getCellContent(int rowNumber, String columnName) {
-        List<String> columnHeaders = getColumnHeaders();
+        List<String> columnHeaders = baseTable.getColumnHeaders();
         int columnIndex = columnHeaders.indexOf(columnName);
         return getCellContent(rowNumber, columnIndex + 1);
     }
 
-    public String getUnitPriceWithCurrencyCharacter(int rowNumber) {
-        return getCellContent(rowNumber, getColumnNumber("Unit Price"));
-    }
-
-    public Currency getCurrency() {
-        char currencySymbol = getUnitPriceWithCurrencyCharacter(2).charAt(0);
-        return Currency.fromSymbol(String.valueOf(currencySymbol));
-    }
-
-    public BigDecimal getUnitPrice(int rowNumber) {
-        String unitPriceWithCurrency = getUnitPriceWithCurrencyCharacter(rowNumber);
-        String unitPriceWithoutCurrency = unitPriceWithCurrency.substring(1);
-        return new BigDecimal(unitPriceWithoutCurrency);
-    }
-
-    public BigDecimal getUnitPrice(String productName) {
-        int rowNumber = getRowNumber(productName);
-        return getUnitPrice(rowNumber);
-    }
-
-    public BigDecimal getUnitPrice(ProductModel product) {
-        int rowNumber = getRowNumber(product.getName());
-        return getUnitPrice(rowNumber);
-    }
-
-    public String getTotalPriceWithCurrencyCharacter(int rowNumber) {
-        return getCellContent(rowNumber, getColumnNumber("Total Price"));
-    }
-
-    public BigDecimal getTotalPrice(int rowNumber) {
-        String totalPriceWithCurrency = getTotalPriceWithCurrencyCharacter(rowNumber);
-        String totalPriceWithoutCurrency = totalPriceWithCurrency.substring(1);
-        return new BigDecimal(totalPriceWithoutCurrency);
-    }
-
-    public BigDecimal getTotalPrice(String productName) {
-        int rowNumber = getRowNumber(productName);
-        return getTotalPrice(rowNumber);
-    }
-
-    public BigDecimal getTotalPrice(ProductModel product) {
-        int rowNumber = getRowNumber(product.getName());
-        return getTotalPrice(rowNumber);
-    }
-
     public int getQuantity(int rowNumber) {
-        String quantity = getCellContent(rowNumber, getColumnNumber("Quantity"));
+        String quantity = getCellContent(rowNumber, baseTable.getColumnNumber("Quantity"));
         return Integer.parseInt(quantity);
     }
 
@@ -244,39 +175,5 @@ public class ShoppingCartTable extends BaseTable {
     public int getQuantity(ProductModel product) {
         int rowNumber = getRowNumber(product.getName());
         return getQuantity(rowNumber);
-    }
-
-    public void setQuantity(int rowNumber, int quantity) {
-        WebElement cell = getCell(rowNumber, getColumnNumber("Quantity"));
-        WebElement input = cell.findElement(quantityItemInput);
-        input.clear();
-        input.sendKeys(String.valueOf(quantity));
-    }
-
-    public void deleteItem(int rowNumber) {
-        WebElement row = getRow(rowNumber);
-        row.findElement(deleteItemButton).click();
-    }
-
-    public void deleteItem(String productName) {
-        int rowNumber = getRowNumber(productName);
-        deleteItem(rowNumber);
-    }
-
-    public void deleteItem(ProductModel product) {
-        int rowNumber = getRowNumber(product.getName());
-        deleteItem(rowNumber);
-    }
-
-    public void clickCartUpdateButton() {
-        locateElement(cartUpdateButton).click();
-    }
-
-    public void clickCartCheckoutButton() {
-        locateElement(cartCheckoutButton).click();
-    }
-
-    public boolean isCartEmpty() {
-        return isElementDisplayed(cartEmptyMessagePanel);
     }
 }

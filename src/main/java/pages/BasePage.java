@@ -131,7 +131,7 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
     }
 
-    protected WebElement locateElement(By locator) {
+    public WebElement locateElement(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return getWebDriverInstance().findElement(locator);
     }

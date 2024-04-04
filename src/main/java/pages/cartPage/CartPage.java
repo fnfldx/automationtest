@@ -3,6 +3,7 @@ package pages.cartPage;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import pages.BasePage;
+import pages.cartPage.shoppingCartTable.ShoppingCartTable;
 
 @Getter
 public class CartPage {
