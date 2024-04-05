@@ -10,6 +10,7 @@ import pages.BasePage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 
@@ -37,15 +38,12 @@ public class MainPageSection extends BasePage {
 
 
     public List<Integer> getProductIdsFromSection(MainPageSectionId sectionId) {
-        List<WebElement> productElements = getWebDriverInstance().findElements(By.xpath("//div[@id='" + sectionId + "']//a[contains(@class, 'productcart')]"));
-        List<Integer> productIds = new ArrayList<>();
-        for (WebElement productElement : productElements) {
-            String dataId = productElement.getAttribute("data-id");
-            if (dataId != null && !dataId.isEmpty()) {
-                productIds.add(Integer.parseInt(dataId));
-            }
-        }
-        return productIds;
+        return getWebDriverInstance().findElements(By.xpath("//div[@id='" + sectionId + "']//a[contains(@class, 'productcart')]"))
+                .stream()
+                .map(element -> element.getAttribute("data-id"))
+                .filter(dataId -> dataId != null && !dataId.isEmpty())
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
 
