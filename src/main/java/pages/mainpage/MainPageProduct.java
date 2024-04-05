@@ -4,34 +4,29 @@ import lombok.Getter;
 import lombok.Setter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import pages.BasePage;
 
-@Getter
 @Setter
+@Getter
 public class MainPageProduct extends BasePage {
-    private String header;
-    private double price;
-    private WebDriver driver;
+    private int productId;
 
     public MainPageProduct(WebDriver driver) {
         super();
-        this.driver = driver;
     }
 
-    public double getPrice(WebElement product) {
-        By priceElement = By.xpath("//a[@class='oneprice'");
-        String priceText = getTextFromElement(priceElement);
-        price = Double.parseDouble(priceText);
-        return price;
-    }
-
-    public String getProductName(WebElement product) {
-        By productNameElement = By.xpath("//a[@class='prdocutname']");
+    public String getProductName() {
+        By productNameElement = By.xpath("//a[@class='productname' and @data-id='" + productId + "']");
         return getTextFromElement(productNameElement);
     }
 
-    public void addToCart(String productId) {
+    public double getPrice() {
+        By priceElement = By.xpath("//div[@class='oneprice' and @data-id='" + productId + "']");
+        String priceText = getTextFromElement(priceElement);
+        return Double.parseDouble(priceText.replace(" zł", "").replace(",", "."));
+    }
+
+    public void clickAddToCartButton() {
         By addToCartButton = By.xpath("//a[@class='productcart' and @data-id='" + productId + "']");
         clickOnElement(addToCartButton);
     }

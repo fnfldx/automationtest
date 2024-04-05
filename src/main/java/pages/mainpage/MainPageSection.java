@@ -1,43 +1,55 @@
 package pages.mainpage;
 
 import enums.MainPageSectionId;
-import org.openqa.selenium.By;
+import lombok.Getter;
+import lombok.Setter;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.BasePage;
-import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 
 @Getter
+@Setter
 public class MainPageSection extends BasePage {
-
-    private WebDriver driver;
-    private MainPageSectionId sectionIdEnum;
+    private MainPageProduct mainPageProduct;
 
     public MainPageSection(WebDriver driver) {
         super();
-        this.driver = driver;
+        this.mainPageProduct = new MainPageProduct(driver);
     }
 
-    // Retrieves a list of products from a specific section using the section ID from the enum
-    public List<WebElement> getProductsFromSection(MainPageSectionId sectionIdEnum) {
-        String sectionId = sectionIdEnum.getId(); // Get the ID from the enum
-        By sectionLocator = By.id(sectionId);
-        scrollToElement(sectionLocator);
-        return locateElement(sectionLocator).findElements(By.xpath(".//div[contains(@class, 'thumbnail')]"));
+    public List<MainPageProduct> getAllProductsFromSection(MainPageSectionId sectionId) {
+        List<WebElement> productElements = getWebDriverInstance().findElements(By.xpath("//div[@id='" + sectionId + "']//div[contains(@class, 'product')]"));
+        List<MainPageProduct> products = new ArrayList<>();
+        for (WebElement productElement : productElements) {
+            MainPageProduct product = new MainPageProduct(getWebDriverInstance());
+            int productId = Integer.parseInt(productElement.findElement(By.xpath(".//a[contains(@class, 'productcart')]")).getAttribute("data-id"));
+            product.setProductId(productId);
+            products.add(product);
+        }
+        return products;
     }
 
-    // Counts the number of products directly from the retrieved list
-    public int countProducts() {
-        return getProductsFromSection(sectionIdEnum).size();
+
+    public List<Integer> getProductIdsFromSection(MainPageSectionId sectionId) {
+        List<WebElement> productElements = getWebDriverInstance().findElements(By.xpath("//div[@id='" + sectionId + "']//a[contains(@class, 'productcart')]"));
+        List<Integer> productIds = new ArrayList<>();
+        for (WebElement productElement : productElements) {
+            String dataId = productElement.getAttribute("data-id");
+            if (dataId != null && !dataId.isEmpty()) {
+                productIds.add(Integer.parseInt(dataId));
+            }
+        }
+        return productIds;
     }
 
-    // Gets a random product directly from the retrieved list
-    public WebElement getRandomProduct(MainPageSectionId sectionIdEnum) {
-        List<WebElement> products = getProductsFromSection(sectionIdEnum);
-        Random rand = new Random();
-        return products.get(rand.nextInt(products.size()));
+
+    public int countProductsInSection(MainPageSectionId sectionId) {
+        return getWebDriverInstance().findElements(By.xpath("//div[@id='" + sectionId + "']//div[contains(@class, 'product')]")).size();
     }
 }

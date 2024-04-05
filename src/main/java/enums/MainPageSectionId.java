@@ -8,6 +8,7 @@ import lombok.ToString;
 @ToString
 @RequiredArgsConstructor
 public enum MainPageSectionId {
+    FEATURES("featured"),
     LATEST("latest"),
     BESTSELLER("bestseller"),
     SPECIAL("special");
