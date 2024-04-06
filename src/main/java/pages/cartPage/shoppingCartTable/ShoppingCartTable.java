@@ -2,10 +2,12 @@ package pages.cartPage.shoppingCartTable;
 
 import enums.Currency;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import models.ProductModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import pages.BasePage;
 import pages.cartPage.BaseTable;
 
 import java.math.BigDecimal;
@@ -15,14 +17,11 @@ import java.util.stream.IntStream;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class ShoppingCartTable extends ShoppingCartTableRow {
     public By cartEmptyMessagePanel = By.xpath("//div[@class='contentpanel1']");
     public By cartUpdateButton = By.id("cart_update");
     public By cartCheckoutButton = By.id("cart_checkout1");
-
-    public ShoppingCartTable() {
-        this.baseTable = new BaseTable("//div[contains(@class, 'product-list')]/table");
-    }
 
     public List<ProductModel> getProducts() {
         int rowCount = baseTable.getRowCount();
@@ -138,14 +137,14 @@ public class ShoppingCartTable extends ShoppingCartTableRow {
     }
 
     public void clickCartUpdateButton() {
-        baseTable.locateElement(cartUpdateButton).click();
+        basePage.locateElement(cartUpdateButton).click();
     }
 
     public void clickCartCheckoutButton() {
-        baseTable.locateElement(cartCheckoutButton).click();
+        basePage.locateElement(cartCheckoutButton).click();
     }
 
     public boolean isCartEmpty() {
-        return baseTable.isElementDisplayed(cartEmptyMessagePanel);
+        return basePage.isElementDisplayed(cartEmptyMessagePanel);
     }
 }

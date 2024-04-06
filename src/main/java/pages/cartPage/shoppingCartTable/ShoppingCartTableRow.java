@@ -6,6 +6,7 @@ import models.ProductModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import pages.BasePage;
 import pages.cartPage.BaseTable;
 
 import java.util.ArrayList;
@@ -16,13 +17,15 @@ import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 @Getter
 @Setter
 public class ShoppingCartTableRow {
-    public By deleteItemButton = By.xpath(".//i[contains(@class, 'fa-trash-o')]/parent::a");
-    public By quantityItemInput = By.xpath(".//input[contains(@id, 'cart_quantity')]");
+    protected BasePage basePage;
     protected BaseTable baseTable;
     protected WebDriver driver = getWebDriverInstance();
+    public By deleteItemButton = By.xpath(".//i[contains(@class, 'fa-trash-o')]/parent::a");
+    public By quantityItemInput = By.xpath(".//input[contains(@id, 'cart_quantity')]");
 
     public ShoppingCartTableRow() {
         this.baseTable = new BaseTable("//div[contains(@class, 'product-list')]/table");
+        this.basePage = baseTable.getBasePage();
     }
 
     public int getRowNumber(String text) {
@@ -37,7 +40,7 @@ public class ShoppingCartTableRow {
     }
 
     protected List<WebElement> getTableRows() {
-        var table = baseTable.locateElement(baseTable.tableLocator);
+        var table = basePage.locateElement(baseTable.tableLocator);
         return table.findElements(By.tagName("tr"));
     }
 
@@ -77,7 +80,7 @@ public class ShoppingCartTableRow {
         var cells = row.findElements(By.tagName("td"));
         List<String> cellData = new ArrayList<>();
 
-        if (cells.size() == 7) {
+        if(cells.size() == 7) {
             cellData.add(getImageItemSrc(cells.get(0)));
             cellData.add(cells.get(1).getText());
             cellData.add(cells.get(2).getText());
@@ -85,7 +88,8 @@ public class ShoppingCartTableRow {
             cellData.add(getQuantityInputValue(cells.get(4)));
             cellData.add(cells.get(5).getText());
             cellData.add(getDeleteButtonHref(cells.get(6)));
-        } else {
+        }
+        else {
             throw new IllegalArgumentException("Row does not contain 7 cells");
         }
 
