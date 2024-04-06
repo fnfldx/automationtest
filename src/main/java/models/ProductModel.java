@@ -3,6 +3,7 @@ package models;
 import enums.Currency;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 @Setter
 @Builder
 @AllArgsConstructor
+@EqualsAndHashCode
 public class ProductModel {
 	public final String name;
 	public final String model;

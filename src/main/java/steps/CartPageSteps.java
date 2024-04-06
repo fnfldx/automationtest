@@ -6,6 +6,7 @@ import org.junit.Assert;
 import pages.cartPage.CartPage;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CartPageSteps {
     protected static CartPage cartPage;
@@ -25,7 +26,12 @@ public class CartPageSteps {
         return cartPage.shoppingCartTable.getProducts();
     }
 
-    public static void validateIfProductIsInTable(ProductModel product, List<ProductModel> products) {
-        Assert.assertTrue(products.stream().anyMatch(p -> p.equals(product)));
+    public static void checkIfProductAppearsOnce(ProductModel product, List<ProductModel> products) {
+        var count = products
+                .stream()
+                .filter(p -> p.equals(product))
+                .count();
+
+        Assert.assertEquals(1, count);
     }
 }

@@ -9,12 +9,13 @@ import org.openqa.selenium.WebElement;
 import pages.cartPage.BaseTable;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Getter
 @Setter
-public class ShoppingCartTable extends ShoppingCartTableRowAndColumn {
+public class ShoppingCartTable extends ShoppingCartTableRow {
     public By cartEmptyMessagePanel = By.xpath("//div[@class='contentpanel1']");
     public By cartUpdateButton = By.id("cart_update");
     public By cartCheckoutButton = By.id("cart_checkout1");
@@ -24,38 +25,48 @@ public class ShoppingCartTable extends ShoppingCartTableRowAndColumn {
     }
 
     public List<ProductModel> getProducts() {
-        List<ProductModel> products = new ArrayList<>();
         int rowCount = baseTable.getRowCount();
 
-        for (int i = 2; i <= rowCount; i++) {
-            products.add(createProductFromRow(i));
-        }
-
-        return products;
+        return IntStream.range(2, rowCount + 1)
+                .mapToObj(this::getProductFromRow)
+                .collect(Collectors.toList());
     }
 
-    private ProductModel createProductFromRow(int rowNumber)
-    {
-        String imageUrl = getCellContent(rowNumber, baseTable.getColumnNumber(ShoppingCartHeader.Image.getHeader()));
-        String name = getCellContent(rowNumber, baseTable.getColumnNumber(ShoppingCartHeader.Name.getHeader()));
-        String model = getCellContent(rowNumber, baseTable.getColumnNumber(ShoppingCartHeader.Model.getHeader()));
-        Currency currency = getCurrency();
-        BigDecimal unitPrice = getUnitPrice(rowNumber);
+    public ProductModel getProductFromRow(int rowNumber) {
+        var rowContent = getRowContent(rowNumber);
+        var name = rowContent.get(ShoppingCartHeader.Name.ordinal());
+        var model = rowContent.get(ShoppingCartHeader.Model.ordinal());
+        var priceCurrency = getCurrencyFromUnitPrice(rowNumber);
+        var price = getUnitPrice(rowNumber);
+        var imageUrl = rowContent.get(ShoppingCartHeader.Image.ordinal());
 
-        return new ProductModel(name, model, currency, unitPrice, null, null, null, imageUrl);
+        return ProductModel.builder()
+                .name(name)
+                .model(model)
+                .priceCurrency(priceCurrency)
+                .price(price)
+                .isOnSale(null)
+                .priceBeforeSale(null)
+                .isOutOfStock(null)
+                .imageUrl(imageUrl)
+                .build();
     }
 
-    public String getUnitPriceWithCurrencyCharacter(int rowNumber) {
-        return getCellContent(rowNumber, baseTable.getColumnNumber(ShoppingCartHeader.UnitPrice.getHeader()));
+    private String getUnitPriceWithSymbol(int rowNumber) {
+        var row = getRowContent(rowNumber);
+
+        return row.get(ShoppingCartHeader.UnitPrice.ordinal());
     }
 
-    public Currency getCurrency() {
-        char currencySymbol = getUnitPriceWithCurrencyCharacter(2).charAt(0);
+    public Currency getCurrencyFromUnitPrice(int rowNumber) {
+        var row = getRowContent(rowNumber);
+        var currencySymbol = row.get(ShoppingCartHeader.UnitPrice.ordinal()).charAt(0);
+
         return Currency.fromSymbol(String.valueOf(currencySymbol));
     }
 
     public BigDecimal getUnitPrice(int rowNumber) {
-        String unitPriceWithCurrency = getUnitPriceWithCurrencyCharacter(rowNumber);
+        var unitPriceWithCurrency = getUnitPriceWithSymbol(rowNumber);
         String unitPriceWithoutCurrency = unitPriceWithCurrency.substring(1);
         return new BigDecimal(unitPriceWithoutCurrency);
     }
@@ -70,8 +81,9 @@ public class ShoppingCartTable extends ShoppingCartTableRowAndColumn {
         return getUnitPrice(rowNumber);
     }
 
-    public String getTotalPriceWithCurrencyCharacter(int rowNumber) {
-        return getCellContent(rowNumber, baseTable.getColumnNumber(ShoppingCartHeader.Total.getHeader()));
+    private String getTotalPriceWithCurrencyCharacter(int rowNumber) {
+        var row = getRowContent(rowNumber);
+        return row.get(ShoppingCartHeader.Total.ordinal());
     }
 
     public BigDecimal getTotalPrice(int rowNumber) {
@@ -91,10 +103,23 @@ public class ShoppingCartTable extends ShoppingCartTableRowAndColumn {
     }
 
     public void setQuantity(int rowNumber, int quantity) {
-        WebElement cell = getCell(rowNumber, baseTable.getColumnNumber(ShoppingCartHeader.Quantity.getHeader()));
-        WebElement input = cell.findElement(quantityItemInput);
+        var row = getRow(rowNumber);
+        var input = row.findElements(By.tagName("td"))
+                .get(ShoppingCartHeader.Quantity.ordinal())
+                .findElement(quantityItemInput);
+
         input.clear();
         input.sendKeys(String.valueOf(quantity));
+    }
+
+    public void setQuantity(String productName, int quantity) {
+        int rowNumber = getRowNumber(productName);
+        setQuantity(rowNumber, quantity);
+    }
+
+    public void setQuantity(ProductModel product, int quantity) {
+        int rowNumber = getRowNumber(product.getName());
+        setQuantity(rowNumber, quantity);
     }
 
     public void deleteItem(int rowNumber) {

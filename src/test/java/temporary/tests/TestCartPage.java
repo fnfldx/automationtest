@@ -12,10 +12,13 @@ import steps.MainPageSteps;
 import java.math.BigDecimal;
 
 import static engine.drivers.WebDriverFactory.quitWebDriver;
+import static steps.CartPageSteps.checkIfProductAppearsOnce;
 import static steps.CartPageSteps.getProductsFromShoppingTable;
 import static steps.CartPageSteps.goToCheckout;
-import static steps.CartPageSteps.validateIfProductIsInTable;
-import static steps.MainPageSteps.*;
+import static steps.MainPageSteps.addProductToCartById;
+import static steps.MainPageSteps.addToCart;
+import static steps.MainPageSteps.goToCart;
+import static steps.MainPageSteps.openPage;
 
 public class TestCartPage extends BaseTest {
 
@@ -61,7 +64,7 @@ public class TestCartPage extends BaseTest {
                 .name("Skinsheen Bronzer Stick")
                 .model("558003")
                 .priceCurrency(Currency.USD)
-                .price(new BigDecimal("23.40"))
+                .price(new BigDecimal("29.50"))
                 .isOnSale(null)
                 .priceBeforeSale(null)
                 .isOutOfStock(null)
@@ -70,7 +73,6 @@ public class TestCartPage extends BaseTest {
 
         // Then:
         Assert.assertEquals(3, products.size());
-        validateIfProductIsInTable(product1, products);
+        checkIfProductAppearsOnce(product1, products);
     }
 }
-
