@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.BasePage;
 import pages.cartPage.CartPage;
 
 import java.time.Duration;
@@ -13,7 +12,8 @@ import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
 import static engine.property.manager.PropertyManager.getProperty;
 
-public class MainPageSteps {
+public class BaseSteps {
+
     protected static CartPage cartPage;
 
     public static void openPage() {
@@ -26,11 +26,6 @@ public class MainPageSteps {
         wait.until(ExpectedConditions.visibilityOfElementLocated(welcomeMsg));
 
         validateURL(url);
-    }
-
-    public static void goToAccountLogin() {
-        var loginOrRegister = getWebDriverInstance().findElement(By.id("customer_menu_top"));
-        loginOrRegister.click();
     }
 
     public static void addToCart() {
@@ -54,16 +49,6 @@ public class MainPageSteps {
         goToCart.click();
 
         validateURL("https://automationteststore.com/index.php?rt=checkout/cart");
-    }
-
-    public static void updateCart() {
-        cartPage = new CartPage();
-        cartPage.clickOnUpdateButton();
-    }
-
-    public static void goToCheckout() {
-        cartPage = new CartPage();
-        cartPage.clickOnFinalCheckoutButton();
     }
 
     public static void validateURL(String url) {

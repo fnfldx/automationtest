@@ -7,23 +7,19 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import pages.cartPage.CartPage;
-import steps.MainPageSteps;
+import steps.BaseSteps;
 
 import java.math.BigDecimal;
 
+import static steps.BaseSteps.*;
 import static engine.drivers.WebDriverFactory.quitWebDriver;
 import static steps.CartPageSteps.checkIfProductAppearsOnce;
 import static steps.CartPageSteps.getProductsFromShoppingTable;
 import static steps.CartPageSteps.goToCheckout;
-import static steps.MainPageSteps.addProductToCartById;
-import static steps.MainPageSteps.addToCart;
-import static steps.MainPageSteps.goToCart;
-import static steps.MainPageSteps.openPage;
 
 public class TestCartPage extends BaseTest {
 
     protected static CartPage cartPage;
-    protected static MainPageSteps mainPageSteps;
 
     @BeforeClass
     public static void setUp() {
@@ -46,7 +42,7 @@ public class TestCartPage extends BaseTest {
         goToCheckout();
 
         // Then:
-        MainPageSteps.validateURL("https://automationteststore.com/index.php?rt=account/login");
+        BaseSteps.validateURL("https://automationteststore.com/index.php?rt=account/login");
     }
 
     @Test
