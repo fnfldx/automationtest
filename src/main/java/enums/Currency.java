@@ -8,18 +8,18 @@ import lombok.ToString;
 @ToString
 @RequiredArgsConstructor
 public enum Currency {
-	EUR("€"),
-	GBP("£"),
-	USD("$");
+    EUR("€"),
+    GBP("£"),
+    USD("$");
 
-	public final String currencySymbol;
+    public final String currencySymbol;
 
-	public static Currency fromSymbol(String symbol) {
-		for (var currency : values()) {
-			if (currency.getCurrencySymbol().equals(symbol)) {
-				return currency;
-			}
-		}
-		throw new IllegalArgumentException("No enum constant for symbol: " + symbol);
-	}
+    public static Currency fromSymbol(String symbol) {
+        for (var currency : values()) {
+            if (currency.getCurrencySymbol().equals(symbol)) {
+                return currency;
+            }
+        }
+        throw new IllegalArgumentException("No enum constant for symbol: " + symbol);
+    }
 }
