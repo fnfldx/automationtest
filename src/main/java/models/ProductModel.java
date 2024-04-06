@@ -15,12 +15,12 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class ProductModel {
-	public final String name;
-	public final String model;
-	public final Currency priceCurrency;
-	public final BigDecimal price;
-	public final Boolean isOnSale;
-	public final BigDecimal priceBeforeSale;
-	public final Boolean isOutOfStock;
-	public final String imageUrl;
+    public final String name;
+    public final String model;
+    public final Currency priceCurrency;
+    public final BigDecimal price;
+    public final Boolean isOnSale;
+    public final BigDecimal priceBeforeSale;
+    public final Boolean isOutOfStock;
+    public final String imageUrl;
 }
