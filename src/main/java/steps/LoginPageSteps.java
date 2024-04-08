@@ -18,7 +18,8 @@ public class LoginPageSteps {
 
     public static void proceedAsRegisterAccount() {
         loginPage = new LoginPage();
-        loginPage.selectRegisterAccountOption();
+        if (!loginPage.isRegisterAccountSelected())
+            loginPage.selectRegisterAccountOption();
         loginPage.clickContinueButton();
     }
 
