@@ -20,8 +20,14 @@ public class CustomerModelUtils {
                 .address2(fakerEN.address().streetAddress())
                 .city(fakerEN.address().cityName())
                 .zipCode(fakerEN.address().zipCode())
-                .login(fakerEN.name().username())
-                .password(fakerEN.internet().password(4, 20))
                 .build();
+    }
+
+    public static String generateLoginName() {
+        return fakerEN.name().username();
+    }
+
+    public static String generatePassword() {
+        return fakerEN.internet().password();
     }
 }

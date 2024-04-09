@@ -18,8 +18,6 @@ public class CustomerModel {
     public final String address2;
     public final String city;
     public final String zipCode;
-    public final String login;
-    public final String password;
 
     @Builder.Default
     public final String countryDefault = "United Kingdom"; // You can set the default country here

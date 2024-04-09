@@ -1,32 +1,33 @@
 package models;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Random;
-
 @Getter
 @Setter
+@Builder
 public class AccountModel {
     public CustomerModel customerModel;
-    public Boolean isSubscribedToNewsletter;
     public String loginName;
     public String password;
 
-    public AccountModel(CustomerModel customerModel, Boolean isSubscribedToNewsletter) {
-        this.customerModel = customerModel;
-        this.isSubscribedToNewsletter = isSubscribedToNewsletter;
-        this.loginName = customerModel.getLogin();
-        this.password = customerModel.getPassword();
+    @Builder.Default
+    public Boolean isSubscribedToNewsletter = false;
+
+    public static AccountModel withCustomerModel(CustomerModel customerModel) {
+        return AccountModel.builder()
+                .customerModel(customerModel)
+                .loginName(CustomerModelUtils.generateLoginName())
+                .password(CustomerModelUtils.generatePassword())
+                .build();
     }
 
-    public AccountModel() {
-        var customerModel = CustomerModelUtils.generateCustomerWithRandomData();
-        this.customerModel = customerModel;
-        this.loginName = customerModel.getLogin();
-        this.password = customerModel.getPassword();
-
-        Random random = new Random();
-        this.isSubscribedToNewsletter = random.nextBoolean();
+    public static AccountModel withRandomCustomerModel() {
+        return AccountModel.builder()
+                .customerModel(CustomerModelUtils.generateCustomerWithRandomData())
+                .loginName(CustomerModelUtils.generateLoginName())
+                .password(CustomerModelUtils.generatePassword())
+                .build();
     }
 }
