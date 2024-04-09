@@ -19,7 +19,7 @@ public class MainPageProductTest {
     @Before
     public void baseSetUp() {
         WebDriver driver = getWebDriverInstance();
-        mainPageProduct = new MainPageProduct(driver);
+        mainPageProduct = new MainPageProduct();
     }
 
     @Test
