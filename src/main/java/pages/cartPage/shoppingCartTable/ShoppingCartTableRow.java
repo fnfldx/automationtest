@@ -57,7 +57,6 @@ public class ShoppingCartTableRow {
         } else {
             throw new IllegalArgumentException("Row does not contain 7 cells");
         }
-
         return cellData;
     }
 
