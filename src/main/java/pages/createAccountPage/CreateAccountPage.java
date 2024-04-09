@@ -78,7 +78,7 @@ public class CreateAccountPage {
     }
 
     public void fillCreateAccountForm() {
-        fillInput(CreateAccountInput.FIRS_NAME, customerModel.firstName);
+        fillInput(CreateAccountInput.FIRST_NAME, customerModel.firstName);
         fillInput(CreateAccountInput.LAST_NAME, customerModel.lastName);
         fillInput(CreateAccountInput.EMAIL, customerModel.email);
         fillInput(CreateAccountInput.TELEPHONE, customerModel.phone);

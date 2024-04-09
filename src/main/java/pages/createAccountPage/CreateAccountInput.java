@@ -8,7 +8,7 @@ import lombok.ToString;
 @ToString
 @RequiredArgsConstructor
 public enum CreateAccountInput {
-    FIRS_NAME("AccountFrm_firstname"),
+    FIRST_NAME("AccountFrm_firstname"),
     LAST_NAME("AccountFrm_lastname"),
     EMAIL("AccountFrm_email"),
     TELEPHONE("AccountFrm_telephone"),
