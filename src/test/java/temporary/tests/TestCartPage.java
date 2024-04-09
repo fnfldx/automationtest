@@ -11,8 +11,11 @@ import steps.BaseSteps;
 
 import java.math.BigDecimal;
 
-import static steps.BaseSteps.*;
 import static engine.drivers.WebDriverFactory.quitWebDriver;
+import static steps.BaseSteps.addProductToCartById;
+import static steps.BaseSteps.addToCart;
+import static steps.BaseSteps.goToCart;
+import static steps.BaseSteps.openPage;
 import static steps.CartPageSteps.checkIfProductAppearsOnce;
 import static steps.CartPageSteps.getProductsFromShoppingTable;
 import static steps.CartPageSteps.goToCheckout;
@@ -61,9 +64,6 @@ public class TestCartPage extends BaseTest {
                 .model("558003")
                 .priceCurrency(Currency.USD)
                 .price(new BigDecimal("29.50"))
-                .isOnSale(null)
-                .priceBeforeSale(null)
-                .isOutOfStock(null)
                 .imageUrl("https://automationteststore.com/image/thumbnails/18/6f/demo_product01_jpg-100089-75x75.jpg")
                 .build();
 

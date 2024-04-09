@@ -44,7 +44,7 @@ public class BaseSteps {
         }
     }
 
-     public static void goToCart() {
+    public static void goToCart() {
         var goToCart = getWebDriverInstance().findElement(By.xpath("/html/body/div/header/div[2]/div/div[3]/ul/li/a"));
         goToCart.click();
 

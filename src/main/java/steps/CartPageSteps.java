@@ -6,7 +6,6 @@ import org.junit.Assert;
 import pages.cartPage.CartPage;
 
 import java.util.List;
-import java.util.Objects;
 
 public class CartPageSteps {
     protected static CartPage cartPage;

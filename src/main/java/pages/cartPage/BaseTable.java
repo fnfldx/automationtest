@@ -2,16 +2,14 @@ package pages.cartPage;
 
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.BasePage;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-public class BaseTable{
+public class BaseTable {
     protected BasePage basePage;
     public String tableXpath;
     public By tableLocator;
