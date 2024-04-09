@@ -10,22 +10,18 @@ public class GuestCheckoutPage {
     protected BasePage basePage;
 
     // Locators:
-    public By firstnameInputLocator = By.id("AccountFrm_firstname");
-    public By lastnameInputLocator = By.id("AccountFrm_lastname");
-    public By emailInputLocator = By.id("AccountFrm_email");
-    public By telephoneInputLocator = By.id("AccountFrm_telephone");
-    public By faxInputLocator = By.id("AccountFrm_fax");
-    public By companyInputLocator = By.id("AccountFrm_company");
-    public By address1InputLocator = By.id("AccountFrm_address_1");
-    public By address2InputLocator = By.id("AccountFrm_address_2");
-    public By cityInputLocator = By.id("AccountFrm_city");
-    public By zoneIdInputLocator = By.xpath("//ul[contains(@class, 'currency')]/parent::*");
-    public By postcodeInputLocator = By.id("AccountFrm_postcode");
-    public By countryIdInputLocator = By.xpath("//ul[contains(@class, 'AccountFrm_country_id')]/parent::*");
-    public By loginNameInputLocator = By.id("AccountFrm_loginname");
-    public By passwordInputLocator = By.id("AccountFrm_password");
-    public By passConfirmInputLocator = By.id("AccountFrm_confirm");
-    public By newsletterInputLocator = By.xpath("//*[@id='AccountFrm_newsletter1']/button");
+    public By firstnameInputLocator = By.id("guestFrm_firstname");
+    public By lastnameInputLocator = By.id("guestFrm_lastname");
+    public By emailInputLocator = By.id("guestFrm_email");
+    public By telephoneInputLocator = By.id("guestFrm_telephone");
+    public By faxInputLocator = By.id("guestFrm_fax");
+    public By companyInputLocator = By.id("guestFrm_company");
+    public By address1InputLocator = By.id("guestFrm_address_1");
+    public By address2InputLocator = By.id("guestFrm_address_2");
+    public By cityInputLocator = By.id("guestFrm_city");
+    public By zoneIdInputLocator = By.xpath("//ul[contains(@class, 'guestFrm_zone_id')]/parent::*");
+    public By postcodeInputLocator = By.id("guestFrm_postcode");
+    public By countryIdInputLocator = By.xpath("//ul[contains(@class, 'guestFrm_country_id')]/parent::*");
 
 
     public GuestCheckoutPage() {
@@ -64,19 +60,6 @@ public class GuestCheckoutPage {
     protected WebElement locateElement(By countryIdInputLocator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(countryIdInputLocator));
         return getWebDriverInstance().findElement(countryIdInputLocator);
-    }
-    public void enterLoginName(String loginname) {
-        basePage.enterTextToElement(loginNameInputLocator, loginname);
-    }
-
-    public void enterPassword(String password) {
-        basePage.enterTextToElement(passwordInputLocator, password);
-    }
-    public void passConfirm(String confirm) {
-        basePage.enterTextToElement(passConfirmInputLocator, confirm);
-    }
-    public boolean newsletter() {
-        return basePage.isElementDisplayed(newsletterInputLocator);
     }
 
 }
