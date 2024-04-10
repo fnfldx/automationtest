@@ -1,6 +1,5 @@
 package pages.createAccountPage;
 
-import models.AccountModel;
 import org.openqa.selenium.By;
 import pages.BasePage;
 
@@ -10,6 +9,7 @@ public class AccountFormUtils {
     public AccountFormUtils() {
         this.basePage = new BasePage();
     }
+
     public By inputFormLocator(CreateAccountInput input) {
         return By.id(input.getId());
     }
