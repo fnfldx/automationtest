@@ -1,11 +1,14 @@
 package temporary.tests;
 
+import models.AccountModel;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import pages.createAccountPage.CreateAccountPage;
 
 import static steps.BaseSteps.openPage;
+import static steps.CreateAccountPageSteps.fillCreateAccountForm;
 import static steps.CreateAccountPageSteps.goToCreateAccountPage;
+import static steps.CreateAccountPageSteps.submitCreateAccountForm;
 import static steps.CreateAccountPageSteps.validateFirstNameInNavbar;
 
 public class TestCreateAccountPage extends BaseTest {
@@ -19,12 +22,13 @@ public class TestCreateAccountPage extends BaseTest {
     @Test
     public void createAccount() {
         // Given:
+        var accountModel = AccountModel.withRandomCustomerModel();
         openPage();
         goToCreateAccountPage();
         // When:
-        createAccountPage.fillCreateAccountForm();
-        createAccountPage.clickContinueButton();
+        fillCreateAccountForm(accountModel);
+        submitCreateAccountForm();
         // Then:
-        validateFirstNameInNavbar(createAccountPage.getAccountModel().customerModel.firstName);
+        validateFirstNameInNavbar(accountModel.customerModel.firstName);
     }
 }
