@@ -1,4 +1,4 @@
-﻿package pages.createAccountPage;
+package pages.createAccountPage;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
