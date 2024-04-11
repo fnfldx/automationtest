@@ -71,10 +71,6 @@ public class ShoppingCartTableRow {
     }
 
     public Currency getCurrencyFromUnitPrice() {
-        var debugRow = getCells();
-        var debugCurrencySymbol = getCells()
-                .get(ShoppingCartHeader.UNIT_PRICE.columnIndex).getText();
-
         var currencySymbol = getCells()
                 .get(ShoppingCartHeader.UNIT_PRICE.columnIndex)
                 .getText()
