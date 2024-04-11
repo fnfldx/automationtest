@@ -20,6 +20,7 @@ public class CustomerModel {
     public final String zipCode;
 
     @Builder.Default
-    public final String countryDefault = "United Kingdom"; // You can set the default country here
-    public final String stateDefault = "Aberdeen";
+    public final String country = "United Kingdom";
+    @Builder.Default
+    public final String state = "Aberdeen";
 }

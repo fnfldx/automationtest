@@ -23,23 +23,27 @@ public class CreateAccountPageSteps {
     public static void fillCreateAccountForm(AccountModel accountModel) {
         accountFormUtils = new AccountFormUtils();
         var customerModel = accountModel.customerModel;
+
         //Form: Your Personal Details
         accountFormUtils.fillInput(CreateAccountInput.FIRST_NAME, customerModel.firstName);
         accountFormUtils.fillInput(CreateAccountInput.LAST_NAME, customerModel.lastName);
         accountFormUtils.fillInput(CreateAccountInput.EMAIL, customerModel.email);
         accountFormUtils.fillInput(CreateAccountInput.TELEPHONE, customerModel.phone);
         accountFormUtils.fillInput(CreateAccountInput.FAX, customerModel.fax);
+
         //Form: Your Address
         accountFormUtils.fillInput(CreateAccountInput.COMPANY, customerModel.company);
         accountFormUtils.fillInput(CreateAccountInput.ADDRESS1, customerModel.address1);
         accountFormUtils.fillInput(CreateAccountInput.ADDRESS2, customerModel.address2);
         accountFormUtils.fillInput(CreateAccountInput.CITY, customerModel.city);
-        accountFormUtils.selectStateOrCountry(CreateAccountInput.REGION_STATE, customerModel.stateDefault);
+        accountFormUtils.selectStateOrCountry(CreateAccountInput.REGION_STATE, customerModel.state);
         accountFormUtils.fillInput(CreateAccountInput.ZIPCODE, customerModel.zipCode);
+
         //Form: Login Details
         accountFormUtils.fillInput(CreateAccountInput.LOGIN_NAME, accountModel.loginName);
         accountFormUtils.fillInput(CreateAccountInput.PASSWORD, accountModel.password);
         accountFormUtils.fillInput(CreateAccountInput.CONFIRM_PASSWORD, accountModel.password);
+
         //Form: Newsletter
         accountFormUtils.subscribeToNewsletter(accountModel.isSubscribedToNewsletter);
         accountFormUtils.acceptPrivacyPolicy();

@@ -18,16 +18,24 @@ public class AccountModel {
     public static AccountModel withCustomerModel(CustomerModel customerModel) {
         return AccountModel.builder()
                 .customerModel(customerModel)
-                .loginName(CustomerModelUtils.generateLoginName())
-                .password(CustomerModelUtils.generatePassword())
+                .loginName(generateLoginName())
+                .password(generatePassword())
                 .build();
     }
 
     public static AccountModel withRandomCustomerModel() {
         return AccountModel.builder()
                 .customerModel(CustomerModelUtils.generateCustomerWithRandomData())
-                .loginName(CustomerModelUtils.generateLoginName())
-                .password(CustomerModelUtils.generatePassword())
+                .loginName(generateLoginName())
+                .password(generatePassword())
                 .build();
+    }
+
+    private static String generateLoginName() {
+        return CustomerModelUtils.fakerEN.name().lastName();
+    }
+
+    private static String generatePassword() {
+        return CustomerModelUtils.fakerEN.internet().password();
     }
 }
