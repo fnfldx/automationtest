@@ -6,6 +6,7 @@ import models.CheckoutProductModel;
 import models.ProductModel;
 import org.openqa.selenium.By;
 import pages.BasePage;
+import pages.cartPage.BaseTable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,9 +20,11 @@ public class ShoppingCartTable {
     public By cartCheckoutButton = By.id("cart_checkout1");
     private String xpath = "//div[contains(@class, 'product-list')]/table";
     private BasePage basePage;
+    private BaseTable baseTable;
 
     public ShoppingCartTable() {
         this.basePage = new BasePage();
+        this.baseTable = new BaseTable(xpath);
     }
 
     public List<ProductModel> getProducts() {
@@ -45,12 +48,21 @@ public class ShoppingCartTable {
                 .size() - 1;
     }
 
+
     public ProductModel getProductRow(int index) {
         return new ShoppingCartTableRow(index).getProductFromRow();
     }
 
     public CheckoutProductModel getCheckoutProductRow(int index) {
         return new ShoppingCartTableRow(index).getCheckoutProductFromRow();
+    }
+
+    public List<String> getColumnHeaders() {
+        return baseTable.getColumnHeaders();
+    }
+
+    public int getColumnsCount() {
+        return baseTable.getColumnCount();
     }
 
     public void clickCartUpdateButton() {

@@ -18,7 +18,7 @@ public class BaseTable {
     public BaseTable(String tableXpath) {
         this.basePage = new BasePage();
         this.tableXpath = tableXpath;
-        this.headerRow = By.xpath(tableXpath + "/tbody/tr");
+        this.headerRow = By.xpath(tableXpath + "/tbody/tr[1]");
         this.tableLocator = By.xpath(tableXpath);
     }
 
