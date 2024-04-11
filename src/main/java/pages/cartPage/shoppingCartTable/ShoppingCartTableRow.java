@@ -129,7 +129,7 @@ public class ShoppingCartTableRow {
                 .getAttribute("href");
     }
 
-    public void deleteProduct() {
+    public void removeProduct() {
         basePage.locateElement(By.xpath(this.xpath))
                 .findElement(deleteItemButton).click();
     }

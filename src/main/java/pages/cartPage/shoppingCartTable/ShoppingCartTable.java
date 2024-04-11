@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 @Getter
 @Setter
 public class ShoppingCartTable {
-    public By cartEmptyMessagePanel = By.xpath("//div[@class='contentpanel1']");
+    public By cartEmptyMessagePanel = By.xpath("//div[@class='contentpanel']");
     public By cartUpdateButton = By.id("cart_update");
     public By cartCheckoutButton = By.id("cart_checkout1");
     private String xpath = "//div[contains(@class, 'product-list')]/table";
@@ -48,7 +48,6 @@ public class ShoppingCartTable {
                 .size() - 1;
     }
 
-
     public ProductModel getProductRow(int index) {
         return new ShoppingCartTableRow(index).getProductFromRow();
     }
@@ -74,6 +73,9 @@ public class ShoppingCartTable {
     }
 
     public boolean isCartEmpty() {
-        return basePage.isElementDisplayed(cartEmptyMessagePanel);
+        var debug = basePage.locateElement(cartEmptyMessagePanel).getText();
+        return basePage.locateElement(cartEmptyMessagePanel)
+                .getText()
+                .contains("Your shopping cart is empty!");
     }
 }
