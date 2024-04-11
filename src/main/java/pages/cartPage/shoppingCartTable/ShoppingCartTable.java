@@ -1,10 +1,11 @@
 package pages.cartPage.shoppingCartTable;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import models.CheckoutProductModel;
 import models.ProductModel;
 import org.openqa.selenium.By;
+import pages.BasePage;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,22 +13,44 @@ import java.util.stream.IntStream;
 
 @Getter
 @Setter
-@NoArgsConstructor
-public class ShoppingCartTable extends ShoppingCartTableRow {
+public class ShoppingCartTable {
     public By cartEmptyMessagePanel = By.xpath("//div[@class='contentpanel1']");
     public By cartUpdateButton = By.id("cart_update");
     public By cartCheckoutButton = By.id("cart_checkout1");
+    private String xpath = "//div[contains(@class, 'product-list')]/table";
+    private BasePage basePage;
+
+    public ShoppingCartTable() {
+        this.basePage = new BasePage();
+    }
 
     public List<ProductModel> getProducts() {
-        int rowCount = baseTable.getRowCount();
+        var productCount = countProducts();
+        return IntStream.range(1, productCount + 1)
+                .mapToObj(this::getProductRow)
+                .collect(Collectors.toList());
+    }
 
-        return IntStream.range(2, rowCount + 1)
-                .mapToObj(this::getProductFromRow)
+    public List<CheckoutProductModel> getCheckoutProducts() {
+        var productCount = countProducts();
+        return IntStream.range(1, productCount + 1)
+                .mapToObj(this::getCheckoutProductRow)
                 .collect(Collectors.toList());
     }
 
     public int countProducts() {
-        return baseTable.getRowCount() - 1;
+        return basePage
+                .locateElement(By.xpath(this.xpath))
+                .findElements(By.xpath(".//tr"))
+                .size() - 1;
+    }
+
+    public ProductModel getProductRow(int index) {
+        return new ShoppingCartTableRow(index).getProductFromRow();
+    }
+
+    public CheckoutProductModel getCheckoutProductRow(int index) {
+        return new ShoppingCartTableRow(index).getCheckoutProductFromRow();
     }
 
     public void clickCartUpdateButton() {

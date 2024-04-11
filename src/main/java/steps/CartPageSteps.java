@@ -1,6 +1,7 @@
 package steps;
 
 
+import models.CheckoutProductModel;
 import models.ProductModel;
 import org.junit.Assert;
 import pages.cartPage.CartPage;
@@ -20,15 +21,19 @@ public class CartPageSteps {
         cartPage.clickOnFinalCheckoutButton();
     }
 
-    public static List<ProductModel> getProductsFromShoppingTable() {
+    public static List<ProductModel> getProductsFromShoppingCartTable() {
         cartPage = new CartPage();
         return cartPage.shoppingCartTable.getProducts();
     }
 
-    public static void checkIfProductAppearsOnce(ProductModel product, List<ProductModel> products) {
-        var count = products
-                .stream()
-                .filter(p -> p.equals(product))
+    public static List<CheckoutProductModel> getCheckoutProductsFromShoppingCartTable() {
+        cartPage = new CartPage();
+        return cartPage.shoppingCartTable.getCheckoutProducts();
+    }
+
+    public static void checkIfProductAppearsOnce(ProductModel product, List<CheckoutProductModel> checkoutProducts) {
+        var count = checkoutProducts.stream()
+                .filter(p -> p.getProductModel().equals(product))
                 .count();
 
         Assert.assertEquals(1, count);
