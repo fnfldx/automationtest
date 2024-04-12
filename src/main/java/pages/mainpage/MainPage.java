@@ -20,9 +20,15 @@ public class MainPage {
         return new MainPageSection(sectionId);
     }
 
-
-    public void addProductToCartFromMainPage(int productId) {
-        MainPageProduct.setProductId(productId);
-        MainPageProduct.clickAddToCartButton();
+    public void addProductToCartFromMainPage(int productId, MainPageSectionId sectionId) {
+        MainPageSection section = getSection(sectionId);
+        String sectionXpath = section.getSectionXpath();
+        MainPageProduct product = new MainPageProduct(productId, sectionXpath);
+        product.clickAddToCartButton();
     }
+
+//    public void addProductToCartFromMainPage(int productId) {
+//        MainPageProduct.setProductId(productId);
+//        MainPageProduct.clickAddToCartButton();
+//    }
 }

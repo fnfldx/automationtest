@@ -20,7 +20,7 @@ public class MainPageSection {
 
     public MainPageSection(MainPageSectionId sectionId)  {
         this.basePage = new BasePage();
-        this.sectionXpath = "//div[@id='" + sectionId  + "]";
+        this.sectionXpath = "//section[@id='" + sectionId + "']";
     }
 
     public List<Integer> getProductIdsFromSection() {
@@ -32,14 +32,13 @@ public class MainPageSection {
                 .collect(Collectors.toList());
     }
 
-
     public int countProductsInSection() {
         return getProductIdsFromSection().size();
     }
 
     public MainPageProduct getProduct(int productId) {
-        MainPageProduct mainPageProduct = new MainPageProduct();
-        mainPageProduct.setProductId(productId);
+        MainPageProduct mainPageProduct = new MainPageProduct(productId, this.sectionXpath);
+        String productName = mainPageProduct.getProductName();
         return mainPageProduct;
     }
 }

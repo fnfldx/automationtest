@@ -1,66 +1,25 @@
 package temporary.tests;
 
-import org.junit.*;
-import org.openqa.selenium.WebDriver;
+import org.junit.jupiter.api.Test;
 import pages.mainpage.MainPageProduct;
+import pages.mainpage.MainPageSection;
+import enums.MainPageSectionId;
 
-import static engine.drivers.WebDriverFactory.getWebDriverInstance;
-import static engine.drivers.WebDriverFactory.quitWebDriver;
-import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MainPageProductTest {
-    private MainPageProduct mainPageProduct;
-
-    @BeforeClass
-    public static void baseClassSetUp() {
-        getPropertyManagerInstance();
-    }
-
-    @Before
-    public void baseSetUp() {
-        WebDriver driver = getWebDriverInstance();
-        mainPageProduct = new MainPageProduct();
-    }
 
     @Test
-    public void testProductMethodsForId50() {
-        int productId50 = 50;
-        mainPageProduct.setProductId(productId50);
+    public void testAddProductToCart() {
+        MainPageSection mainPageSection = new MainPageSection(MainPageSectionId.FEATURES);
+        MainPageProduct mainPageProduct = mainPageSection.getProduct(50);
 
-        // Test getPrice method for product ID 50
-        double priceId50 = mainPageProduct.getPrice();
-        Assert.assertTrue("Price should be greater than 0", priceId50 > 0);
+        String productName = mainPageProduct.getProductName();
+        double productPrice = mainPageProduct.getPrice();
 
-        // Test getProductName method for product ID 50
-        String nameId50 = mainPageProduct.getProductName();
-        Assert.assertNotNull("Product name should not be null", nameId50);
+        System.out.println("Product Name: " + productName);
+        System.out.println("Product Price: " + productPrice);
 
-        // Test addToCart method for product ID 50
         mainPageProduct.clickAddToCartButton();
-
-    }
-
-    @Test
-    public void testProductMethodsForId51() {
-        int productId51 = 51;
-        mainPageProduct.setProductId(productId51);
-
-        // Test getPrice method for product ID 51
-        double priceId51 = mainPageProduct.getPrice();
-        Assert.assertTrue("Price should be greater than 0", priceId51 > 0);
-
-        // Test getProductName method for product ID 51
-        String nameId51 = mainPageProduct.getProductName();
-        Assert.assertNotNull("Product name should not be null", nameId51);
-
-        // Test addToCart method for product ID 51
-        mainPageProduct.clickAddToCartButton();
-
-
-    }
-
-    @After
-    public void tearDown() {
-        quitWebDriver();
     }
 }

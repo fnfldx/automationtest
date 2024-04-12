@@ -1,35 +1,32 @@
 package pages.mainpage;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import pages.BasePage;
-
 
 @Getter
 public class MainPageProduct {
-    private String productXpath;
     protected BasePage basePage;
+    private final String productXpath;
 
     public MainPageProduct(int productId, String sectionXpath) {
         this.basePage = new BasePage();
-        this.productXpath = sectionXpath + " and @data-id='" + productId + "']";
+        this.productXpath = sectionXpath + "//*[@data-id='" + productId + "']/ancestor::" + sectionXpath;
     }
 
     public String getProductName() {
-        By productNameElement = By.xpath(productXpath + "//a[@class='productname");
+        By productNameElement = By.xpath(productXpath + "//a[@class='productname']");
         return basePage.getTextFromElement(productNameElement);
     }
 
     public double getPrice() {
-        By priceElement = By.xpath("//div[@class='oneprice' and @data-id='" + productId + "']");
+        By priceElement = By.xpath(productXpath + "//div[@class='oneprice']");
         String priceText = basePage.getTextFromElement(priceElement);
         return Double.parseDouble(priceText.replace(" zł", "").replace(",", "."));
     }
 
     public void clickAddToCartButton() {
-        By addToCartButton = By.xpath("//a[@class='productcart' and @data-id='" + productId + "']");
+        By addToCartButton = By.xpath(productXpath + "//a[@class='productcart']");
         basePage.clickOnElement(addToCartButton);
     }
 }
