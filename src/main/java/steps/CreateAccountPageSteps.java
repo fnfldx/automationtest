@@ -3,16 +3,28 @@ package steps;
 import models.AccountModel;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import pages.createAccountPage.AccountFormUtils;
 import pages.createAccountPage.CreateAccountInput;
 import pages.createAccountPage.CreateAccountPage;
 
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
+import static pages.createAccountPage.CreateAccountPage.address1;
+import static pages.createAccountPage.CreateAccountPage.address2;
+import static pages.createAccountPage.CreateAccountPage.city;
+import static pages.createAccountPage.CreateAccountPage.company;
+import static pages.createAccountPage.CreateAccountPage.confirmPassword;
+import static pages.createAccountPage.CreateAccountPage.email;
+import static pages.createAccountPage.CreateAccountPage.fax;
+import static pages.createAccountPage.CreateAccountPage.firstName;
+import static pages.createAccountPage.CreateAccountPage.lastName;
+import static pages.createAccountPage.CreateAccountPage.loginName;
+import static pages.createAccountPage.CreateAccountPage.password;
+import static pages.createAccountPage.CreateAccountPage.regionState;
+import static pages.createAccountPage.CreateAccountPage.telephone;
+import static pages.createAccountPage.CreateAccountPage.zipCode;
 import static steps.LoginPageSteps.goToAccountLogin;
 import static steps.LoginPageSteps.proceedAsRegisterAccount;
 
 public class CreateAccountPageSteps {
-    protected static AccountFormUtils accountFormUtils;
     protected static CreateAccountPage createAccountPage;
 
     public static void goToCreateAccountPage() {
@@ -21,32 +33,32 @@ public class CreateAccountPageSteps {
     }
 
     public static void fillCreateAccountForm(AccountModel accountModel) {
-        accountFormUtils = new AccountFormUtils();
+        createAccountPage = new CreateAccountPage();
         var customerModel = accountModel.customerModel;
 
         //Form: Your Personal Details
-        accountFormUtils.fillInput(CreateAccountInput.FIRST_NAME, customerModel.firstName);
-        accountFormUtils.fillInput(CreateAccountInput.LAST_NAME, customerModel.lastName);
-        accountFormUtils.fillInput(CreateAccountInput.EMAIL, customerModel.email);
-        accountFormUtils.fillInput(CreateAccountInput.TELEPHONE, customerModel.phone);
-        accountFormUtils.fillInput(CreateAccountInput.FAX, customerModel.fax);
+        firstName.fillInput(customerModel.firstName);
+        lastName.fillInput(customerModel.lastName);
+        email.fillInput(customerModel.email);
+        telephone.fillInput(customerModel.phone);
+        fax.fillInput(customerModel.fax);
 
         //Form: Your Address
-        accountFormUtils.fillInput(CreateAccountInput.COMPANY, customerModel.company);
-        accountFormUtils.fillInput(CreateAccountInput.ADDRESS1, customerModel.address1);
-        accountFormUtils.fillInput(CreateAccountInput.ADDRESS2, customerModel.address2);
-        accountFormUtils.fillInput(CreateAccountInput.CITY, customerModel.city);
-        accountFormUtils.selectStateOrCountry(CreateAccountInput.REGION_STATE, customerModel.state);
-        accountFormUtils.fillInput(CreateAccountInput.ZIPCODE, customerModel.zipCode);
+        company.fillInput(customerModel.company);
+        address1.fillInput(customerModel.address1);
+        address2.fillInput(customerModel.address2);
+        city.fillInput(customerModel.city);
+        regionState.selectStateOrCountry(customerModel.state);
+        zipCode.fillInput(customerModel.zipCode);
 
         //Form: Login Details
-        accountFormUtils.fillInput(CreateAccountInput.LOGIN_NAME, accountModel.loginName);
-        accountFormUtils.fillInput(CreateAccountInput.PASSWORD, accountModel.password);
-        accountFormUtils.fillInput(CreateAccountInput.CONFIRM_PASSWORD, accountModel.password);
+        loginName.fillInput(accountModel.loginName);
+        password.fillInput(accountModel.password);
+        confirmPassword.fillInput(accountModel.password);
 
         //Form: Newsletter
-        accountFormUtils.subscribeToNewsletter(accountModel.isSubscribedToNewsletter);
-        accountFormUtils.acceptPrivacyPolicy();
+        createAccountPage.subscribeToNewsletter(accountModel.isSubscribedToNewsletter);
+        createAccountPage.acceptPrivacyPolicy();
     }
 
     public static void submitCreateAccountForm() {
