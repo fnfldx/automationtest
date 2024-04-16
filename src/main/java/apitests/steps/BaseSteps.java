@@ -9,8 +9,8 @@ public class BaseSteps {
 
     protected PetClient petClient;
 
-    public BaseSteps() {
-        this.petClient = new PetClient();
-        this.response = new ResponseDetails();
+    public BaseSteps(ResponseDetails response, PetClient petClient) {
+        this.petClient = petClient;
+        this.response = response;
     }
 }
