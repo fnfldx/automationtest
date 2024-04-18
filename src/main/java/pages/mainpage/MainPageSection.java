@@ -3,12 +3,14 @@ package pages.mainpage;
 import enums.MainPageSectionId;
 import lombok.Getter;
 import lombok.Setter;
+import models.ProductModel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 import pages.BasePage;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 
@@ -20,25 +22,30 @@ public class MainPageSection {
 
     public MainPageSection(MainPageSectionId sectionId)  {
         this.basePage = new BasePage();
-        this.sectionXpath = "//section[@id='" + sectionId + "']";
+        this.sectionXpath = "//section[@id='" + sectionId.getId() + "']";
     }
 
-    public List<Integer> getProductIdsFromSection() {
-        return getWebDriverInstance().findElements(By.xpath(this.sectionXpath + "/div/div"))
-                .stream()
-                .map(element -> element.getAttribute("data-id"))
-                .filter(dataId -> dataId != null && !dataId.isEmpty())
-                .map(Integer::parseInt)
+    public List<MainPageProduct> getProductsFromSection() {
+        return IntStream.range(1, countProductsInSection() + 1)
+                .mapToObj(index -> new MainPageProduct(index, sectionXpath))
                 .collect(Collectors.toList());
-    }
+}
 
     public int countProductsInSection() {
-        return getProductIdsFromSection().size();
+        return getWebDriverInstance()
+                .findElements(By.xpath(this.sectionXpath + "/div/div/div/div"))
+                .size();
     }
 
-    public MainPageProduct getProduct(int productId) {
-        MainPageProduct mainPageProduct = new MainPageProduct(productId, this.sectionXpath);
-        String productName = mainPageProduct.getProductName();
-        return mainPageProduct;
+    public MainPageProduct getProduct(String name) {
+        return getProductsFromSection().stream()
+                .filter(productModel -> productModel.getProductsDetails().name.equals(name))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public MainPageProduct getProduct(int index) {
+        return getProductsFromSection()
+                .get(index);
     }
 }
