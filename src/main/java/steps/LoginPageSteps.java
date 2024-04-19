@@ -16,6 +16,13 @@ public class LoginPageSteps {
         loginPage.clickContinueButton();
     }
 
+    public static void proceedAsRegisterAccount() {
+        loginPage = new LoginPage();
+        if (!loginPage.isRegisterAccountSelected())
+            loginPage.selectRegisterAccountOption();
+        loginPage.clickContinueButton();
+    }
+
     public static void goToAccountLogin() {
         var loginOrRegister = getWebDriverInstance().findElement(By.id("customer_menu_top"));
         loginOrRegister.click();

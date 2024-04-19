@@ -44,4 +44,8 @@ public class LoginPage {
     public boolean isGuestCheckoutButtonVisible() {
         return basePage.isElementDisplayed(guestCheckoutButtonLocator);
     }
+
+    public boolean isRegisterAccountSelected() {
+        return basePage.isRadioButtonSelected(registerAccountButtonLocator);
+    }
 }
