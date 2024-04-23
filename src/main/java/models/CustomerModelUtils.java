@@ -15,7 +15,6 @@ public class CustomerModelUtils {
                 .email(fakerEN.name().lastName())
                 .address(fakerEN.address().streetAddress())
                 .city(fakerEN.address().cityName())
-                .state(fakerEN.address().stateAbbr())
                 .zipCode(fakerEN.address().zipCode())
                 .login(fakerEN.name().username())
                 .password(fakerEN.internet().password(4, 20))

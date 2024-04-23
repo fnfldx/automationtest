@@ -10,6 +10,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -100,6 +101,11 @@ public class BasePage {
             throw new IllegalStateException("Checkbox is already in the desired state");
         }
         element.click();
+    }
+
+    public void selectionOptionFromDropdown(By locator, String option) {
+        var dropdown = new Select(locateElement(locator));
+        dropdown.selectByVisibleText(option);
     }
 
     public void enterTextToElement(By locator, String text) {

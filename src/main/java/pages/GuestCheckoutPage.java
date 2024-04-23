@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 
@@ -19,48 +20,66 @@ public class GuestCheckoutPage {
     public By address1InputLocator = By.id("guestFrm_address_1");
     public By address2InputLocator = By.id("guestFrm_address_2");
     public By cityInputLocator = By.id("guestFrm_city");
-    public By zoneIdInputLocator = By.xpath("//ul[contains(@class, 'guestFrm_zone_id')]/parent::*");
+    public By regionInputLocator = By.id("guestFrm_zone_id");
     public By postcodeInputLocator = By.id("guestFrm_postcode");
-    public By countryIdInputLocator = By.xpath("//ul[contains(@class, 'guestFrm_country_id')]/parent::*");
-
+    public By countryIdInputLocator = By.id("guestFrm_country_id");
 
     public GuestCheckoutPage() {
         this.basePage = new BasePage();
     }
 
-    public void enterFirstName(String firstname) { basePage.enterTextToElement(firstnameInputLocator, firstname); }
+    public static boolean isGuestCheckoutButtonVisible() {
+    }
+
+    public void fillInput(By input, String value) {
+        basePage.enterTextToElement(input, value);
+    }
+
+    public void selectOptionRegionOrCountry(By locator, String option) {
+        basePage.selectionOptionFromDropdown(locator, option);
+    }
+
+    public void enterFirstName(String firstname) {
+        basePage.enterTextToElement(firstnameInputLocator, firstname);
+    }
+
     public void enterLastName(String lastname) {
         basePage.enterTextToElement(lastnameInputLocator, lastname);
     }
+
     public void enterEmail(String email) {
         basePage.enterTextToElement(emailInputLocator, email);
     }
-    public void enterTelephone(String telephone) { basePage.enterTextToElement(telephoneInputLocator, telephone); }
+
+    public void enterTelephone(String telephone) {
+        basePage.enterTextToElement(telephoneInputLocator, telephone);
+    }
+
     public void enterFax(String fax) {
         basePage.enterTextToElement(faxInputLocator, fax);
     }
+
     public void enterCompany(String company) {
         basePage.enterTextToElement(companyInputLocator, company);
     }
+
     public void enterAddress_1(String address_1) {
         basePage.enterTextToElement(address1InputLocator, address_1);
     }
-    public void enterAddress_2(String address_2) { basePage.enterTextToElement(address2InputLocator, address_2); }
+
+    public void enterAddress_2(String address_2) {
+        basePage.enterTextToElement(address2InputLocator, address_2);
+    }
+
     public void enterCity(String city) {
         basePage.enterTextToElement(cityInputLocator, city);
     }
 
-    protected WebElement locateElement(By zoneIdInputLocator) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(zoneIdInputLocator));
-        return getWebDriverInstance().findElement(zoneIdInputLocator);
+
+    public void enterPostcode(String postcode) {
+        basePage.enterTextToElement(postcodeInputLocator, postcode);
     }
 
-    public void enterPostcode(String postcode) { basePage.enterTextToElement(postcodeInputLocator, postcode); }
-
-    protected WebElement locateElement(By countryIdInputLocator) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(countryIdInputLocator));
-        return getWebDriverInstance().findElement(countryIdInputLocator);
-    }
 
 }
 
