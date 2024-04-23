@@ -6,9 +6,9 @@ import org.junit.Test;
 import pages.checkoutConfirmationPage.CheckoutConfirmationPage;
 
 import static engine.drivers.WebDriverFactory.quitWebDriver;
+import static steps.BaseSteps.*;
 import static steps.CartPageSteps.goToCheckout;
 import static steps.CheckoutConfirmationPageSteps.confirmOrder;
-import static steps.MainPageSteps.*;
 import static temporary.tests.TestGuestCheckout.loginPage;
 
 public class TestCheckoutConfirmationPage extends BaseTest {
@@ -34,8 +34,8 @@ public class TestCheckoutConfirmationPage extends BaseTest {
         goToCheckout();
         loginPage.selectGuestAccountOption();
         loginPage.clickContinueButton();
-        //Ilona's part with entering the data into fields
-        //Ilona's part with clicking a continue button
+        // TODO: Ilona's part with entering the data into fields
+        // TODO: Ilona's part with clicking a continue button
 
 
         // When:
