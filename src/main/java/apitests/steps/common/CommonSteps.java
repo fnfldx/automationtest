@@ -13,6 +13,8 @@ public class CommonSteps extends BaseSteps {
 
     @Then("The response with status code {int} is returned")
     public void the_response_with_status_code_is_returned(Integer statusCode) {
-        response.getResponse().then().log().all().statusCode(statusCode);
+        response.getResponse()
+                .then().log().all()
+                .statusCode(statusCode);
     }
 }
