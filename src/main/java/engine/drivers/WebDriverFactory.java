@@ -2,6 +2,7 @@ package engine.drivers;
 
 import engine.cookie.manager.CookieManager;
 import engine.exceptions.UnsupportedBrowserException;
+import enums.Currency;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
@@ -43,6 +44,14 @@ public class WebDriverFactory {
         var cookieManager = CookieManager.getCookieManagerInstance();
         for (Cookie cookie : cookieManager.getCookies()) {
             driver.manage().addCookie(cookie);
+        }
+    }
+
+    public static void setGlobalCurrency(Currency currency) {
+        Currency.setGlobalCurrency(currency);
+        if (webDriverInstance != null) {
+            webDriverInstance.manage().deleteCookieNamed("Currency");
+            webDriverInstance.manage().addCookie(new Cookie("Currency", currency.getCurrencySymbol()));
         }
     }
 }

@@ -2,6 +2,7 @@ package engine.cookie.manager;
 
 import lombok.Getter;
 import org.openqa.selenium.Cookie;
+import enums.Currency;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +24,11 @@ public class CookieManager {
     private CookieManager() {
         cookies = new HashSet<>();
         cookies.add(new Cookie("Currency", getCurrency().currencySymbol));
+    }
+
+    public void setGlobalCurrency(Currency currency) {
+        cookies.removeIf(cookie -> cookie.getName().equals("Currency"));
+        cookies.add(new Cookie("Currency", currency.getCurrencySymbol()));
     }
 
     public Set<Cookie> getCookies() {
