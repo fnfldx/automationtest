@@ -4,6 +4,7 @@ import enums.BrowserName;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import enums.Currency;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -46,11 +47,16 @@ public class PropertyManager {
         return BrowserName.valueOf(getProperty(PropertyKeys.BROWSER_NAME));
     }
 
+    public static Currency getCurrency() {
+        return Currency.valueOf(getProperty(PropertyKeys.CURRENCY));
+    }
+
     public enum PropertyKeys {
         CHROME_DRIVER,
         FIREFOX_DRIVER,
         BROWSER_NAME,
         BASE_URL,
-        BASE_WAIT_IN_SECONDS
+        BASE_WAIT_IN_SECONDS,
+        CURRENCY
     }
 }

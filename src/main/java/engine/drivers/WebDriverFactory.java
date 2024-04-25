@@ -1,9 +1,11 @@
 package engine.drivers;
 
+import engine.cookie.manager.CookieManager;
 import engine.exceptions.UnsupportedBrowserException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 import static engine.property.manager.PropertyManager.getBrowserName;
@@ -21,17 +23,26 @@ public class WebDriverFactory {
 
     @SneakyThrows
     public static WebDriver createWebDriverInstance() {
-        return switch (getBrowserName()) {
+        WebDriver driver = switch (getBrowserName()) {
             case CHROME -> new ChromeDriverManager().getDriver();
             case FIREFOX -> new FirefoxDriverManager().getDriver();
             default -> throw new UnsupportedBrowserException(getBrowserName().toString());
         };
+        setCookies(driver);
+        return driver;
     }
 
     public static void quitWebDriver() {
         if (webDriverInstance != null) {
             webDriverInstance.quit();
             webDriverInstance = null;
+        }
+    }
+
+    private static void setCookies(WebDriver driver) {
+        var cookieManager = CookieManager.getCookieManagerInstance();
+        for (Cookie cookie : cookieManager.getCookies()) {
+            driver.manage().addCookie(cookie);
         }
     }
 }
