@@ -16,7 +16,7 @@ public class Tag {
 
     @JsonCreator
     public Tag(@JsonProperty("id") Long id,
-               @JsonProperty("name") String name){
+               @JsonProperty("name") String name) {
         this.id = id;
         this.name = name;
     }

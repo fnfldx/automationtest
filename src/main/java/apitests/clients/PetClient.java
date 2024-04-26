@@ -12,15 +12,15 @@ public class PetClient extends BaseClient {
     public Response getPetsByStatus(final String status) {
         return given()
                 .when()
-                    .queryParams("status", status)
-                    .get(PET_URL + "findByStatus");
+                .queryParams("status", status)
+                .get(PET_URL + "findByStatus");
     }
 
     public Response postPet(final Pet pet) {
         return given()
-                    .contentType("application/json")
-                    .body(pet)
+                .contentType("application/json")
+                .body(pet)
                 .when()
-                    .post(PET_URL);
+                .post(PET_URL);
     }
 }

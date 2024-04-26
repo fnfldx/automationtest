@@ -41,7 +41,7 @@ public class PetCrudSteps extends BaseSteps {
     }
 
     @And("Check the response body of created pet is correct")
-    public void check_the_response_body_of_created_pet_is_correct(){
+    public void check_the_response_body_of_created_pet_is_correct() {
         final Pet createdPet = response.getResponse().getBody().as(Pet.class);
 
         assertThat(createdPet).isEqualToComparingFieldByFieldRecursively(newPet);

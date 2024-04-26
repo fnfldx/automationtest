@@ -14,9 +14,10 @@ public class Category {
 
     public final Long id;
     public final String name;
+
     @JsonCreator
     public Category(@JsonProperty("id") Long id,
-                    @JsonProperty("name") String name){
+                    @JsonProperty("name") String name) {
         this.id = id;
         this.name = name;
     }
