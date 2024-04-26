@@ -6,6 +6,7 @@ import apitests.model.ResponseDetails;
 import apitests.steps.BaseSteps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
+import io.restassured.mapper.ObjectMapperType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +34,7 @@ public class PetCrudSteps extends BaseSteps {
 
     @And("Check if status {string} is returned")
     public void check_if_status_is_returned(String expectedStatus) {
-        final List<Pet> pets = Arrays.asList(response.getResponse().getBody().as(Pet[].class));
+        final List<Pet> pets = Arrays.asList(response.getResponse().getBody().as(Pet[].class, ObjectMapperType.GSON));
 
         final List<String> statuses = pets.stream().map(Pet::getStatus).toList();
 

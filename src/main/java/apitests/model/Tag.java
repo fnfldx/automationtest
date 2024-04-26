@@ -1,23 +1,19 @@
 package apitests.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldNameConstants;
 
 @Getter
 @Builder
 @FieldNameConstants
+@RequiredArgsConstructor
+@NoArgsConstructor(force = true, access = AccessLevel.PROTECTED)
 public class Tag {
 
     public final Long id;
     public final String name;
-
-    @JsonCreator
-    public Tag(@JsonProperty("id") Long id,
-               @JsonProperty("name") String name) {
-        this.id = id;
-        this.name = name;
-    }
 }
