@@ -23,12 +23,13 @@ public class CookieManager {
 
     private CookieManager() {
         cookies = new HashSet<>();
-        cookies.add(new Cookie("Currency", getCurrency().currencySymbol));
+        cookies.add(new Cookie("currency", getCurrency().name()));
     }
 
     public void setGlobalCurrency(Currency currency) {
-        cookies.removeIf(cookie -> cookie.getName().equals("Currency"));
-        cookies.add(new Cookie("Currency", currency.getCurrencySymbol()));
+        cookies.removeIf(cookie -> cookie.getName().equals("AC_SF_8CEFDA09D5"));
+        cookies.removeIf(cookie -> cookie.getName().equals("currency"));
+        cookies.add(new Cookie("currency", currency.name()));
     }
 
     public Set<Cookie> getCookies() {

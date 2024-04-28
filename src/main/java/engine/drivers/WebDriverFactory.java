@@ -24,13 +24,11 @@ public class WebDriverFactory {
 
     @SneakyThrows
     public static WebDriver createWebDriverInstance() {
-        WebDriver driver = switch (getBrowserName()) {
+        return switch (getBrowserName()) {
             case CHROME -> new ChromeDriverManager().getDriver();
             case FIREFOX -> new FirefoxDriverManager().getDriver();
             default -> throw new UnsupportedBrowserException(getBrowserName().toString());
         };
-        setCookies(driver);
-        return driver;
     }
 
     public static void quitWebDriver() {
@@ -40,10 +38,11 @@ public class WebDriverFactory {
         }
     }
 
-    private static void setCookies(WebDriver driver) {
+    public static void setCookies() {
         var cookieManager = CookieManager.getCookieManagerInstance();
+        //webDriverInstance.manage().deleteAllCookies(); TO CHECK
         for (Cookie cookie : cookieManager.getCookies()) {
-            driver.manage().addCookie(cookie);
+            webDriverInstance.manage().addCookie(cookie);
         }
     }
 
