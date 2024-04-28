@@ -1,28 +1,23 @@
 package pages.cartPage.shoppingCartTable;
 
 import enums.Currency;
-import lombok.Getter;
-import lombok.Setter;
 import models.CheckoutProductModel;
 import models.ProductModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.BasePage;
-
 import java.math.BigDecimal;
 import java.util.List;
 
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 
-@Getter
-@Setter
 public class ShoppingCartTableRow {
     public By deleteItemButton = By.xpath(".//i[contains(@class, 'fa-trash-o')]/parent::a");
     public By quantityItemInput = By.xpath(".//input[contains(@id, 'cart_quantity')]");
     protected WebDriver driver = getWebDriverInstance();
-    private String xpath;
-    private BasePage basePage;
+    private final String xpath;
+    private final BasePage basePage;
 
     public ShoppingCartTableRow(int index) {
         if (index == 0) {

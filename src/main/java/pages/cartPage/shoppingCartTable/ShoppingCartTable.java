@@ -1,7 +1,5 @@
 package pages.cartPage.shoppingCartTable;
 
-import lombok.Getter;
-import lombok.Setter;
 import models.CheckoutProductModel;
 import models.ProductModel;
 import org.openqa.selenium.By;
@@ -12,15 +10,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-@Getter
-@Setter
 public class ShoppingCartTable {
     public By cartEmptyMessagePanel = By.xpath("//div[@class='contentpanel']");
     public By cartUpdateButton = By.id("cart_update");
     public By cartCheckoutButton = By.id("cart_checkout1");
-    private String xpath = "//div[contains(@class, 'product-list')]/table";
-    private BasePage basePage;
-    private BaseTable baseTable;
+    private final String xpath = "//div[contains(@class, 'product-list')]/table";
+    private final BasePage basePage;
+    private final BaseTable baseTable;
 
     public ShoppingCartTable() {
         this.basePage = new BasePage();

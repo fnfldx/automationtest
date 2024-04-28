@@ -20,7 +20,7 @@ import static steps.BaseSteps.openPage;
 import static steps.CartPageSteps.changeQuantityOfProduct;
 import static steps.CartPageSteps.checkIfCartIsEmpty;
 import static steps.CartPageSteps.checkIfProductAppearsOnce;
-import static steps.CartPageSteps.checkIfTotalPriceIsCorrect;
+import static steps.CartPageSteps.checkIfTotalPricesAreCorrectPerProduct;
 import static steps.CartPageSteps.getCheckoutProductsFromShoppingCartTable;
 import static steps.CartPageSteps.getProductsFromShoppingCartTable;
 import static steps.CartPageSteps.goToCheckout;
@@ -97,7 +97,7 @@ public class TestCartPage extends BaseTest {
 
         // Then:
         var checkoutProducts = getCheckoutProductsFromShoppingCartTable();
-        checkIfTotalPriceIsCorrect(products, checkoutProducts);
+        checkIfTotalPricesAreCorrectPerProduct(products, checkoutProducts);
     }
 
     @Test

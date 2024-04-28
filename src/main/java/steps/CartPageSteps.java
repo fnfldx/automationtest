@@ -9,7 +9,6 @@ import pages.cartPage.shoppingCartTable.ShoppingCartTableRow;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class CartPageSteps {
     protected static CartPage cartPage;
@@ -62,19 +61,18 @@ public class CartPageSteps {
         Assert.assertEquals(1, count);
     }
 
-    public static void checkIfTotalPriceIsCorrect(List<ProductModel> products, List<CheckoutProductModel> checkoutProducts) {
-        var unitPrices = products.stream()
-                .map(ProductModel::getPrice)
-                .toList();
-        var quantities = checkoutProducts.stream()
-                .map(CheckoutProductModel::getQuantity)
-                .toList();
-        var totalPrices = checkoutProducts.stream()
-                .map(CheckoutProductModel::getTotalPrice)
-                .toList();
-        var expectedTotalPrices = IntStream.range(0, products.size())
-                .mapToObj(i -> unitPrices.get(i).multiply(BigDecimal.valueOf(quantities.get(i))))
-                .toList();
-        Assert.assertEquals(expectedTotalPrices, totalPrices);
+    public static void checkIfTotalPricesAreCorrectPerProduct(List<ProductModel> products, List<CheckoutProductModel> checkoutProducts) {
+        checkoutProducts.forEach(checkoutProduct -> {
+            var product = getProductByCheckoutProduct(products, checkoutProduct);
+            var expectedTotalPrice = product.getPrice().multiply(BigDecimal.valueOf(checkoutProduct.getQuantity()));
+            Assert.assertEquals(expectedTotalPrice, checkoutProduct.getTotalPrice());
+        });
+    }
+
+    public static ProductModel getProductByCheckoutProduct(List<ProductModel> products, CheckoutProductModel checkoutProduct) {
+        return products.stream()
+                .filter(product -> product.getName().equals(checkoutProduct.getProductModel().getName()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No matching product found for checkout product"));
     }
 }
