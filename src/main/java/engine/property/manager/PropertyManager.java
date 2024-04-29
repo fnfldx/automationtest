@@ -1,22 +1,25 @@
 package engine.property.manager;
 
 import enums.BrowserName;
+import enums.Currency;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import enums.Currency;
+import org.openqa.selenium.Cookie;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertyManager {
-    private static PropertyManager propertyManagerInstance;
     private static final Properties properties;
+    private static PropertyManager propertyManagerInstance;
 
     static {
         properties = new Properties();
@@ -48,7 +51,18 @@ public class PropertyManager {
     }
 
     public static Currency getCurrency() {
-        return Currency.valueOf(getProperty(PropertyKeys.CURRENCY));
+        return Currency.valueOf(getProperty(PropertyKeys.COOKIE_currency));
+    }
+
+    public static Set<Cookie> getCookiesFromProperty() {
+        return properties.stringPropertyNames().stream()
+                .filter(propertyName -> propertyName.startsWith("COOKIE_"))
+                .map(propertyName -> {
+                    var cookieName = propertyName.substring(7); // DELETE "COOKIE_" PREFIX
+                    var cookieValue = properties.getProperty(propertyName);
+                    return new Cookie(cookieName, cookieValue);
+                })
+                .collect(Collectors.toSet());
     }
 
     public enum PropertyKeys {
@@ -57,6 +71,6 @@ public class PropertyManager {
         BROWSER_NAME,
         BASE_URL,
         BASE_WAIT_IN_SECONDS,
-        CURRENCY
+        COOKIE_currency
     }
 }

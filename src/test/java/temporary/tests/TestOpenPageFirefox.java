@@ -11,7 +11,6 @@ import pages.LoginPage;
 import java.time.Duration;
 
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
-import static engine.drivers.WebDriverFactory.setCookies;
 import static engine.property.manager.PropertyManager.PropertyKeys.BASE_URL;
 import static engine.property.manager.PropertyManager.getProperty;
 import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
@@ -24,9 +23,6 @@ public class TestOpenPageFirefox {
         LoginPage loginPage = new LoginPage();
         String url = getProperty(BASE_URL);
         driver.navigate().to(url);
-
-        setCookies();
-        driver.navigate().refresh();
         var welcomeMsg = By.xpath("//div[@class='welcome_msg']");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(welcomeMsg));
