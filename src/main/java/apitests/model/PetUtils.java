@@ -10,7 +10,7 @@ import static java.util.UUID.randomUUID;
 public class PetUtils {
     private static final String PET_STATUS = AVAILABLE.toString().toLowerCase();
 
-    public static Pet generatePetWithRandomTesData() {
+    public static Pet generatePetWithRandomTestData() {
         return Pet.builder()
                 .id(idGenerator())
                 .category(Category.builder()

@@ -11,12 +11,12 @@ import io.restassured.mapper.ObjectMapperType;
 import java.util.Arrays;
 import java.util.List;
 
-import static apitests.model.PetUtils.generatePetWithRandomTesData;
+import static apitests.model.PetUtils.generatePetWithRandomTestData;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PetCrudSteps extends BaseSteps {
 
-    private static final Pet newPet = generatePetWithRandomTesData();
+    private static final Pet newPet = generatePetWithRandomTestData();
 
     public PetCrudSteps(ResponseDetails response, PetClient petClient) {
         super(response, petClient);
