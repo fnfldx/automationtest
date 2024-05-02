@@ -10,15 +10,17 @@ import java.util.Set;
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 import static engine.property.manager.PropertyManager.getCookiesFromProperty;
 
-
 @Getter
 public class CookieManager {
-    private static final String sessionCookieName = "AC_SF_8CEFDA09D5";
+    public Currency globalCurrency;
+    public static final String CURRENCY_COOKIE_NAME = "currency";
+    private static final String SESSION_COOKIE_NAME = "AC_SF_8CEFDA09D5";
     private static CookieManager cookieManagerInstance;
-    private static Set<Cookie> cookies = new HashSet<>();
+    private Set<Cookie> cookies = new HashSet<>();
 
     public CookieManager() {
         cookies.addAll(getWebDriverInstance().manage().getCookies());
+        globalCurrency = getGlobalCurrency();
     }
 
     public static synchronized CookieManager getCookieManagerInstance() {
@@ -28,56 +30,61 @@ public class CookieManager {
         return cookieManagerInstance;
     }
 
-    public static void clearCookies() {
+    public void clearCookies() {
         getWebDriverInstance().manage().deleteAllCookies();
-        cookies.clear();
+        this.cookies.clear();
     }
 
-    public static Currency getGlobalCurrency() {
-        return Currency.valueOf(findCookie("currency").getValue());
-    }
-
-    public static void setCookiesFromProperties() {
+    public void setCookiesFromProperties() {
         var cookiesFromProperty = getCookiesFromProperty();
         for (Cookie cookie : cookiesFromProperty) {
-            if (!cookies.contains(cookie)) {
-                addCookie(cookie);
-            } else {
-                removeCookie(cookie);
-                addCookie(cookie);
+            addCookie(cookie);
+            if (cookie.getName().equals(CURRENCY_COOKIE_NAME)) {
+                globalCurrency = Currency.valueOf(cookie.getValue());
             }
         }
-        findAndRemoveCookie(sessionCookieName); //to refresh new settings session cookie has to be removed
-        getWebDriverInstance().navigate().refresh();
-        cookies.add(findCookie(sessionCookieName));
+        updateSessionCookie();
     }
 
-    public static void setGlobalCurrency(Currency currency) {
-        findAndRemoveCookie(sessionCookieName);
-        findAndRemoveCookie("currency");
-        addCookie(new Cookie("currency", currency.name()));
-        getWebDriverInstance().navigate().refresh();
-        cookies.add(findCookie(sessionCookieName));
+    public void setGlobalCurrency(Currency currency) {
+        findAndRemoveCookie(CURRENCY_COOKIE_NAME);
+        addCookie(new Cookie(CURRENCY_COOKIE_NAME, currency.name()));
+        updateSessionCookie();
+        globalCurrency = currency;
     }
 
-    private static void addCookie(Cookie cookie) {
+    private void updateSessionCookie() {
+        findAndRemoveCookie(SESSION_COOKIE_NAME);
+        getWebDriverInstance().navigate().refresh();
+        cookies.add(findCookie(SESSION_COOKIE_NAME));
+    }
+
+    private void addCookie(Cookie cookie) {
+        findAndRemoveCookie(SESSION_COOKIE_NAME);
+        if (this.cookies.contains(cookie)) {
+            removeCookie(cookie);
+        }
         getWebDriverInstance().manage().addCookie(cookie);
-        cookies.add(cookie);
+        this.cookies.add(cookie);
     }
 
-    private static void removeCookie(Cookie cookie) {
+    private void removeCookie(Cookie cookie) {
         getWebDriverInstance().manage().deleteCookie(cookie);
-        cookies.remove(cookie);
+        this.cookies.remove(cookie);
     }
 
-    private static Cookie findCookie(String name) {
+    private Cookie findCookie(String name) {
         return getWebDriverInstance().manage().getCookieNamed(name);
     }
 
-    private static void findAndRemoveCookie(String name) {
+    private void findAndRemoveCookie(String name) {
         var cookie = findCookie(name);
         if (cookie != null) {
             removeCookie(cookie);
         }
+    }
+
+    private Currency getGlobalCurrency() {
+        return Currency.valueOf(findCookie(CURRENCY_COOKIE_NAME).getValue());
     }
 }
