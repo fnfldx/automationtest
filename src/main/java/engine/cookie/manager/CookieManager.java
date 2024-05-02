@@ -33,6 +33,10 @@ public class CookieManager {
         cookies.clear();
     }
 
+    public static Currency getGlobalCurrency() {
+        return Currency.valueOf(findCookie("currency").getValue());
+    }
+
     public static void setCookiesFromProperties() {
         var cookiesFromProperty = getCookiesFromProperty();
         for (Cookie cookie : cookiesFromProperty) {
@@ -49,8 +53,8 @@ public class CookieManager {
     }
 
     public static void setGlobalCurrency(Currency currency) {
-        findAndRemoveCookie("currency");
         findAndRemoveCookie(sessionCookieName);
+        findAndRemoveCookie("currency");
         addCookie(new Cookie("currency", currency.name()));
         getWebDriverInstance().navigate().refresh();
         cookies.add(findCookie(sessionCookieName));

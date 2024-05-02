@@ -1,9 +1,14 @@
 package enums;
 
+import engine.cookie.manager.CookieManager;
 import engine.property.manager.PropertyManager;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+
+import java.math.BigDecimal;
+
+import static engine.cookie.manager.CookieManager.getGlobalCurrency;
 
 @Getter
 @ToString
@@ -15,7 +20,9 @@ public enum Currency {
 
     public final String currencySymbol;
 
-    public static void setGlobalCurrency(Currency currency) {
-        PropertyManager.setProperty("CURRENCY", currency.name());
+    public static BigDecimal convertCurrency(String priceWithSymbol) {
+        var globalCurrencySymbol = getGlobalCurrency().getCurrencySymbol();
+        return new BigDecimal(priceWithSymbol
+                .replace(globalCurrencySymbol, ""));
     }
 }
