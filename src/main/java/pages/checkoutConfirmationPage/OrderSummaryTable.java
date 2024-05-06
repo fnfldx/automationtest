@@ -39,15 +39,15 @@ public class OrderSummaryTable {
         return convertCurrencyFromCookie(getWebDriverInstance().findElement(By.xpath(formattedProductXpath)).getText());
     }
 
-    public BigDecimal getSubTotalValue() {
+    public BigDecimal getSubTotalPrice() {
         return convertCurrencyFromCookie(basePage.getTextFromElement(subTotalLocator));
     }
 
-    public BigDecimal getFlatShippingRateValue() {
+    public BigDecimal getFlatShippingRatePrice() {
         return convertCurrencyFromCookie(basePage.getTextFromElement(flatShippingRateLocator));
     }
 
-    public BigDecimal getTotalValue() {
+    public BigDecimal getTotalPrice() {
         return convertCurrencyFromCookie(basePage.getTextFromElement(totalLocator));
     }
 }
