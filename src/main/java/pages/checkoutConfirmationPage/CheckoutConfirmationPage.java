@@ -17,6 +17,7 @@ public class CheckoutConfirmationPage {
     public By returnPolicyModalLocator = By.id("returnPolicyModal");
     public By closeReturnPolicyModalCrossLocator = By.xpath("//button[@class='close']");
     public By closeReturnPolicyModalButtonLocator = By.xpath("//button[@class='btn']");
+    public By editCartButtonLocator = By.xpath("//h4/a");
     public By backButtonLocator = By.id("back");
     public By confirmOrderButtonLocator = By.id("checkout_btn");
     protected BasePage basePage;
@@ -47,6 +48,10 @@ public class CheckoutConfirmationPage {
 
     public BigDecimal getTotalPrice() {
         return convertCurrencyFromCookie(basePage.getTextFromElement(totalLocator));
+    }
+
+    public void clickOnEditCartButton() {
+        basePage.clickOnElement(editCartButtonLocator);
     }
 
     public void clickOnBackButton() {
