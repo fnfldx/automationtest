@@ -15,26 +15,14 @@ public class TotalsTable {
     protected BasePage basePage;
 
     public BigDecimal getSubTotalPrize() {
-        return convertCurrencyFromCookie(getSubTotalText());
+        return convertCurrencyFromCookie(basePage.getTextFromElement(subTotalLocator));
     }
 
     public BigDecimal getFlatShippingRatePrize() {
-        return convertCurrencyFromCookie(getFlatShippingRateText());
+        return convertCurrencyFromCookie(basePage.getTextFromElement(flatShippingRateLocator));
     }
 
     public BigDecimal getTotalPrize() {
-        return convertCurrencyFromCookie(getTotalText());
-    }
-
-    private String getSubTotalText() {
-        return basePage.getTextFromElement(subTotalLocator);
-    }
-
-    private String getFlatShippingRateText() {
-        return basePage.getTextFromElement(flatShippingRateLocator);
-    }
-
-    private String getTotalText() {
-        return basePage.getTextFromElement(totalLocator);
+        return convertCurrencyFromCookie(basePage.getTextFromElement(totalLocator));
     }
 }
