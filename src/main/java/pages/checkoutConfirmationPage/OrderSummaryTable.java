@@ -22,20 +22,20 @@ public class OrderSummaryTable {
         return getWebDriverInstance().findElements(By.xpath(orderSummaryXpath)).size();
     }
 
-    public String getProductNameFromProductsList(int index) {
-        var formattedProductXpath = String.format("%s[%d]/td[1]/a", productXpath, index);
+    public String getProductNameFromProductsList(int productIndex) {
+        var formattedProductXpath = String.format("%s[%d]/td[1]/a", productXpath, productIndex);
         return getWebDriverInstance().findElement(By.xpath(formattedProductXpath)).getText();
     }
 
-    public int getProductQuantityFromProductsList(int index) {
-        var formattedProductXpath = String.format("%s[%d]/td[1]", productXpath, index);
+    public int getProductQuantityFromProductsList(int productIndex) {
+        var formattedProductXpath = String.format("%s[%d]/td[1]", productXpath, productIndex);
         var quantityText = getWebDriverInstance().findElement(By.xpath(formattedProductXpath)).getText();
         var splitText = quantityText.split(" ");
         return Integer.parseInt(splitText[0]);
     }
 
-    public BigDecimal getProductPriceFromProductsList(int index) {
-        var formattedProductXpath = String.format("%s[%d]/td[2]", productXpath, index);
+    public BigDecimal getProductPriceFromProductsList(int productIndex) {
+        var formattedProductXpath = String.format("%s[%d]/td[2]", productXpath, productIndex);
         return convertCurrencyFromCookie(getWebDriverInstance().findElement(By.xpath(formattedProductXpath)).getText());
     }
 
