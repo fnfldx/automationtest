@@ -8,13 +8,16 @@ public class CartPage {
     public By checkoutButtonLocator = By.id("cart_checkout1");
     public By finalCheckoutButtonLocator = By.id("cart_checkout2");
     public By continueShoppingButtonLocator = By.xpath("//i[contains(@class,'fa-arrow-right')]/parent::a");
-    protected ApplyCouponCodeTable applyCouponCodeTable = new ApplyCouponCodeTable();
-    protected EstimateShippingAndTaxesTable estimateShippingAndTaxesTable = new EstimateShippingAndTaxesTable();
-    protected TotalsTable totalsTable = new TotalsTable();
+    protected ApplyCouponCodeTable applyCouponCodeTable;
+    protected EstimateShippingAndTaxesTable estimateShippingAndTaxesTable;
+    protected TotalsTable totalsTable;
     protected BasePage basePage;
 
     public CartPage() {
         this.basePage = new BasePage();
+        this.applyCouponCodeTable = new ApplyCouponCodeTable();
+        this.estimateShippingAndTaxesTable = new EstimateShippingAndTaxesTable();
+        this.totalsTable = new TotalsTable();
     }
 
     public void clickOnUpdateButton() {
