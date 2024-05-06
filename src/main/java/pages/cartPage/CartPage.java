@@ -4,20 +4,18 @@ import org.openqa.selenium.By;
 import pages.BasePage;
 
 public class CartPage {
-
-    protected BasePage basePage;
     public By updateButtonLocator = By.id("cart_update");
     public By checkoutButtonLocator = By.id("cart_checkout1");
-    public By continueShoppingButtonLocator = By.xpath(".totals > a:nth-of-type(1)");
     public By finalCheckoutButtonLocator = By.id("cart_checkout2");
+    public By continueShoppingButtonLocator = By.xpath("//i[contains(@class,'fa-arrow-right')]/parent::a");
+    protected ApplyCouponCodeTable applyCouponCodeTable = new ApplyCouponCodeTable();
+    protected EstimateShippingAndTaxesTable estimateShippingAndTaxesTable = new EstimateShippingAndTaxesTable();
+    protected TotalsTable totalsTable = new TotalsTable();
+    protected BasePage basePage;
 
     public CartPage() {
         this.basePage = new BasePage();
     }
-
-    ApplyCouponCodeTable applyCouponCodeTable = new ApplyCouponCodeTable();
-    EstimateShippingAndTaxesTable estimateShippingAndTaxesTable = new EstimateShippingAndTaxesTable();
-    TotalsTable totalsTable = new TotalsTable();
 
     public void clickOnUpdateButton() {
         basePage.clickOnElement(updateButtonLocator);
