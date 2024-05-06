@@ -14,6 +14,10 @@ public class TotalsTable {
     public By totalLocator = By.xpath(totalsTable + "/tbody/tr[3]/td[2]");
     protected BasePage basePage;
 
+    public TotalsTable() {
+        this.basePage = new BasePage();
+    }
+
     public BigDecimal getSubTotalPrize() {
         return convertCurrencyFromCookie(basePage.getTextFromElement(subTotalLocator));
     }
