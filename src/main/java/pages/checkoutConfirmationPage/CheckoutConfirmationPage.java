@@ -58,7 +58,7 @@ public class CheckoutConfirmationPage {
     }
 
     public boolean isReturnPolicyModalVisible() {
-        var style = getWebDriverInstance().findElement(returnPolicyModalLocator).getAttribute("style");
+        var style = basePage.getAttributeFromElement(returnPolicyModalLocator, "style");
         return !style.contains("display: none");
     }
 }
