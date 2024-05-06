@@ -21,9 +21,17 @@ public class CheckoutConfirmationPage {
     public By backButtonLocator = By.id("back");
     public By confirmOrderButtonLocator = By.id("checkout_btn");
     protected BasePage basePage;
+    protected ConfirmPaymentOptionsTable confirmPaymentOptionsTable;
+    protected ConfirmProductsTable confirmProductsTable;
+    protected ConfirmShippmentOptionsTable confirmShippmentOptionsTable;
+    protected OrderSummaryTable orderSummaryTable;
 
     public CheckoutConfirmationPage() {
         this.basePage = new BasePage();
+        this.confirmPaymentOptionsTable = new ConfirmPaymentOptionsTable();
+        this.confirmProductsTable = new ConfirmProductsTable();
+        this.confirmShippmentOptionsTable = new ConfirmShippmentOptionsTable();
+        this.orderSummaryTable = new OrderSummaryTable();
     }
 
     public void clickOnReturnPolicy() {
