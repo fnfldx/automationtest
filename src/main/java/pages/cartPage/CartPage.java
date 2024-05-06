@@ -8,9 +8,9 @@ public class CartPage {
     public By checkoutButtonLocator = By.id("cart_checkout1");
     public By finalCheckoutButtonLocator = By.id("cart_checkout2");
     public By continueShoppingButtonLocator = By.xpath("//i[contains(@class,'fa-arrow-right')]/parent::a");
-    protected ApplyCouponCodeTable applyCouponCodeTable;
-    protected EstimateShippingAndTaxesTable estimateShippingAndTaxesTable;
-    protected TotalsTable totalsTable;
+    public ApplyCouponCodeTable applyCouponCodeTable;
+    public EstimateShippingAndTaxesTable estimateShippingAndTaxesTable;
+    public TotalsTable totalsTable;
     protected BasePage basePage;
 
     public CartPage() {

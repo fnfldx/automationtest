@@ -9,9 +9,9 @@ import steps.BaseSteps;
 import static engine.drivers.WebDriverFactory.quitWebDriver;
 import static steps.BaseSteps.*;
 import static steps.CartPageSteps.goToCheckout;
+import static steps.CartPageSteps.validateTotalPrice;
 
 public class TestCartPage extends BaseTest {
-
     protected static CartPage cartPage;
 
     @BeforeClass
@@ -38,5 +38,16 @@ public class TestCartPage extends BaseTest {
         BaseSteps.validateURL("https://automationteststore.com/index.php?rt=account/login");
     }
 
-}
+    @Test
+    public void totalTable() {
+        // Given:
+        openPage();
+        addToCart();
 
+        // When:
+        goToCart();
+
+        // Then:
+        validateTotalPrice();
+    }
+}
