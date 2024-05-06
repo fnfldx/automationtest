@@ -12,6 +12,10 @@ public class EstimateShippingAndTaxesTable {
     public By shipmentsDropdownLocator = By.id("shippings");
     protected BasePage basePage;
 
+    public EstimateShippingAndTaxesTable() {
+        this.basePage = new BasePage();
+    }
+
     public void enterZipPostCode(String zipPostCode) {
         basePage.enterTextToElement(zipPostCodeInputLocator, zipPostCode);
     }
