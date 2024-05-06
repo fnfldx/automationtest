@@ -1,11 +1,9 @@
 package pages.checkoutConfirmationPage;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import pages.BasePage;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 import static enums.Currency.convertCurrencyFromCookie;
@@ -20,7 +18,7 @@ public class OrderSummaryTable {
     public By totalLocator = By.xpath(orderSummaryXpath + "/table[2]/tbody/tr[3]/td[2]");
     protected BasePage basePage;
 
-    public int gertProductsListSize() {
+    public int getProductsListSize() {
         return getWebDriverInstance().findElements(By.xpath(orderSummaryXpath)).size();
     }
 
