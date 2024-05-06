@@ -18,6 +18,10 @@ public class OrderSummaryTable {
     public By totalLocator = By.xpath(orderSummaryXpath + "/table[2]/tbody/tr[3]/td[2]");
     protected BasePage basePage;
 
+    public OrderSummaryTable() {
+        this.basePage = new BasePage();
+    }
+
     public int getProductsListSize() {
         return getWebDriverInstance().findElements(By.xpath(orderSummaryXpath)).size();
     }
