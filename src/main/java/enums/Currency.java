@@ -19,6 +19,13 @@ public enum Currency {
 
     public final String currencySymbol;
 
+    public static Currency fromSymbol(String symbol) {
+        return Arrays.stream(values())
+                .filter(currency -> currency.getCurrencySymbol().equals(symbol))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No enum constant for symbol: " + symbol));
+    }
+
     public static BigDecimal convertCurrency(String priceWithSymbol, Currency currency) {
         var currencySymbol = currency.getCurrencySymbol();
         return new BigDecimal(priceWithSymbol
