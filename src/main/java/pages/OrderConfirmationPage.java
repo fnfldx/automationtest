@@ -9,7 +9,7 @@ public class OrderConfirmationPage {
     public By orderConfirmationMessageLocator = By.xpath("//*[@id='maincontainer']/div/div/div/h1/span[1]");
 
     public OrderConfirmationPage() {
-        this.basePage = new BasePage;
+        this.basePage = new BasePage();
     }
 
     public boolean hasOrderBeenProceesedSuccessfully() {
