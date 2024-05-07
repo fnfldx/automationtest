@@ -10,6 +10,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -35,16 +36,11 @@ public class BasePage {
     public By newsletterInputLocator = By.xpath(footersocialXpath + "//input[@id='appendedInputButton']");
     public By newsletterButtonLocator = By.xpath(footersocialXpath + "//button[@class='btn btn-orange']");
 
-
     public BasePage() {
-        String someProperty = null; // get the property value
-        int someInt;
-        if (someProperty != null && !someProperty.isEmpty()) {
-            someInt = Integer.parseInt(someProperty);
-        } else {
-            someInt = 0; // or any default value
-        }
-        // use someInt...
+        this.browserName = getBrowserName();
+        int baseWaitInSeconds = Integer.parseInt(PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_WAIT_IN_SECONDS));
+        this.wait = new WebDriverWait(getWebDriverInstance(), Duration.ofSeconds(baseWaitInSeconds));
+        this.baseUrl = PropertyManager.getProperty(PropertyManager.PropertyKeys.BASE_URL);
     }
 
     public By buttonNavbarLocatorByDataId(NavbarButton button) {
@@ -99,12 +95,21 @@ public class BasePage {
         element.click();
     }
 
+    public boolean isRadioButtonSelected(By locator) {
+        return locateElement(locator).isSelected();
+    }
+
     public void setCheckboxState(By locator, boolean state) {
         WebElement element = locateElement(locator);
         if (element.isSelected() == state) {
             throw new IllegalStateException("Checkbox is already in the desired state");
         }
         element.click();
+    }
+
+    public void selectionOptionFromDropdown(By locator, String option) {
+        var dropdown = new Select(locateElement(locator));
+        dropdown.selectByVisibleText(option);
     }
 
     public void enterTextToElement(By locator, String text) {
