@@ -70,7 +70,7 @@ public class ShoppingCartTableRow {
                 .get(ShoppingCartHeader.UNIT_PRICE.columnIndex)
                 .getText()
                 .charAt(0);
-        return Currency.fromSymbol(String.valueOf(currencySymbol));
+        return Currency.getCurrencyFromSymbol(String.valueOf(currencySymbol));
     }
 
     public Currency getCurrencyFromTotalPrice() {
@@ -78,7 +78,7 @@ public class ShoppingCartTableRow {
                 .get(ShoppingCartHeader.TOTAL.columnIndex)
                 .getText()
                 .charAt(0);
-        return Currency.fromSymbol(String.valueOf(currencySymbol));
+        return Currency.getCurrencyFromSymbol(String.valueOf(currencySymbol));
     }
 
     public BigDecimal getUnitPrice() {
