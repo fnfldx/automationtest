@@ -3,6 +3,7 @@ package pages;
 import engine.property.manager.PropertyManager;
 import enums.BrowserName;
 import enums.CategoryMenuButton;
+import enums.Currency;
 import enums.FooterHyperLink;
 import enums.NavbarButton;
 import org.openqa.selenium.By;

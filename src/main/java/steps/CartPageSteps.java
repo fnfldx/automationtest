@@ -1,11 +1,15 @@
 package steps;
 
+import models.CheckoutProductModel;
 import models.ProductModel;
 import org.junit.Assert;
 import pages.cartPage.CartPage;
+import pages.cartPage.shoppingCartTable.ShoppingCartTableRow;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class CartPageSteps {
     protected static CartPage cartPage;
