@@ -120,6 +120,10 @@ public class BasePage {
         return locateElement(locator).getText();
     }
 
+    public String getValueFromElement(By locator) {
+        return locateElement(locator).getAttribute("value");
+    }
+
     public void clearTextFromElement(By locator) {
         locateElement(locator).clear();
     }
@@ -137,7 +141,7 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
     }
 
-    protected WebElement locateElement(By locator) {
+    public WebElement locateElement(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return getWebDriverInstance().findElement(locator);
     }

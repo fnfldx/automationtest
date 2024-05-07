@@ -33,6 +33,17 @@ public class BaseSteps {
         addProductToCart.click();
     }
 
+    public static void addProductToCartById(String id) {
+        cartPage = new CartPage();
+        String xpath = String.format("//a[@data-id='%s']", id);
+        By productLocator = By.xpath(xpath);
+        if (cartPage.getBasePage().isElementDisplayed(productLocator)) {
+            cartPage.getBasePage().clickOnElement(productLocator);
+        } else {
+            Assert.fail("Product with id " + id + " was not found");
+        }
+    }
+
     public static void goToCart() {
         var goToCart = getWebDriverInstance().findElement(By.xpath("/html/body/div/header/div[2]/div/div[3]/ul/li/a"));
         goToCart.click();
