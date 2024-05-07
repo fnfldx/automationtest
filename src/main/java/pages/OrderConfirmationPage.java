@@ -6,14 +6,17 @@ public class OrderConfirmationPage {
     protected BasePage basePage;
 
     // Locators:
-    public By orderConfirmationMessageLocator = By.xpath("//*[@id='maincontainer']/div/div/div/h1/span[1]");
+    public By orderConfirmationMessageLocator = By.xpath("//h1[contains(text(), 'YOUR ORDER HAS BEEN PROCESSED')]");
 
     public OrderConfirmationPage() {
         this.basePage = new BasePage();
     }
 
-    public boolean hasOrderBeenProceesedSuccessfully() {
-        return basePage.isElementDisplayed(orderConfirmationMessageLocator) &&
-                basePage.getTextFromElement(orderConfirmationMessageLocator).matches(".*YOUR ORDER HAS BEEN PROCESSED.*");
+    public boolean isOrderConfirmationMessageVisible() {
+        return basePage.isElementDisplayed(orderConfirmationMessageLocator);
+    }
+
+    public boolean doesOrderConfirmationMessageContainExpectedText() {
+        return basePage.getTextFromElement(orderConfirmationMessageLocator).matches(".*YOUR ORDER HAS BEEN PROCESSED.*");
     }
 }
