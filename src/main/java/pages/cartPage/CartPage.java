@@ -1,5 +1,6 @@
 package pages.cartPage;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import pages.BasePage;
 import pages.cartPage.shoppingCartTable.ShoppingCartTable;
@@ -13,7 +14,7 @@ public class CartPage {
     public ApplyCouponCodeTable applyCouponCodeTable;
     public EstimateShippingAndTaxesTable estimateShippingAndTaxesTable;
     public TotalsTable totalsTable;
-    protected BasePage basePage;
+    public BasePage basePage;
 
     public CartPage() {
         this.basePage = new BasePage();
