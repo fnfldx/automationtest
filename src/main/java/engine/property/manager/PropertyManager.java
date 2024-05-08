@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Properties;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,7 +17,9 @@ import java.util.logging.Logger;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertyManager {
     private static PropertyManager propertyManagerInstance;
+    private static final Locale locale;
     private static final Properties properties;
+    private static final ResourceBundle resourceBundle;
 
     static {
         properties = new Properties();
@@ -25,6 +29,8 @@ public class PropertyManager {
         } catch (IOException ex) {
             Logger.getLogger(PropertyManager.class.getName()).log(Level.SEVERE, "Error loading properties", ex);
         }
+        locale = new Locale(getProperty(PropertyKeys.LOCALE));
+        resourceBundle = ResourceBundle.getBundle("translations", locale);
     }
 
     public static synchronized PropertyManager getPropertyManagerInstance() {
@@ -51,6 +57,7 @@ public class PropertyManager {
         FIREFOX_DRIVER,
         BROWSER_NAME,
         BASE_URL,
-        BASE_WAIT_IN_SECONDS
+        BASE_WAIT_IN_SECONDS,
+        LOCALE
     }
 }
