@@ -3,13 +3,12 @@ package pages;
 import org.openqa.selenium.By;
 
 public class OrderConfirmationPage {
-    protected BasePage basePage;
-
     // Locators:
     public By orderConfirmationMessageLocator = By.xpath("//h1[contains(text(), 'YOUR ORDER HAS BEEN PROCESSED')]");
     public By invoicePageHyperlinkLocator = By.xpath("//div[@id='maincontainer']//a[contains(@href,'rt=account/invoice')]");
     public By contactPageHyperlinkLocator = By.xpath("//div[@id='maincontainer']//a[contains(@href,'rt=content/contact')]");
     public By continueButtonLocator = By.xpath("//div[@id='maincontainer']//a[@title='Continue']");
+    protected BasePage basePage;
 
     public OrderConfirmationPage() {
         this.basePage = new BasePage();

@@ -14,8 +14,8 @@ import java.util.logging.Logger;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertyManager {
-    private static PropertyManager propertyManagerInstance;
     private static final Properties properties;
+    private static PropertyManager propertyManagerInstance;
 
     static {
         properties = new Properties();

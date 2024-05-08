@@ -5,19 +5,17 @@ import pages.BasePage;
 
 public class CartPage {
 
-    protected BasePage basePage;
     public By updateButtonLocator = By.id("cart_update");
     public By checkoutButtonLocator = By.id("cart_checkout1");
     public By continueShoppingButtonLocator = By.xpath(".totals > a:nth-of-type(1)");
     public By finalCheckoutButtonLocator = By.id("cart_checkout2");
-
-    public CartPage() {
-        this.basePage = new BasePage();
-    }
-
+    protected BasePage basePage;
     ApplyCouponCodeTable applyCouponCodeTable = new ApplyCouponCodeTable();
     EstimateShippingAndTaxesTable estimateShippingAndTaxesTable = new EstimateShippingAndTaxesTable();
     TotalsTable totalsTable = new TotalsTable();
+    public CartPage() {
+        this.basePage = new BasePage();
+    }
 
     public void clickOnUpdateButton() {
         basePage.clickOnElement(updateButtonLocator);
