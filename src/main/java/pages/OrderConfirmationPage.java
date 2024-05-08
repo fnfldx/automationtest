@@ -8,22 +8,22 @@ public class OrderConfirmationPage {
     // Locators:
     public By orderConfirmationMessageLocator = By.xpath("//h1[contains(text(), 'YOUR ORDER HAS BEEN PROCESSED')]");
     public By invoicePageHyperlinkLocator = By.xpath("//div[@id='maincontainer']//a[contains(@href,'rt=account/invoice')]");
-    public By contactWithStoreOwnerrHyperlinkLocator = By.xpath("//div[@id='maincontainer']//a[contains(@href,'rt=content/contact')]");
+    public By contactPageHyperlinkLocator = By.xpath("//div[@id='maincontainer']//a[contains(@href,'rt=content/contact')]");
     public By continueButtonLocator = By.xpath("//div[@id='maincontainer']//a[@title='Continue']");
 
     public OrderConfirmationPage() {
         this.basePage = new BasePage();
     }
 
-    public void goToInvoicePage() {
+    public void navigateToInvoicePage() {
         basePage.clickOnElement(invoicePageHyperlinkLocator);
     }
 
-    public void goToContactWithStoreOwner() {
-        basePage.clickOnElement(contactWithStoreOwnerrHyperlinkLocator);
+    public void navigateToContactPage() {
+        basePage.clickOnElement(contactPageHyperlinkLocator);
     }
 
-    public void continueShopping() {
+    public void navigateToContinueShopping() {
         basePage.clickOnElement(continueButtonLocator);
     }
 

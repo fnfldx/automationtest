@@ -5,18 +5,18 @@ import pages.OrderConfirmationPage;
 public class OrderConfirmationSteps {
     protected static OrderConfirmationPage orderConfirmationPage;
 
-    public static void proceedToInvoicePage() {
+    public static void goToInvoicePage() {
         orderConfirmationPage = new OrderConfirmationPage();
-        orderConfirmationPage.goToInvoicePage();
+        orderConfirmationPage.navigateToInvoicePage();
     }
 
-    public static void proceedToContactPage() {
+    public static void goToContactPage() {
         orderConfirmationPage = new OrderConfirmationPage();
-        orderConfirmationPage.goToContactWithStoreOwner();
+        orderConfirmationPage.navigateToContactPage();
     }
 
-    public static void continueShopping() {
+    public static void goToContinueShopping() {
         orderConfirmationPage = new OrderConfirmationPage();
-        orderConfirmationPage.continueShopping();
+        orderConfirmationPage.navigateToContinueShopping();
     }
 }

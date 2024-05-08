@@ -11,6 +11,7 @@ import static steps.CartPageSteps.goToCheckout;
 import static steps.CartPageSteps.updateCart;
 import static steps.CheckoutConfirmationPageSteps.confirmOrder;
 import static steps.LoginPageSteps.proceedAsGuest;
+import static steps.OrderConfirmationSteps.*;
 
 public class TestOrderConfirmation extends BaseTest {
     protected static OrderConfirmationPage orderConfirmationPage;
@@ -26,7 +27,7 @@ public class TestOrderConfirmation extends BaseTest {
     }
 
     @Test
-    public void isOrderProcessed() {
+    public void proceedToInvoicePage() {
         // Given:
         openPage();
         addToCart();
@@ -39,7 +40,47 @@ public class TestOrderConfirmation extends BaseTest {
         confirmOrder();
 
         // When:
-        // TODO: Kuba to create 'order confirmation step'
+        goToInvoicePage();
+
+        // Then:
+        validateURLContains("https://automationteststore.com/index.php?rt=account/invoice");
+    }
+
+    @Test
+    public void proceedToContactPage() {
+        // Given:
+        openPage();
+        addToCart();
+        goToCart();
+        updateCart();
+        goToCheckout();
+        proceedAsGuest();
+        // TODO: Ilona's part with entering the data into fields
+        // TODO: Ilona's part with clicking a continue button
+        confirmOrder();
+
+        // When:
+        goToContactPage();
+
+        // Then:
+        validateURL("https://automationteststore.com/index.php?rt=content/contact");
+    }
+
+    @Test
+    public void continueShopping() {
+        // Given:
+        openPage();
+        addToCart();
+        goToCart();
+        updateCart();
+        goToCheckout();
+        proceedAsGuest();
+        // TODO: Ilona's part with entering the data into fields
+        // TODO: Ilona's part with clicking a continue button
+        confirmOrder();
+
+        // When:
+        goToContinueShopping();
 
         // Then:
         validateURL("https://automationteststore.com/index.php?rt=checkout/success");
