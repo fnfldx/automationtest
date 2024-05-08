@@ -19,7 +19,7 @@ public class PropertyManager {
     private static PropertyManager propertyManagerInstance;
     private static final Locale locale;
     private static final Properties properties;
-    private static final ResourceBundle resourceBundle;
+    private static final ResourceBundle tr;
 
     static {
         properties = new Properties();
@@ -30,7 +30,7 @@ public class PropertyManager {
             Logger.getLogger(PropertyManager.class.getName()).log(Level.SEVERE, "Error loading properties", ex);
         }
         locale = new Locale(getProperty(PropertyKeys.LOCALE));
-        resourceBundle = ResourceBundle.getBundle("translations", locale);
+        tr = ResourceBundle.getBundle("translations.translation", locale);
     }
 
     public static synchronized PropertyManager getPropertyManagerInstance() {
