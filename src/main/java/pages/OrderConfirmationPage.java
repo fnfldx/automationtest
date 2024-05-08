@@ -7,10 +7,9 @@ public class OrderConfirmationPage {
 
     // Locators:
     public By orderConfirmationMessageLocator = By.xpath("//h1[contains(text(), 'YOUR ORDER HAS BEEN PROCESSED')]");
-    public By invoicePageHyperlinkLocator = By.xpath("//*[@id='maincontainer']/div/div/div/div/section/p[3]/a");
-    public By contactWithStoreOwnerrHyperlinkLocator = By.xpath("//*[@id='maincontainer']/div/div/div/div/section/p[4]/a");
-    public By continueButtonLocator = By.xpath("//*[@id='maincontainer']/div/div/div/div/section/a");
-
+    public By invoicePageHyperlinkLocator = By.xpath("//div[@id='maincontainer']//a[contains(@href,'rt=account/invoice')]");
+    public By contactWithStoreOwnerrHyperlinkLocator = By.xpath("//div[@id='maincontainer']//a[contains(@href,'rt=content/contact')]");
+    public By continueButtonLocator = By.xpath("//div[@id='maincontainer']//a[@title='Continue']");
 
     public OrderConfirmationPage() {
         this.basePage = new BasePage();
