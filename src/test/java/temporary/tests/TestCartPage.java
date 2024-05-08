@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import static engine.drivers.WebDriverFactory.quitWebDriver;
+import static engine.property.manager.PropertyManager.tr;
 import static steps.BaseSteps.addProductToCartById;
 import static steps.BaseSteps.addToCart;
 import static steps.BaseSteps.goToCart;
@@ -67,7 +68,7 @@ public class TestCartPage extends BaseTest {
         // When:
         var checkoutProducts = getCheckoutProductsFromShoppingCartTable();
         ProductModel product1 = ProductModel.builder()
-                .name("Skinsheen Bronzer Stick")
+                .name(tr.getString("skinsheenBronzerStick"))
                 .model("558003")
                 .priceCurrency(Currency.USD)
                 .price(new BigDecimal("29.50"))

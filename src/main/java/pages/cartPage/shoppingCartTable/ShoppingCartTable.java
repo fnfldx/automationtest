@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static engine.property.manager.PropertyManager.tr;
+
 public class ShoppingCartTable {
     public By cartEmptyMessagePanel = By.xpath("//div[@class='contentpanel']");
     public By cartUpdateButton = By.id("cart_update");
@@ -72,6 +74,6 @@ public class ShoppingCartTable {
         var debug = basePage.locateElement(cartEmptyMessagePanel).getText();
         return basePage.locateElement(cartEmptyMessagePanel)
                 .getText()
-                .contains("Your shopping cart is empty!");
+                .contains(tr.getString("emptyCartMessage"));
     }
 }

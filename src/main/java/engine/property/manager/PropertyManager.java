@@ -17,9 +17,9 @@ import java.util.logging.Logger;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertyManager {
     private static PropertyManager propertyManagerInstance;
-    private static final Locale locale;
+    private static Locale locale;
+    public static ResourceBundle tr;
     private static final Properties properties;
-    private static final ResourceBundle tr;
 
     static {
         properties = new Properties();
@@ -29,7 +29,7 @@ public class PropertyManager {
         } catch (IOException ex) {
             Logger.getLogger(PropertyManager.class.getName()).log(Level.SEVERE, "Error loading properties", ex);
         }
-        locale = new Locale(getProperty(PropertyKeys.LOCALE));
+        locale = new Locale(getProperty(PropertyKeys.LANG));
         tr = ResourceBundle.getBundle("translations.translation", locale);
     }
 
@@ -58,6 +58,6 @@ public class PropertyManager {
         BROWSER_NAME,
         BASE_URL,
         BASE_WAIT_IN_SECONDS,
-        LOCALE
+        LANG
     }
 }

@@ -15,7 +15,6 @@ import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 public class ShoppingCartTableRow {
     public By deleteItemButton = By.xpath(".//i[contains(@class, 'fa-trash-o')]/parent::a");
     public By quantityItemInput = By.xpath(".//input[contains(@id, 'cart_quantity')]");
-    protected WebDriver driver = getWebDriverInstance();
     private final String xpath;
     private final BasePage basePage;
 

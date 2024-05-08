@@ -4,17 +4,19 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
+import static engine.property.manager.PropertyManager.tr;
+
 @Getter
 @RequiredArgsConstructor
 @ToString
 public enum FooterHyperLink {
-    ABOUT_US("About us"),
-    PRIVACY_POLICY("Privacy policy"),
-    RETURN_POLICY("Return policy"),
-    SHIPPING("Shipping"),
-    CONTACT_US("Contact us"),
-    SITE_MAP("Site map"),
-    LOGIN("Login");
+    ABOUT_US(tr.getString("aboutUsLink")),
+    PRIVACY_POLICY(tr.getString("privacyPolicyLink")),
+    RETURN_POLICY(tr.getString("returnPolicyLink")),
+    SHIPPING(tr.getString("shippingLink")),
+    CONTACT_US(tr.getString("contactUsLink")),
+    SITE_MAP(tr.getString("siteMapLink")),
+    LOGIN(tr.getString("loginLink"));
 
     private final String text;
 }
