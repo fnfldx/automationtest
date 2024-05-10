@@ -83,6 +83,6 @@ public class TestOrderConfirmation extends BaseTest {
         goToContinueShopping();
 
         // Then:
-        validateURL("https://automationteststore.com");
+        validateURL("https://automationteststore.com/");
     }
 }
