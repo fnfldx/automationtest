@@ -28,6 +28,9 @@ public class BasePage {
     protected final String footersocialXpath = "//section[@class='footersocial']";
     protected final String footerlinksXpath = "//section[@class='footerlinks']";
     public By searchInputLocator = By.id("filter_keyword");
+    public By facebookButtonLocator = By.className("facebook");
+    public By twitterButtonLocator = By.className("twitter");
+    public By linkedinButtonLocator = By.className("linkedin");
     public By searchButtonLocator = By.xpath("//i[@class='fa fa-search']");
     public By loginAndRegisterButtonLocator = By.xpath("//div[@class='navbar']//a");
     public By homeLinkByLogoLocator = By.xpath("//a[@class='logo']");
@@ -57,6 +60,18 @@ public class BasePage {
 
     public void clickOnElement(By locator) {
         locateElement(locator).click();
+    }
+
+    public void clickOnFacebookButton() {
+        locateElement(facebookButtonLocator).click();
+    }
+
+    public void clickOnTwitterButton() {
+        locateElement(twitterButtonLocator).click();
+    }
+
+    public void clickOnLinkedinButton() {
+        locateElement(linkedinButtonLocator).click();
     }
 
     public void scrollToElement(By locator) {

@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.BasePage;
 import pages.cartPage.CartPage;
 
 import java.time.Duration;
@@ -53,5 +54,32 @@ public class BaseSteps {
 
     public static void validateURL(String url) {
         Assert.assertEquals("Guest Checkout URL is not valid", url, getWebDriverInstance().getCurrentUrl());
+    }
+
+    public static void validateNewTabURL(String expectedUrl) {
+        var driver = getWebDriverInstance();
+        var windowHandles = driver.getWindowHandles();
+        var newTabHandle = windowHandles.stream()
+                .filter(handle -> !handle.equals(driver.getWindowHandle()))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("New tab did not open"));
+        driver.switchTo().window(newTabHandle);
+        var actualUrl = driver.getCurrentUrl();
+        Assert.assertEquals("URL is not valid", expectedUrl, actualUrl);
+    }
+
+    public static void clickOnFacebookButton() {
+        var base = new BasePage();
+        base.clickOnFacebookButton();
+    }
+
+    public static void clickOnTwitterButton() {
+        var base = new BasePage();
+        base.clickOnTwitterButton();
+    }
+
+    public static void clickOnLinkedinButton() {
+        var base = new BasePage();
+        base.clickOnLinkedinButton();
     }
 }
