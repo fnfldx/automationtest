@@ -29,8 +29,7 @@ public class PropertyManager {
         } catch (IOException ex) {
             Logger.getLogger(PropertyManager.class.getName()).log(Level.SEVERE, "Error loading properties", ex);
         }
-        locale = new Locale(getProperty(PropertyKeys.LANG));
-        tr = ResourceBundle.getBundle("translations.translation", locale);
+        setTranslation();
     }
 
     public static synchronized PropertyManager getPropertyManagerInstance() {
@@ -46,6 +45,12 @@ public class PropertyManager {
 
     public static void setProperty(String systemProperty, String systemStringValue) {
         System.setProperty(systemProperty, systemStringValue);
+    }
+
+    private static void setTranslation(){
+        locale = new Locale(getProperty(PropertyKeys.LANG));
+        Locale.setDefault(locale);
+        tr = ResourceBundle.getBundle("translations.translation", locale);
     }
 
     public static BrowserName getBrowserName() {
