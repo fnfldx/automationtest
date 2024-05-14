@@ -12,10 +12,10 @@ import static engine.property.manager.PropertyManager.getCookiesFromProperty;
 
 @Getter
 public class CookieManager {
-    public Currency globalCurrency;
     public static final String CURRENCY_COOKIE_NAME = "currency";
     private static final String SESSION_COOKIE_NAME = "AC_SF_8CEFDA09D5";
     private static CookieManager cookieManagerInstance;
+    public Currency globalCurrency;
     private Set<Cookie> cookies = new HashSet<>();
 
     public CookieManager() {
@@ -44,13 +44,6 @@ public class CookieManager {
             }
         }
         updateSessionCookie();
-    }
-
-    public void setGlobalCurrency(Currency currency) {
-        findAndRemoveCookie(CURRENCY_COOKIE_NAME);
-        addCookie(new Cookie(CURRENCY_COOKIE_NAME, currency.name()));
-        updateSessionCookie();
-        globalCurrency = currency;
     }
 
     private void updateSessionCookie() {
@@ -86,5 +79,12 @@ public class CookieManager {
 
     private Currency getGlobalCurrency() {
         return Currency.valueOf(findCookie(CURRENCY_COOKIE_NAME).getValue());
+    }
+
+    public void setGlobalCurrency(Currency currency) {
+        findAndRemoveCookie(CURRENCY_COOKIE_NAME);
+        addCookie(new Cookie(CURRENCY_COOKIE_NAME, currency.name()));
+        updateSessionCookie();
+        globalCurrency = currency;
     }
 }

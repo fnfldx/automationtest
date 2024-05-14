@@ -13,7 +13,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -51,18 +50,16 @@ public class PropertyManager {
     }
 
     public static Currency getCurrency() {
-        return Currency.valueOf(getProperty(PropertyKeys.COOKIE_currency));
+        return Currency.valueOf(getProperty(PropertyKeys.COOKIE_CURRENCY));
     }
 
+    // Add more 'get' methods here if new Cookie properties are added
     public static Set<Cookie> getCookiesFromProperty() {
-        return properties.stringPropertyNames().stream()
-                .filter(propertyName -> propertyName.startsWith("COOKIE_"))
-                .map(propertyName -> {
-                    var cookieName = propertyName.substring(7); // DELETE "COOKIE_" PREFIX
-                    var cookieValue = properties.getProperty(propertyName);
-                    return new Cookie(cookieName, cookieValue);
-                })
-                .collect(Collectors.toSet());
+        return Set.of(getCurrencyCookieFromProperties());
+    }
+
+    private static Cookie getCurrencyCookieFromProperties() {
+        return new Cookie("currency", PropertyKeys.COOKIE_CURRENCY.toString());
     }
 
     public enum PropertyKeys {
@@ -71,6 +68,6 @@ public class PropertyManager {
         BROWSER_NAME,
         BASE_URL,
         BASE_WAIT_IN_SECONDS,
-        COOKIE_currency
+        COOKIE_CURRENCY
     }
 }
