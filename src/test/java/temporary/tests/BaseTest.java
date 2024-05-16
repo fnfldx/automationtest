@@ -3,6 +3,8 @@ package temporary.tests;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.Assert;
 
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 import static engine.drivers.WebDriverFactory.quitWebDriver;
