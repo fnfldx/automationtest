@@ -5,7 +5,14 @@ import org.junit.*;
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 import static engine.drivers.WebDriverFactory.quitWebDriver;
 import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
-import static steps.BaseSteps.*;
+import static steps.BaseSteps.openPage;
+import static steps.BaseSteps.validateNewTabURL;
+import static steps.BaseSteps.clickOnFacebookHeaderButton;
+import static steps.BaseSteps.clickOnTwitterHeaderButton;
+import static steps.BaseSteps.clickOnLinkedinHeaderButton;
+import static steps.BaseSteps.clickOnFacebookFooterButton;
+import static steps.BaseSteps.clickOnTwitterFooterButton;
+import static steps.BaseSteps.clickOnLinkedinFooterButton;
 
 public class BaseTest {
 
@@ -25,44 +32,68 @@ public class BaseTest {
     }
 
     @Test
-    public void checkFacebookRedirect(){
-        // Given
+    public void checkFacebookHeaderRedirect(){
         openPage();
-        // When
-        clickOnFacebookButton();
-        // Then
-        var driver = getWebDriverInstance();
-        var tabs = driver.getWindowHandles();
+
+        clickOnFacebookHeaderButton();
+
+        var tabs = getWebDriverInstance().getWindowHandles();
         Assert.assertEquals("New tab is not opened", 2, tabs.size());
-        validateNewTabURL("https://facebook.com/");
+        validateNewTabURL("https://www.facebook.com/");
     }
 
     @Test
-    public void checkTwitterRedirect(){
-        // Given
+    public void checkFacebookFooterRedirect(){
         openPage();
-        // When
-        clickOnTwitterButton();
-        // Then
-        var driver = getWebDriverInstance();
-        var tabs = driver.getWindowHandles();
-        Assert.assertEquals("New tab is not opened", 2, tabs.size());
 
+        clickOnFacebookFooterButton();
+
+        var tabs = getWebDriverInstance().getWindowHandles();
+        Assert.assertEquals("New tab is not opened", 2, tabs.size());
+        validateNewTabURL("https://www.facebook.com/");
+    }
+
+    @Test
+    public void checkTwitterHeaderRedirect(){
+        openPage();
+
+        clickOnTwitterHeaderButton();
+
+        var tabs = getWebDriverInstance().getWindowHandles();
+        Assert.assertEquals("New tab is not opened", 2, tabs.size());
         validateNewTabURL("https://twitter.com/");
     }
 
     @Test
-    public void checkLinkedinRedirect(){
-        // Given
+    public void checkTwitterFooterRedirect(){
         openPage();
-        // When
-        clickOnLinkedinButton();
-        // Then
-        var driver = getWebDriverInstance();
-        var tabs = driver.getWindowHandles();
+
+        clickOnTwitterFooterButton();
+
+        var tabs = getWebDriverInstance().getWindowHandles();
         Assert.assertEquals("New tab is not opened", 2, tabs.size());
-        validateNewTabURL("https://linkedin.com/");
-        // test nie przechodzi bo linkedin otwiera sie na tej samej karcie
+        validateNewTabURL("https://twitter.com/");
     }
 
+    @Test
+    public void checkLinkedinHeaderRedirect(){
+        openPage();
+
+        clickOnLinkedinHeaderButton();
+
+        var tabs = getWebDriverInstance().getWindowHandles();
+        Assert.assertEquals("New tab is not opened", 2, tabs.size());
+        validateNewTabURL("https://www.linkedin.com/");
+    }
+
+    @Test
+    public void checkLinkedinFooterRedirect(){
+        openPage();
+
+        clickOnLinkedinFooterButton();
+
+        var tabs = getWebDriverInstance().getWindowHandles();
+        Assert.assertEquals("New tab is not opened", 2, tabs.size());
+        validateNewTabURL("https://www.linkedin.com/");
+    }
 }

@@ -68,18 +68,36 @@ public class BaseSteps {
         Assert.assertEquals("URL is not valid", expectedUrl, actualUrl);
     }
 
-    public static void clickOnFacebookButton() {
-        var base = new BasePage();
-        base.clickOnFacebookButton();
+    public static void clickOnFacebookHeaderButton() {
+        var basePage = new BasePage();
+        basePage.clickOnElement(basePage.facebookHeaderButtonLocator);
     }
 
-    public static void clickOnTwitterButton() {
-        var base = new BasePage();
-        base.clickOnTwitterButton();
+    public static void clickOnFacebookFooterButton() {
+        var basePage = new BasePage();
+        basePage.scrollToElement(basePage.facebookFooterButtonLocator);
+        basePage.clickOnElement(basePage.facebookFooterButtonLocator);
     }
 
-    public static void clickOnLinkedinButton() {
-        var base = new BasePage();
-        base.clickOnLinkedinButton();
+    public static void clickOnTwitterHeaderButton() {
+        var basePage = new BasePage();
+        basePage.clickOnElement(basePage.twitterHeaderButtonLocator);
+    }
+
+    public static void clickOnTwitterFooterButton() {
+        var basePage = new BasePage();
+        basePage.scrollToElement(basePage.twitterFooterButtonLocator);
+        basePage.clickOnElement(basePage.twitterFooterButtonLocator);
+    }
+
+    public static void clickOnLinkedinHeaderButton() {
+        var basePage = new BasePage();
+        basePage.clickOnElement(basePage.linkedinHeaderButtonLocator);
+    }
+
+    public static void clickOnLinkedinFooterButton() {
+        var basePage = new BasePage();
+        basePage.scrollToElement(basePage.linkedinFooterButtonLocator);
+        basePage.clickOnElement(basePage.linkedinFooterButtonLocator);
     }
 }

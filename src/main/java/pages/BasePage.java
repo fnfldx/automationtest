@@ -28,9 +28,12 @@ public class BasePage {
     protected final String footersocialXpath = "//section[@class='footersocial']";
     protected final String footerlinksXpath = "//section[@class='footerlinks']";
     public By searchInputLocator = By.id("filter_keyword");
-    public By facebookButtonLocator = By.className("facebook");
-    public By twitterButtonLocator = By.className("twitter");
-    public By linkedinButtonLocator = By.className("linkedin");
+    public By facebookHeaderButtonLocator = By.xpath("//header//a[contains(@class, 'facebook')]");
+    public By twitterHeaderButtonLocator = By.xpath("//header//a[contains(@class, 'twitter')]");
+    public By linkedinHeaderButtonLocator = By.xpath("//header//a[contains(@class, 'linkedin')]");
+    public By facebookFooterButtonLocator = By.xpath("//footer//a[contains(@class, 'facebook')]");
+    public By twitterFooterButtonLocator = By.xpath("//footer//a[contains(@class, 'twitter')]");
+    public By linkedinFooterButtonLocator = By.xpath("//footer//a[contains(@class, 'linkedin')]");
     public By searchButtonLocator = By.xpath("//i[@class='fa fa-search']");
     public By loginAndRegisterButtonLocator = By.xpath("//div[@class='navbar']//a");
     public By homeLinkByLogoLocator = By.xpath("//a[@class='logo']");
@@ -60,18 +63,6 @@ public class BasePage {
 
     public void clickOnElement(By locator) {
         locateElement(locator).click();
-    }
-
-    public void clickOnFacebookButton() {
-        locateElement(facebookButtonLocator).click();
-    }
-
-    public void clickOnTwitterButton() {
-        locateElement(twitterButtonLocator).click();
-    }
-
-    public void clickOnLinkedinButton() {
-        locateElement(linkedinButtonLocator).click();
     }
 
     public void scrollToElement(By locator) {
