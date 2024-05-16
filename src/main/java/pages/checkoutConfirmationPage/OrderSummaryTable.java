@@ -6,7 +6,7 @@ import pages.BasePage;
 import java.math.BigDecimal;
 
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
-import static enums.Currency.convertCurrencyFromCookie;
+import static enums.Currency.getPriceAsBigDecimal;
 
 public class OrderSummaryTable {
     public final String orderSummaryXpath = "//div[@class='sidewidt']";
@@ -40,18 +40,18 @@ public class OrderSummaryTable {
 
     public BigDecimal getProductPriceFromProductsList(int productIndex) {
         var formattedProductXpath = String.format("%s[%d]/td[2]", productXpath, productIndex);
-        return convertCurrencyFromCookie(getWebDriverInstance().findElement(By.xpath(formattedProductXpath)).getText());
+        return getPriceAsBigDecimal(getWebDriverInstance().findElement(By.xpath(formattedProductXpath)).getText());
     }
 
     public BigDecimal getSubTotalPrice() {
-        return convertCurrencyFromCookie(basePage.getTextFromElement(subTotalLocator));
+        return getPriceAsBigDecimal(basePage.getTextFromElement(subTotalLocator));
     }
 
     public BigDecimal getFlatShippingRatePrice() {
-        return convertCurrencyFromCookie(basePage.getTextFromElement(flatShippingRateLocator));
+        return getPriceAsBigDecimal(basePage.getTextFromElement(flatShippingRateLocator));
     }
 
     public BigDecimal getTotalPrice() {
-        return convertCurrencyFromCookie(basePage.getTextFromElement(totalLocator));
+        return getPriceAsBigDecimal(basePage.getTextFromElement(totalLocator));
     }
 }

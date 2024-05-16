@@ -19,14 +19,14 @@ public enum Currency {
 
     public final String currencySymbol;
 
-    public static BigDecimal convertCurrency(String priceWithSymbol, Currency currency) {
+    public static BigDecimal getPriceAsBigDecimal(String priceWithSymbol, Currency currency) {
         var currencySymbol = currency.getCurrencySymbol();
         return new BigDecimal(priceWithSymbol
                 .replace(currencySymbol, ""));
     }
 
-    public static BigDecimal convertCurrencyFromCookie(String priceWithSymbol) {
-        return convertCurrency(priceWithSymbol, getCookieManagerInstance().globalCurrency);
+    public static BigDecimal getPriceAsBigDecimal(String priceWithSymbol) {
+        return getPriceAsBigDecimal(priceWithSymbol, getCookieManagerInstance().globalCurrency);
     }
 
     public static Currency getCurrencyFromSymbol(String currencySymbol) {

@@ -5,8 +5,7 @@ import pages.BasePage;
 
 import java.math.BigDecimal;
 
-import static engine.drivers.WebDriverFactory.getWebDriverInstance;
-import static enums.Currency.convertCurrencyFromCookie;
+import static enums.Currency.getPriceAsBigDecimal;
 
 public class CheckoutConfirmationPage {
     public final String totalsTableXpath = "//div[contains(@class, 'confirm_total')]//table";
@@ -47,15 +46,15 @@ public class CheckoutConfirmationPage {
     }
 
     public BigDecimal getSubTotalPrice() {
-        return convertCurrencyFromCookie(basePage.getTextFromElement(subTotalLocator));
+        return getPriceAsBigDecimal(basePage.getTextFromElement(subTotalLocator));
     }
 
     public BigDecimal getFlatShippingRatePrice() {
-        return convertCurrencyFromCookie(basePage.getTextFromElement(flatShippingRateLocator));
+        return getPriceAsBigDecimal(basePage.getTextFromElement(flatShippingRateLocator));
     }
 
     public BigDecimal getTotalPrice() {
-        return convertCurrencyFromCookie(basePage.getTextFromElement(totalLocator));
+        return getPriceAsBigDecimal(basePage.getTextFromElement(totalLocator));
     }
 
     public void clickOnEditCartButton() {

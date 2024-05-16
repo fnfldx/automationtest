@@ -6,7 +6,7 @@ import pages.BasePage;
 import java.math.BigDecimal;
 
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
-import static enums.Currency.convertCurrencyFromCookie;
+import static enums.Currency.getPriceAsBigDecimal;
 
 public class ConfirmProductsTable {
     public final String confirmProductsTableXpath = "//table[contains(@class,'confirm_products')]";
@@ -34,7 +34,7 @@ public class ConfirmProductsTable {
     public BigDecimal getProductPriceFromRow(int productIndex) {
         var productXpath = String.format("%s[%d]/td[3]", confirmProductRowXpath, productIndex);
         var priceText = getWebDriverInstance().findElement(By.xpath(productXpath)).getText();
-        return convertCurrencyFromCookie(priceText);
+        return getPriceAsBigDecimal(priceText);
     }
 
     public int getProductQuantityFromRow(int productIndex) {
@@ -45,6 +45,6 @@ public class ConfirmProductsTable {
     public BigDecimal getProductTotalPriceFromRow(int productIndex) {
         var productXpath = String.format("%s[%d]/td[5]", confirmProductRowXpath, productIndex);
         var totalPriceText = getWebDriverInstance().findElement(By.xpath(productXpath)).getText();
-        return convertCurrencyFromCookie(totalPriceText);
+        return getPriceAsBigDecimal(totalPriceText);
     }
 }

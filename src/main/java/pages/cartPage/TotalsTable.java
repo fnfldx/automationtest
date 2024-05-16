@@ -5,7 +5,7 @@ import pages.BasePage;
 
 import java.math.BigDecimal;
 
-import static enums.Currency.convertCurrencyFromCookie;
+import static enums.Currency.getPriceAsBigDecimal;
 
 public class TotalsTable {
     public final String totalsTable = "//table[@id='totals_table']";
@@ -19,14 +19,14 @@ public class TotalsTable {
     }
 
     public BigDecimal getSubTotalPrize() {
-        return convertCurrencyFromCookie(basePage.getTextFromElement(subTotalLocator));
+        return getPriceAsBigDecimal(basePage.getTextFromElement(subTotalLocator));
     }
 
     public BigDecimal getFlatShippingRatePrize() {
-        return convertCurrencyFromCookie(basePage.getTextFromElement(flatShippingRateLocator));
+        return getPriceAsBigDecimal(basePage.getTextFromElement(flatShippingRateLocator));
     }
 
     public BigDecimal getTotalPrize() {
-        return convertCurrencyFromCookie(basePage.getTextFromElement(totalLocator));
+        return getPriceAsBigDecimal(basePage.getTextFromElement(totalLocator));
     }
 }

@@ -10,7 +10,7 @@ import pages.BasePage;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static enums.Currency.convertCurrencyFromCookie;
+import static enums.Currency.getPriceAsBigDecimal;
 
 public class ShoppingCartTableRow {
     private final String xpath;
@@ -81,13 +81,13 @@ public class ShoppingCartTableRow {
     }
 
     public BigDecimal getUnitPrice() {
-        return convertCurrencyFromCookie(getCells()
+        return getPriceAsBigDecimal(getCells()
                 .get(ShoppingCartHeader.UNIT_PRICE.columnIndex)
                 .getText());
     }
 
     public BigDecimal getTotalPrice() {
-        return convertCurrencyFromCookie(getCells()
+        return getPriceAsBigDecimal(getCells()
                 .get(ShoppingCartHeader.TOTAL.columnIndex)
                 .getText());
     }
