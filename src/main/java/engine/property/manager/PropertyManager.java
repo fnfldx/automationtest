@@ -26,10 +26,10 @@ public class PropertyManager {
         var configPath = "src/main/resources/config.properties";
         try (FileInputStream input = new FileInputStream(configPath)) {
             properties.load(input);
+            setTranslation();
         } catch (IOException ex) {
             Logger.getLogger(PropertyManager.class.getName()).log(Level.SEVERE, "Error loading properties", ex);
         }
-        setTranslation();
     }
 
     public static synchronized PropertyManager getPropertyManagerInstance() {

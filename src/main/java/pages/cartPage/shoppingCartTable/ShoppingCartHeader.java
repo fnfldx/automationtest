@@ -4,19 +4,25 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-import static engine.property.manager.PropertyManager.tr;
+import static enums.TranslationKey.IMAGE_HEADER;
+import static enums.TranslationKey.MODEL_HEADER;
+import static enums.TranslationKey.NAME_HEADER;
+import static enums.TranslationKey.QUANTITY_HEADER;
+import static enums.TranslationKey.REMOVE_HEADER;
+import static enums.TranslationKey.TOTAL_HEADER;
+import static enums.TranslationKey.UNIT_PRICE_HEADER;
 
 @Getter
 @ToString
 @RequiredArgsConstructor
 public enum ShoppingCartHeader {
-    IMAGE(tr.getString("imageHeader"), 0),
-    NAME(tr.getString("nameHeader"), 1),
-    MODEL(tr.getString("modelHeader"), 2),
-    UNIT_PRICE(tr.getString("unitePriceHeader"), 3),
-    QUANTITY(tr.getString("quantityHeader"), 4),
-    TOTAL(tr.getString("totalHeader"), 5),
-    REMOVE(tr.getString("removeHeader"), 6);
+    IMAGE(IMAGE_HEADER.getTranslation(), 0),
+    NAME(NAME_HEADER.getTranslation(), 1),
+    MODEL(MODEL_HEADER.getTranslation(), 2),
+    UNIT_PRICE(UNIT_PRICE_HEADER.getTranslation(), 3),
+    QUANTITY(QUANTITY_HEADER.getTranslation(), 4),
+    TOTAL(TOTAL_HEADER.getTranslation(), 5),
+    REMOVE(REMOVE_HEADER.getTranslation(), 6);
 
     public final String header;
     public final int columnIndex;
