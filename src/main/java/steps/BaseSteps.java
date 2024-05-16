@@ -54,4 +54,10 @@ public class BaseSteps {
     public static void validateURL(String url) {
         Assert.assertEquals("Guest Checkout URL is not valid", url, getWebDriverInstance().getCurrentUrl());
     }
+
+    public static void validateURLContains(String expectedURLPart) {
+        String currentURL = getWebDriverInstance().getCurrentUrl();
+        Assert.assertTrue("Current URL does not contain the expected part: " + expectedURLPart,
+                currentURL.contains(expectedURLPart));
+    }
 }
