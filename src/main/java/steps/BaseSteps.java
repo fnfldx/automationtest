@@ -56,6 +56,12 @@ public class BaseSteps {
         Assert.assertEquals("Guest Checkout URL is not valid", url, getWebDriverInstance().getCurrentUrl());
     }
 
+    public static void validateURLContains(String expectedURLPart) {
+        String currentURL = getWebDriverInstance().getCurrentUrl();
+        Assert.assertTrue("Current URL does not contain the expected part: " + expectedURLPart,
+                currentURL.contains(expectedURLPart));
+    }
+
     public static void validateNewTabURL(String expectedUrl) {
         var driver = getWebDriverInstance();
         var windowHandles = driver.getWindowHandles();

@@ -5,9 +5,8 @@ import pages.BasePage;
 
 public class TableConfirmProducts {
 
-    protected BasePage basePage;
-
     public By editCartButtonLocator = By.xpath("//i[contains(@class, 'fa-shopping-cart')]/parent::a");
+    protected BasePage basePage;
 
     public TableConfirmProducts() {
         this.basePage = new BasePage();

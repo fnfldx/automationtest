@@ -5,9 +5,8 @@ import pages.BasePage;
 
 public class TableConfirmShippmentOptions {
 
-    protected BasePage basePage;
-
     public By editShippingButtonLocator = By.xpath("//a[normalize-space()='Edit Shipping']");
+    protected BasePage basePage;
 
     public TableConfirmShippmentOptions() {
         this.basePage = new BasePage();

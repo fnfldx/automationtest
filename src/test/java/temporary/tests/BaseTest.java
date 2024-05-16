@@ -1,6 +1,8 @@
 package temporary.tests;
 
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 import static engine.drivers.WebDriverFactory.quitWebDriver;

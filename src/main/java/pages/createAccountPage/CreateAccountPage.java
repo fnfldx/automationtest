@@ -10,12 +10,6 @@ import static pages.createAccountPage.CreateAccountFormId.*;
 @Getter
 @Setter
 public class CreateAccountPage {
-    public By accountFormLocator = By.id("AccountFrm");
-    public String alertMessageXpath = "//div[contains(@class, 'alert-error')]";
-    public By alertMessageLocator = By.xpath(alertMessageXpath);
-    public By alertMessageCloseButtonLocator = By.xpath(alertMessageXpath + "//button[@class='close']");
-    public By continueButtonLocator = By.xpath("//button[@title='Continue']");
-    public By loginPageLinkLocator = By.xpath("//p/a");
     public static CreateAccountInput firstName = new CreateAccountInput(FIRST_NAME);
     public static CreateAccountInput lastName = new CreateAccountInput(LAST_NAME);
     public static CreateAccountInput email = new CreateAccountInput(EMAIL);
@@ -34,6 +28,12 @@ public class CreateAccountPage {
     public static CreateAccountInput subscribeYes = new CreateAccountInput(SUBSCRIBE_YES);
     public static CreateAccountInput subscribeNo = new CreateAccountInput(SUBSCRIBE_NO);
     public static CreateAccountInput privacyPolicy = new CreateAccountInput(PRIVACY_POLICY);
+    public By accountFormLocator = By.id("AccountFrm");
+    public String alertMessageXpath = "//div[contains(@class, 'alert-error')]";
+    public By alertMessageLocator = By.xpath(alertMessageXpath);
+    public By alertMessageCloseButtonLocator = By.xpath(alertMessageXpath + "//button[@class='close']");
+    public By continueButtonLocator = By.xpath("//button[@title='Continue']");
+    public By loginPageLinkLocator = By.xpath("//p/a");
     protected BasePage basePage;
 
     public CreateAccountPage() {
