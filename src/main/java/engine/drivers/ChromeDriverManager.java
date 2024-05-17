@@ -2,6 +2,7 @@ package engine.drivers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import static engine.property.manager.PropertyManager.PropertyKeys.CHROME_DRIVER;
 import static engine.property.manager.PropertyManager.getProperty;
@@ -18,6 +19,10 @@ public class ChromeDriverManager implements WebDriverInterface {
     @Override
     public WebDriver getDriver() {
         setWebDriverPath();
-        return new ChromeDriver();
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+
+        return new ChromeDriver(options);
     }
 }
