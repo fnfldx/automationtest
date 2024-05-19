@@ -1,13 +1,9 @@
-package pages.mainpage;
+package pages.mainPage;
 
 import enums.MainPageSectionId;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.openqa.selenium.WebDriver;
-import pages.BasePage;
-
-import java.util.List;
 
 @Getter
 @Setter

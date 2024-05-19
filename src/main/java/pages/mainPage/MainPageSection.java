@@ -1,10 +1,8 @@
-package pages.mainpage;
+package pages.mainPage;
 
 import enums.MainPageSectionId;
 import lombok.Getter;
 import lombok.Setter;
-import models.ProductModel;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 import pages.BasePage;
 

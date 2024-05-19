@@ -1,11 +1,10 @@
 package temporary.tests;
 
-import org.junit.jupiter.api.Test;
-import pages.mainpage.MainPageProduct;
-import pages.mainpage.MainPageSection;
-import enums.MainPageSectionId;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+import pages.mainPage.MainPageProduct;
+import pages.mainPage.MainPageSection;
+import enums.MainPageSectionId;
 import static steps.BaseSteps.openPage;
 
 public class MainPageProductTest {
@@ -14,7 +13,7 @@ public class MainPageProductTest {
     public void testAddProductToCart() {
         openPage();
         MainPageSection mainPageSection = new MainPageSection(MainPageSectionId.FEATURES);
-        MainPageProduct mainPageProduct = mainPageSection.getProduct(1);
+        MainPageProduct mainPageProduct = mainPageSection.getProduct(3);
 
         var productsDetails = mainPageProduct.getProductsDetails();
 
@@ -22,5 +21,4 @@ public class MainPageProductTest {
         System.out.println("Product Price: " + productsDetails.price);
 
         mainPageProduct.clickAddToCartButton();
-    }
-}
+    }}
