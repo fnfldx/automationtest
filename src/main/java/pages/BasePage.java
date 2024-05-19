@@ -19,10 +19,6 @@ import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 import static engine.property.manager.PropertyManager.getBrowserName;
 
 public class BasePage {
-    protected WebDriverWait wait;
-    protected String baseUrl;
-    protected BrowserName browserName;
-
     protected final String navbarXpath = "//div[@role='navigation']";
     protected final String categoryMenuXpath = "//section[@id='categorymenu']";
     protected final String footersocialXpath = "//section[@class='footersocial']";
@@ -35,6 +31,9 @@ public class BasePage {
     public By itemsInCartDropDownLocator = By.xpath("//ul[contains(@class, 'topcartopen')]/parent::*");
     public By newsletterInputLocator = By.xpath(footersocialXpath + "//input[@id='appendedInputButton']");
     public By newsletterButtonLocator = By.xpath(footersocialXpath + "//button[@class='btn btn-orange']");
+    protected WebDriverWait wait;
+    protected String baseUrl;
+    protected BrowserName browserName;
 
     public BasePage() {
         this.browserName = getBrowserName();
@@ -120,6 +119,10 @@ public class BasePage {
         return locateElement(locator).getText();
     }
 
+    public String getValueFromElement(By locator) {
+        return locateElement(locator).getAttribute("value");
+    }
+
     public void clearTextFromElement(By locator) {
         locateElement(locator).clear();
     }
@@ -137,7 +140,7 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
     }
 
-    protected WebElement locateElement(By locator) {
+    public WebElement locateElement(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return getWebDriverInstance().findElement(locator);
     }

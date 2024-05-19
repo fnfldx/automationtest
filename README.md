@@ -1,31 +1,33 @@
-# AutomationTestStore - Automated Testing Project
+# Automated Testing Project
+
+## AutomationTestStore
 
 Hello and welcome to AutomationTestStore :)
 
 This project contains automated tests for the https://automationteststore.com website. The tests are designed to
 validate various functionalities and behaviors of the website to ensure its proper functioning.
 
-## Table of contents:
+### Table of contents:
 
 - [Introduction](#introduction)
 - [Features](#features)
 - [Installation](#installation)
 - [Credits](#credits)
 
-## Introduction
+### Introduction
 
 The AutomationTestStore Automated Testing Project aims to provide automated tests for
 the https://automationteststore.com website.
 These tests cover a range of scenarios, including user interactions, cart functionality and checkout processes, to
 ensure the website operates as expected.
 
-## Features
+### Features
 
 - Automated tests for key functionalities of the https://automationteststore.com website.
 - Validation of user flows, cart operations, and checkout processes.
 - Scalable and maintainable test suite structure.
 
-## Installation
+### Installation
 
 To run the automated tests locally, follow these steps:
 
@@ -34,7 +36,46 @@ To run the automated tests locally, follow these steps:
 3. Ensure you have the necessary WebDriver setup (e.g., ChromeDriver) for your preferred browser
 4. See `config.example` file to configure your own properties file
 
-## Credits
+### Credits
 
 - The project uses Selenium WebDriver for automated browser interactions.
 - Maven is used for project management and dependency resolution.
+
+## PetStore
+
+Hello and welcome to PetStore for API testing :)
+
+This project contains automated tests for the https://petstore.swagger.io/ api. The tests are designed to
+validate various functionalities and behaviors of the api endpoints to ensure its proper functioning.
+
+### Introduction
+
+API tests approach is based on the RestAssured and the Cucumber - BDD.
+Due to this fact the cucumber `features files` must be linked with java code `test steps` via `runner` files.
+Please see the following structure:
+
+```bash
+src
+├── main
+│   ├── java
+│   │   ├── apitests
+│   │   │   ├── clients # methods implementations of the requests
+│   │   │   ├── model # objects usually represents the json objects from the response/request body
+│   │   │   ├── runner # runner of the test cases
+│   │   │   ├── steps # cucumber test steps implementations
+├── test
+│   ├── resources
+│   │   ├── cucumber
+│   │   │   ├── features # cucumber files with gherkin syntax
+```
+
+
+
+### Installation
+
+If all maven dependencies are correctly imported and project has no errors the API tests are ready to be run.
+
+### Running test
+
+Go to the runner folder with certain test runner `*.AT` file.
+Click on the test icon on the left from the runner test class (i.e.: "PetCrudAT").

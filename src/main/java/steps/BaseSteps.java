@@ -33,6 +33,17 @@ public class BaseSteps {
         addProductToCart.click();
     }
 
+    public static void addProductToCartById(String id) {
+        cartPage = new CartPage();
+        String xpath = String.format("//a[@data-id='%s']", id);
+        By productLocator = By.xpath(xpath);
+        if (cartPage.getBasePage().isElementDisplayed(productLocator)) {
+            cartPage.getBasePage().clickOnElement(productLocator);
+        } else {
+            Assert.fail("Product with id " + id + " was not found");
+        }
+    }
+
     public static void goToCart() {
         var goToCart = getWebDriverInstance().findElement(By.xpath("/html/body/div/header/div[2]/div/div[3]/ul/li/a"));
         goToCart.click();
@@ -42,5 +53,11 @@ public class BaseSteps {
 
     public static void validateURL(String url) {
         Assert.assertEquals("Guest Checkout URL is not valid", url, getWebDriverInstance().getCurrentUrl());
+    }
+
+    public static void validateURLContains(String expectedURLPart) {
+        String currentURL = getWebDriverInstance().getCurrentUrl();
+        Assert.assertTrue("Current URL does not contain the expected part: " + expectedURLPart,
+                currentURL.contains(expectedURLPart));
     }
 }
