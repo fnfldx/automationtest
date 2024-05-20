@@ -11,9 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static steps.BaseSteps.*;
 import static steps.CartPageSteps.goToCheckout;
 import static steps.CartPageSteps.updateCart;
+import static steps.GuestCheckoutPageSteps.fillGuestCheckoutWithShippingAddressForm;
 import static steps.LoginPageSteps.goToAccountLogin;
 import static steps.LoginPageSteps.proceedAsGuest;
 import static steps.GuestCheckoutPageSteps.fillGuestCheckoutForm;
+import static steps.GuestCheckoutPageSteps.submitGuestCheckoutForm;
 
 public class TestGuestCheckout extends BaseTest {
 
@@ -71,8 +73,27 @@ public class TestGuestCheckout extends BaseTest {
 
         // When:
         fillGuestCheckoutForm();
+        submitGuestCheckoutForm();
 
         //Then
-        assertThat(GuestCheckoutPage.isGuestCheckoutButtonVisible()).isTrue();
+        validateURL("https://automationteststore.com/index.php?rt=checkout/guest_step_3");
+    }
+
+    @Test
+    public void fillGuestCheckoutWithShippingAddressFormTest() {
+        // Given:
+        openPage();
+        addToCart();
+        goToCart();
+        updateCart();
+        goToCheckout();
+        proceedAsGuest();
+
+        // When:
+        fillGuestCheckoutWithShippingAddressForm();
+        submitGuestCheckoutForm();
+
+        //Then
+        validateURL("https://automationteststore.com/index.php?rt=checkout/guest_step_3");
     }
 }
