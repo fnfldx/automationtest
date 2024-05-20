@@ -34,14 +34,7 @@ public class MainPageSection {
                 .findElements(By.xpath(this.sectionXpath + "/div/div/div/div"))
                 .size();
     }
-
-    public MainPageProduct getProduct(String name) {
-        return getProductsFromSection().stream()
-                .filter(productModel -> productModel.getProductsDetails().name.equals(name))
-                .findFirst()
-                .orElse(null);
-    }
-
+    
     public MainPageProduct getProduct(int index) {
         return getProductsFromSection()
                 .get(index);

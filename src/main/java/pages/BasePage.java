@@ -144,8 +144,4 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return getWebDriverInstance().findElement(locator);
     }
-
-    public boolean isElementPresent(By locator) {
-        return !getWebDriverInstance().findElements(locator).isEmpty();
-    }
 }

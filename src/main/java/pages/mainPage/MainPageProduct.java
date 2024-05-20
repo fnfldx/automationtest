@@ -29,9 +29,9 @@ public class MainPageProduct {
         By outOfStockElement = By.xpath(productXpath + "//span[@class='nostock']");
         By addToCartButton = By.xpath(productXpath + "//a[@class='productcart']");
 
-        if (basePage.isElementPresent(outOfStockElement)) {
+        if (basePage.isElementDisplayed(outOfStockElement)) {
             System.out.println("Product is out of stock and cannot be added to the cart.");
-        } else if (basePage.isElementPresent(addToCartButton)) {
+        } else if (basePage.isElementDisplayed(addToCartButton)) {
             basePage.clickOnElement(addToCartButton);
         } else {
             System.out.println("Add to cart button is not present for the product.");
