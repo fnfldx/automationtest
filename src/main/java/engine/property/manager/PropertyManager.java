@@ -16,10 +16,10 @@ import java.util.logging.Logger;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertyManager {
+    private static final Properties properties;
+    public static ResourceBundle tr;
     private static PropertyManager propertyManagerInstance;
     private static Locale locale;
-    public static ResourceBundle tr;
-    private static final Properties properties;
 
     static {
         properties = new Properties();
@@ -47,14 +47,15 @@ public class PropertyManager {
         System.setProperty(systemProperty, systemStringValue);
     }
 
-    private static void setTranslation(){
-        locale = new Locale(getProperty(PropertyKeys.LANG));
-        Locale.setDefault(locale);
-        tr = ResourceBundle.getBundle("translations.translation", locale);
-    }
 
     public static BrowserName getBrowserName() {
         return BrowserName.valueOf(getProperty(PropertyKeys.BROWSER_NAME));
+    }
+
+    private static void setTranslation() {
+        locale = new Locale(getProperty(PropertyKeys.LANG));
+        Locale.setDefault(locale);
+        tr = ResourceBundle.getBundle("translations.translation", locale);
     }
 
     public enum PropertyKeys {
