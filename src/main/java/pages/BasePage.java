@@ -95,6 +95,10 @@ public class BasePage {
         element.click();
     }
 
+    public boolean isRadioButtonSelected(By locator) {
+        return locateElement(locator).isSelected();
+    }
+
     public void setCheckboxState(By locator, boolean state) {
         WebElement element = locateElement(locator);
         if (element.isSelected() == state) {
