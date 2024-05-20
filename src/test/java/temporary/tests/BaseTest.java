@@ -1,6 +1,5 @@
 package temporary.tests;
 
-import enums.Currency;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -24,6 +23,11 @@ public class BaseTest {
         getPropertyManagerInstance();
     }
 
+    @AfterClass
+    public static void baseTearDown() {
+        quitWebDriver();
+    }
+
     @Before
     public void baseSetUp() {
         getWebDriverInstance();
@@ -31,13 +35,8 @@ public class BaseTest {
         getCookieManagerInstance().setCookiesFromProperties();
     }
 
-    @AfterClass
-    public static void baseTearDown() {
-        quitWebDriver();
-    }
-
     @Test
-    public void setGlobalCurrency(){
+    public void setGlobalCurrency() {
         // Given:
         openPage();
         // When and Then:
