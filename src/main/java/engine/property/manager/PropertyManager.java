@@ -59,7 +59,7 @@ public class PropertyManager {
     }
 
     private static Cookie getCurrencyCookieFromProperties() {
-        return new Cookie("currency", PropertyKeys.COOKIE_CURRENCY.toString());
+        return new Cookie("currency", getProperty(PropertyKeys.COOKIE_CURRENCY));
     }
 
     public enum PropertyKeys {
