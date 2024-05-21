@@ -37,4 +37,5 @@ public class MainPageProductTest extends BaseTest {
 
         mainPageProduct.clickAddToCartButton();
     }
+
 }

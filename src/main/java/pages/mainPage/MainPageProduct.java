@@ -3,6 +3,7 @@ package pages.mainPage;
 import lombok.Getter;
 import models.ProductModel;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import pages.BasePage;
 
 import java.math.BigDecimal;
@@ -29,11 +30,11 @@ public class MainPageProduct {
         var addToCartButton = By.xpath(productXpath + "//a[@class='productcart']");
 
         if (basePage.isElementDisplayed(outOfStockElement)) {
-            System.out.println("Product is out of stock and cannot be added to the cart.");
+            throw new IllegalStateException("Product is out of stock and cannot be added to the cart.");
         } else if (basePage.isElementDisplayed(addToCartButton)) {
             basePage.clickOnElement(addToCartButton);
         } else {
-            System.out.println("Add to cart button is not present for the product.");
+            throw new NoSuchElementException("Add to cart button is not present for the product.");
         }
     }
 
