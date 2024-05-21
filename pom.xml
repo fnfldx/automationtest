@@ -36,6 +36,7 @@
             <version>4.21.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
@@ -97,19 +98,20 @@
             <version>1.0.2</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>3.2.5</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
             <version>3.2.5</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -130,6 +132,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.2.5</version>
+                <configuration>
+                    <groups>EndToEnd</groups>
+                    <includes>
+                        <include>**/Test*.java</include>
+                    </includes>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -138,11 +146,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <includes>
-                        <include>**/Test*.java</include>
-                    </includes>
-                </configuration>
             </plugin>
         </plugins>
     </build>
