@@ -5,10 +5,9 @@ import pages.BasePage;
 
 public class TableConfirmPaymentOptions {
 
-    protected BasePage basePage;
-
     public By editPaymentButtonLocator = By.xpath("//a[normalize-space()='Edit Payment']");
     public By editCouponButtonLocator = By.xpath("//a[normalize-space()='Edit Coupon']");
+    protected BasePage basePage;
 
     public TableConfirmPaymentOptions() {
         this.basePage = new BasePage();

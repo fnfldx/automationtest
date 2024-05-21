@@ -3,8 +3,6 @@ package pages;
 import org.openqa.selenium.By;
 
 public class LoginPage {
-    protected BasePage basePage;
-
     // Locators:
     public By registerAccountButtonLocator = By.id("accountFrm_accountregister");
     public By guestCheckoutButtonLocator = By.id("accountFrm_accountguest");
@@ -12,6 +10,7 @@ public class LoginPage {
     public By passwordInputLocator = By.id("loginFrm_password");
     public By loginButtonLocator = By.xpath("//*[@id='loginFrm']/button");
     public By continueButtonLocator = By.xpath("//*[@id='accountFrm']/fieldset/button");
+    protected BasePage basePage;
 
     public LoginPage() {
         this.basePage = new BasePage();

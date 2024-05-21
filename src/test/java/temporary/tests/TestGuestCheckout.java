@@ -8,7 +8,10 @@ import pages.LoginPage;
 
 import static engine.drivers.WebDriverFactory.quitWebDriver;
 import static org.assertj.core.api.Assertions.assertThat;
-import static steps.BaseSteps.*;
+import static steps.BaseSteps.addToCart;
+import static steps.BaseSteps.goToCart;
+import static steps.BaseSteps.openPage;
+import static steps.BaseSteps.validateURL;
 import static steps.CartPageSteps.goToCheckout;
 import static steps.CartPageSteps.updateCart;
 import static steps.GuestCheckoutPageSteps.fillGuestCheckoutWithShippingAddressForm;

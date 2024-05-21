@@ -7,17 +7,16 @@ import java.math.BigDecimal;
 
 public class CheckoutConfirmationPage {
 
-    protected BasePage basePage;
-
+    public final String totalsTable = "//div[contains(@class, 'confirm_total')]//table";
     public By returnPolicyLocator = By.xpath("//b[normalize-space()='Return Policy']");
     public By closeReturnPolicyCrossLocator = By.xpath("//*[@id='returnPolicyModal']/div/div/div[1]/button");
     public By closeReturnPolicyButtonLocator = By.xpath("//*[@id='returnPolicyModal']/div/div/div[3]/button");
-    public final String totalsTable = "//div[contains(@class, 'confirm_total')]//table";
     public By subTotalLocator = By.xpath(totalsTable + "/tbody/tr[1]/td[2]/span");
     public By flatShippingRateLocator = By.xpath(totalsTable + "/tbody/tr[2]/td[2]/span");
     public By totalLocator = By.xpath(totalsTable + "/tbody/tr[3]/td[2]/span");
     public By backButtonLocator = By.id("back");
     public By confirmOrderButtonLocator = By.id("checkout_btn");
+    protected BasePage basePage;
 
     public CheckoutConfirmationPage() {
         this.basePage = new BasePage();
