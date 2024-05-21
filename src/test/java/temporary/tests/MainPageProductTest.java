@@ -24,9 +24,6 @@ public class MainPageProductTest extends BaseTest {
 
         var productsDetails = mainPageProduct.getProductsDetails();
 
-        System.out.println("Product Name: " + productsDetails.name);
-        System.out.println("Product Price: " + productsDetails.price);
-
         mainPageProduct.clickAddToCartButton();
     }
 
@@ -37,9 +34,6 @@ public class MainPageProductTest extends BaseTest {
         MainPageProduct mainPageProduct = mainPageSection.getProduct(1);
 
         var productsDetails = mainPageProduct.getProductsDetails();
-
-        System.out.println("Product Name: " + productsDetails.name);
-        System.out.println("Product Price: " + productsDetails.price);
 
         mainPageProduct.clickAddToCartButton();
     }
