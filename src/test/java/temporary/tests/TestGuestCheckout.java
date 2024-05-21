@@ -1,8 +1,9 @@
 package temporary.tests;
 
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import pages.LoginPage;
 
 import static engine.drivers.WebDriverFactory.quitWebDriver;
@@ -20,17 +21,18 @@ public class TestGuestCheckout extends BaseTest {
 
     protected static LoginPage loginPage;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         loginPage = new LoginPage();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         quitWebDriver();
     }
 
     @Test
+    @Tag("EndToEnd")
     public void continueAsGuest() {
         // Given:
         openPage();
@@ -47,6 +49,7 @@ public class TestGuestCheckout extends BaseTest {
     }
 
     @Test
+    @Tag("EndToEnd")
     public void proceedToLoginOrRegister() {
         // Given:
         openPage();

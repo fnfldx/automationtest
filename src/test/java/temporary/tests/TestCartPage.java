@@ -2,10 +2,11 @@ package temporary.tests;
 
 import enums.Currency;
 import models.ProductModel;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import pages.cartPage.CartPage;
 import steps.BaseSteps;
 
@@ -31,17 +32,18 @@ public class TestCartPage extends BaseTest {
 
     protected static CartPage cartPage;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         cartPage = new CartPage();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         quitWebDriver();
     }
 
     @Test
+    @Tag("EndToEnd")
     public void proceedToCheckout() {
         // Given:
         openPage();
@@ -56,6 +58,7 @@ public class TestCartPage extends BaseTest {
     }
 
     @Test
+    @Tag("EndToEnd")
     public void shoppingCartTableTest() {
         // Given:
         openPage();
@@ -80,6 +83,7 @@ public class TestCartPage extends BaseTest {
     }
 
     @Test
+    @Tag("EndToEnd")
     public void shoppingCartTableQuantityAndTotalPriceTest() {
         // Given:
         openPage();
@@ -101,6 +105,7 @@ public class TestCartPage extends BaseTest {
     }
 
     @Test
+    @Tag("EndToEnd")
     public void shoppingCartTableRemoveProductTest() {
         // Given:
         openPage();
@@ -122,6 +127,7 @@ public class TestCartPage extends BaseTest {
     }
 
     @Test
+    @Tag("EndToEnd")
     public void shoppingCartTableEmptyCartTest() {
         // Given:
         openPage();
