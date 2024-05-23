@@ -47,6 +47,7 @@ public class PropertyManager {
 
     public static BrowserName getBrowserName() {
         return BrowserName.valueOf(getProperty(PropertyKeys.BROWSER_NAME));
+
     }
 
     public static Currency getCurrency() {

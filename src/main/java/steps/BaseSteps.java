@@ -22,7 +22,7 @@ public class BaseSteps {
     }
 
     public static void addToCart() {
-        var addProductToCart = getWebDriverInstance().findElement(By.xpath("//*[@id='block_frame_latest_1770']/div/div[1]/div[2]/div[3]/a"));
+        var addProductToCart = getWebDriverInstance().findElement(By.xpath("//*[@id='block_frame_latest_1770']/div/div[2]/div[2]/div[3]/a"));
         addProductToCart.click();
     }
 
