@@ -25,7 +25,8 @@ public class TestOpenPageChrome {
         String url = getProperty(BASE_URL);
         driver.navigate().to(url);
 
-        var welcomeMsg = By.xpath("//div[@class='welcome_msg']");
+        var welcomeMsg = By.xpath("//div[@clas" +
+                "s='welcome_msg']");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(welcomeMsg));
 
