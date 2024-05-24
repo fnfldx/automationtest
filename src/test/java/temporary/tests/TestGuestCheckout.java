@@ -22,13 +22,13 @@ import static steps.GuestCheckoutPageSteps.fillGuestCheckoutForm;
 import static steps.GuestCheckoutPageSteps.submitGuestCheckoutForm;
 
 public class TestGuestCheckout extends BaseTest {
-
     protected static LoginPage loginPage;
     protected static GuestCheckoutPage guestCheckoutPage;
 
     @BeforeAll
     public static void setUp() {
         loginPage = new LoginPage();
+        guestCheckoutPage = new GuestCheckoutPage();
     }
 
     @AfterEach
@@ -67,6 +67,7 @@ public class TestGuestCheckout extends BaseTest {
     }
 
     @Test
+    @Tag("EndToEnd")
     public void fillGuestCheckoutFormTest() {
         // Given:
         openPage();
@@ -85,6 +86,7 @@ public class TestGuestCheckout extends BaseTest {
     }
 
     @Test
+    @Tag("EndToEnd")
     public void fillGuestCheckoutWithShippingAddressFormTest() {
         // Given:
         openPage();
