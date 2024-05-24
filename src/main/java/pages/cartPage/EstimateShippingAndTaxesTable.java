@@ -5,12 +5,12 @@ import pages.BasePage;
 
 public class EstimateShippingAndTaxesTable {
 
-    protected BasePage basePage;
     public By countryDropdownLocator = By.id("estimate_country");
     public By stateDropdownLocator = By.id("estimate_country_zones");
     public By zipPostCodeLocator = By.id("estimate_postcode");
     public By estimateButtonLocator = By.xpath("//button[@title='Estimate']");
     public By shipmentsDropdownLocator = By.id("shippings");
+    protected BasePage basePage;
 
     void enterZipPostCode(String zipPostCode) {
         basePage.enterTextToElement(zipPostCodeLocator, zipPostCode);

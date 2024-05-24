@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.Properties;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,7 +44,6 @@ public class PropertyManager {
     public static void setProperty(String systemProperty, String systemStringValue) {
         System.setProperty(systemProperty, systemStringValue);
     }
-
 
     public static BrowserName getBrowserName() {
         return BrowserName.valueOf(getProperty(PropertyKeys.BROWSER_NAME));

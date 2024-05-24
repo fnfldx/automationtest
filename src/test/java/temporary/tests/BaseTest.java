@@ -15,13 +15,13 @@ public class BaseTest {
         getPropertyManagerInstance();
     }
 
-    @Before
-    public void baseSetUp() {
-        getWebDriverInstance();
-    }
-
     @AfterClass
     public static void baseTearDown() {
         quitWebDriver();
+    }
+
+    @Before
+    public void baseSetUp() {
+        getWebDriverInstance();
     }
 }
