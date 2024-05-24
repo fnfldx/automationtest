@@ -10,7 +10,9 @@ import static engine.drivers.WebDriverFactory.quitWebDriver;
 import static steps.BaseSteps.*;
 import static steps.CartPageSteps.goToCheckout;
 import static steps.CheckoutConfirmationPageSteps.confirmOrder;
-import static temporary.tests.TestGuestCheckout.loginPage;
+import static steps.GuestCheckoutPageSteps.fillGuestCheckoutForm;
+import static steps.GuestCheckoutPageSteps.submitGuestCheckoutForm;
+import static steps.LoginPageSteps.proceedAsGuest;
 
 public class TestCheckoutConfirmationPage extends BaseTest {
 
@@ -34,11 +36,9 @@ public class TestCheckoutConfirmationPage extends BaseTest {
         addToCart();
         goToCart();
         goToCheckout();
-        loginPage.selectGuestAccountOption();
-        loginPage.clickContinueButton();
-        // TODO: Ilona's part with entering the data into fields
-        // TODO: Ilona's part with clicking a continue button
-
+        proceedAsGuest();
+        fillGuestCheckoutForm();
+        submitGuestCheckoutForm();
 
         // When:
         confirmOrder();
@@ -46,6 +46,4 @@ public class TestCheckoutConfirmationPage extends BaseTest {
         // Then:
         validateURL("https://automationteststore.com/index.php?rt=checkout/success");
     }
-
 }
-
