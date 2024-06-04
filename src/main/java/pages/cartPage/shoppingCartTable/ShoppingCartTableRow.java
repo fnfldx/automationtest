@@ -13,10 +13,10 @@ import java.util.List;
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 
 public class ShoppingCartTableRow {
-    public By deleteItemButton = By.xpath(".//i[contains(@class, 'fa-trash-o')]/parent::a");
-    public By quantityItemInput = By.xpath(".//input[contains(@id, 'cart_quantity')]");
     private final String xpath;
     private final BasePage basePage;
+    public By deleteItemButton = By.xpath(".//i[contains(@class, 'fa-trash-o')]/parent::a");
+    public By quantityItemInput = By.xpath(".//input[contains(@id, 'cart_quantity')]");
 
     public ShoppingCartTableRow(int index) {
         if (index == 0) {
@@ -69,7 +69,7 @@ public class ShoppingCartTableRow {
                 .get(ShoppingCartHeader.UNIT_PRICE.columnIndex)
                 .getText()
                 .charAt(0);
-        return Currency.fromSymbol(String.valueOf(currencySymbol));
+        return Currency.getCurrencyFromSymbol(String.valueOf(currencySymbol));
     }
 
     public Currency getCurrencyFromTotalPrice() {
@@ -77,21 +77,19 @@ public class ShoppingCartTableRow {
                 .get(ShoppingCartHeader.TOTAL.columnIndex)
                 .getText()
                 .charAt(0);
-        return Currency.fromSymbol(String.valueOf(currencySymbol));
+        return Currency.getCurrencyFromSymbol(String.valueOf(currencySymbol));
     }
 
     public BigDecimal getUnitPrice() {
-        var price = getCells()
+        return getPriceAsBigDecimal(getCells()
                 .get(ShoppingCartHeader.UNIT_PRICE.columnIndex)
-                .getText();
-        return new BigDecimal(price.substring(1));
+                .getText());
     }
 
     public BigDecimal getTotalPrice() {
-        var price = getCells()
+        return getPriceAsBigDecimal(getCells()
                 .get(ShoppingCartHeader.TOTAL.columnIndex)
-                .getText();
-        return new BigDecimal(price.substring(1));
+                .getText());
     }
 
     public int getQuantity() {

@@ -3,6 +3,7 @@ package pages;
 import engine.property.manager.PropertyManager;
 import enums.BrowserName;
 import enums.CategoryMenuButton;
+import enums.Currency;
 import enums.FooterHyperLink;
 import enums.NavbarButton;
 import org.openqa.selenium.By;
@@ -28,6 +29,7 @@ public class BasePage {
     public By loginAndRegisterButtonLocator = By.xpath("//div[@class='navbar']//a");
     public By homeLinkByLogoLocator = By.xpath("//a[@class='logo']");
     public By currencyDropdownLocator = By.xpath("//ul[contains(@class, 'currency')]/parent::*");
+    public By currencySymbolLocator = By.xpath("//span//span[contains(@class,'label-orange')]");
     public By itemsInCartDropDownLocator = By.xpath("//ul[contains(@class, 'topcartopen')]/parent::*");
     public By newsletterInputLocator = By.xpath(footersocialXpath + "//input[@id='appendedInputButton']");
     public By newsletterButtonLocator = By.xpath(footersocialXpath + "//button[@class='btn btn-orange']");
@@ -56,6 +58,11 @@ public class BasePage {
 
     public void clickOnElement(By locator) {
         locateElement(locator).click();
+    }
+
+    public Currency getCurrencyFromPage() {
+        var currencySymbol = getTextFromElement(currencySymbolLocator);
+        return Currency.getCurrencyFromSymbol(currencySymbol);
     }
 
     public void scrollToElement(By locator) {
@@ -138,6 +145,10 @@ public class BasePage {
 
     public boolean isElementDisplayedAfterWait(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
+    }
+
+    public String getAttributeFromElement(By locator, String attribute) {
+        return getWebDriverInstance().findElement(locator).getAttribute(attribute);
     }
 
     public WebElement locateElement(By locator) {
