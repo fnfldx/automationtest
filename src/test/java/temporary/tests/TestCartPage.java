@@ -26,9 +26,9 @@ import static steps.CartPageSteps.getProductsFromShoppingCartTable;
 import static steps.CartPageSteps.goToCheckout;
 import static steps.CartPageSteps.removeProductFromShoppingCartTable;
 import static steps.CartPageSteps.updateCart;
+import static steps.CartPageSteps.validateTotalPrice;
 
 public class TestCartPage extends BaseTest {
-
     protected static CartPage cartPage;
 
     @BeforeClass
@@ -53,6 +53,19 @@ public class TestCartPage extends BaseTest {
 
         // Then:
         BaseSteps.validateURL("https://automationteststore.com/index.php?rt=account/login");
+    }
+
+    @Test
+    public void totalTable() {
+        // Given:
+        openPage();
+        addToCart();
+
+        // When:
+        goToCart();
+
+        // Then:
+        validateTotalPrice();
     }
 
     @Test

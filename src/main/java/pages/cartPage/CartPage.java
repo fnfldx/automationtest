@@ -1,24 +1,26 @@
 package pages.cartPage;
 
-import lombok.Getter;
 import org.openqa.selenium.By;
 import pages.BasePage;
 import pages.cartPage.shoppingCartTable.ShoppingCartTable;
 
-@Getter
 public class CartPage {
     public By updateButtonLocator = By.id("cart_update");
     public By checkoutButtonLocator = By.id("cart_checkout1");
-    public By continueShoppingButtonLocator = By.xpath(".totals > a:nth-of-type(1)");
     public By finalCheckoutButtonLocator = By.id("cart_checkout2");
-    public ApplyCouponCodeTable applyCouponCodeTable = new ApplyCouponCodeTable();
-    public EstimateShippingAndTaxesTable estimateShippingAndTaxesTable = new EstimateShippingAndTaxesTable();
-    public TotalsTable totalsTable = new TotalsTable();
-    public ShoppingCartTable shoppingCartTable = new ShoppingCartTable();
-    protected BasePage basePage;
+    public By continueShoppingButtonLocator = By.xpath("//i[contains(@class,'fa-arrow-right')]/parent::a");
+    public ShoppingCartTable shoppingCartTable;
+    public ApplyCouponCodeTable applyCouponCodeTable;
+    public EstimateShippingAndTaxesTable estimateShippingAndTaxesTable;
+    public TotalsTable totalsTable;
+    public BasePage basePage;
 
     public CartPage() {
         this.basePage = new BasePage();
+        this.shoppingCartTable = new ShoppingCartTable();
+        this.applyCouponCodeTable = new ApplyCouponCodeTable();
+        this.estimateShippingAndTaxesTable = new EstimateShippingAndTaxesTable();
+        this.totalsTable = new TotalsTable();
     }
 
     public void clickOnUpdateButton() {

@@ -1,6 +1,5 @@
 package steps;
 
-
 import models.CheckoutProductModel;
 import models.ProductModel;
 import org.junit.Assert;
@@ -9,6 +8,8 @@ import pages.cartPage.shoppingCartTable.ShoppingCartTableRow;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class CartPageSteps {
     protected static CartPage cartPage;
@@ -21,6 +22,14 @@ public class CartPageSteps {
     public static void goToCheckout() {
         cartPage = new CartPage();
         cartPage.clickOnFinalCheckoutButton();
+    }
+
+    public static void validateTotalPrice() {
+        cartPage = new CartPage();
+        var subTotalPrice = cartPage.totalsTable.getSubTotalPrize();
+        var shippingPrice = cartPage.totalsTable.getFlatShippingRatePrize();
+        var totalPrice = cartPage.totalsTable.getTotalPrize();
+        assertThat(totalPrice).isEqualTo(subTotalPrice.add(shippingPrice));
     }
 
     public static List<ProductModel> getProductsFromShoppingCartTable() {
