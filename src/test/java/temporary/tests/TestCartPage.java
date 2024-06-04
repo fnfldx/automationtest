@@ -1,6 +1,7 @@
 package temporary.tests;
 
 import enums.Currency;
+import enums.TranslationKey;
 import models.ProductModel;
 import org.junit.After;
 import org.junit.Assert;
@@ -13,6 +14,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import static engine.drivers.WebDriverFactory.quitWebDriver;
+import static engine.property.manager.PropertyManager.tr;
+import static enums.TranslationKey.SKINSHEEN_BRONZER_STICK;
 import static steps.BaseSteps.addProductToCartById;
 import static steps.BaseSteps.addToCart;
 import static steps.BaseSteps.goToCart;
@@ -80,7 +83,7 @@ public class TestCartPage extends BaseTest {
         // When:
         var checkoutProducts = getCheckoutProductsFromShoppingCartTable();
         ProductModel product1 = ProductModel.builder()
-                .name("Skinsheen Bronzer Stick")
+                .name(SKINSHEEN_BRONZER_STICK.getTranslation())
                 .model("558003")
                 .priceCurrency(Currency.USD)
                 .price(new BigDecimal("29.50"))

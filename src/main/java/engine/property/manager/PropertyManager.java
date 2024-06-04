@@ -18,13 +18,16 @@ import java.util.logging.Logger;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertyManager {
     private static final Properties properties;
+    public static ResourceBundle tr;
     private static PropertyManager propertyManagerInstance;
+    private static Locale locale;
 
     static {
         properties = new Properties();
         var configPath = "src/main/resources/config.properties";
         try (FileInputStream input = new FileInputStream(configPath)) {
             properties.load(input);
+            setTranslation();
         } catch (IOException ex) {
             Logger.getLogger(PropertyManager.class.getName()).log(Level.SEVERE, "Error loading properties", ex);
         }
@@ -47,7 +50,12 @@ public class PropertyManager {
 
     public static BrowserName getBrowserName() {
         return BrowserName.valueOf(getProperty(PropertyKeys.BROWSER_NAME));
+    }
 
+    private static void setTranslation() {
+        locale = new Locale(getProperty(PropertyKeys.LANG));
+        Locale.setDefault(locale);
+        tr = ResourceBundle.getBundle("translations.translation", locale);
     }
 
     public static Currency getCurrency() {
@@ -69,6 +77,7 @@ public class PropertyManager {
         BROWSER_NAME,
         BASE_URL,
         BASE_WAIT_IN_SECONDS,
-        COOKIE_CURRENCY
+        COOKIE_CURRENCY,
+        LANG
     }
 }

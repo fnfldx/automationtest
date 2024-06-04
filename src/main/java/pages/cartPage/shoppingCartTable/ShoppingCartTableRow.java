@@ -4,13 +4,13 @@ import enums.Currency;
 import models.CheckoutProductModel;
 import models.ProductModel;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.BasePage;
-
 import java.math.BigDecimal;
 import java.util.List;
 
-import static enums.Currency.getPriceAsBigDecimal;
+import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 
 public class ShoppingCartTableRow {
     private final String xpath;

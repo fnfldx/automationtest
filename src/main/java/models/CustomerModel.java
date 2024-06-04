@@ -4,6 +4,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import static enums.TranslationKey.DEFAULT_COUNTRY;
+import static enums.TranslationKey.DEFAULT_STATE;
+
 @Getter
 @Builder
 @RequiredArgsConstructor
@@ -20,7 +23,7 @@ public class CustomerModel {
     public final String zipCode;
 
     @Builder.Default
-    public final String country = "United Kingdom";
+    public final String country = DEFAULT_COUNTRY.getTranslation();
     @Builder.Default
-    public final String state = "Aberdeen";
+    public final String state = DEFAULT_STATE.getTranslation();
 }
