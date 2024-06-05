@@ -9,7 +9,10 @@ import pages.createAccountPage.CreateAccountPage;
 
 import static engine.drivers.WebDriverFactory.quitWebDriver;
 import static steps.BaseSteps.openPage;
-import static steps.CreateAccountPageSteps.*;
+import static steps.CreateAccountPageSteps.fillCreateAccountForm;
+import static steps.CreateAccountPageSteps.goToCreateAccountPage;
+import static steps.CreateAccountPageSteps.submitCreateAccountForm;
+import static steps.CreateAccountPageSteps.validateFirstNameInNavbar;
 
 public class TestCreateAccountPage extends BaseTest {
     protected static CreateAccountPage createAccountPage;

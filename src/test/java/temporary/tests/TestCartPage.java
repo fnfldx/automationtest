@@ -1,6 +1,7 @@
 package temporary.tests;
 
 import enums.Currency;
+import enums.TranslationKey;
 import models.ProductModel;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
@@ -14,6 +15,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import static engine.drivers.WebDriverFactory.quitWebDriver;
+import static engine.property.manager.PropertyManager.tr;
+import static enums.TranslationKey.SKINSHEEN_BRONZER_STICK;
 import static steps.BaseSteps.addProductToCartById;
 import static steps.BaseSteps.addToCart;
 import static steps.BaseSteps.goToCart;
@@ -27,6 +30,7 @@ import static steps.CartPageSteps.getProductsFromShoppingCartTable;
 import static steps.CartPageSteps.goToCheckout;
 import static steps.CartPageSteps.removeProductFromShoppingCartTable;
 import static steps.CartPageSteps.updateCart;
+import static steps.CartPageSteps.validateTotalPrice;
 
 public class TestCartPage extends BaseTest {
 
@@ -58,6 +62,19 @@ public class TestCartPage extends BaseTest {
     }
 
     @Test
+    public void totalTable() {
+        // Given:
+        openPage();
+        addToCart();
+
+        // When:
+        goToCart();
+
+        // Then:
+        validateTotalPrice();
+    }
+
+    @Test
     @Tag("EndToEnd")
     public void shoppingCartTableTest() {
         // Given:
@@ -70,7 +87,7 @@ public class TestCartPage extends BaseTest {
         // When:
         var checkoutProducts = getCheckoutProductsFromShoppingCartTable();
         ProductModel product1 = ProductModel.builder()
-                .name("Skinsheen Bronzer Stick")
+                .name(SKINSHEEN_BRONZER_STICK.getTranslation())
                 .model("558003")
                 .priceCurrency(Currency.USD)
                 .price(new BigDecimal("29.50"))

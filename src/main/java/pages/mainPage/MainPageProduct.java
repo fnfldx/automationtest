@@ -8,6 +8,8 @@ import pages.BasePage;
 
 import java.math.BigDecimal;
 
+import static enums.Currency.getPriceAsBigDecimal;
+
 @Getter
 public class MainPageProduct {
     protected BasePage basePage;
@@ -45,6 +47,6 @@ public class MainPageProduct {
     private BigDecimal getPrice() {
         var priceElement = By.xpath(productXpath + "//div[@class='oneprice' or @class='pricenew']");
         String priceText = basePage.getTextFromElement(priceElement);
-        return new BigDecimal(priceText.substring(1));
+        return getPriceAsBigDecimal(priceText);
     }
 }

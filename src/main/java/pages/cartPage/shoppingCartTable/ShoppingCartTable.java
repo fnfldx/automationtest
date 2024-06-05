@@ -1,5 +1,6 @@
 package pages.cartPage.shoppingCartTable;
 
+import enums.TranslationKey;
 import models.CheckoutProductModel;
 import models.ProductModel;
 import org.openqa.selenium.By;
@@ -9,6 +10,9 @@ import pages.cartPage.BaseTable;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static engine.property.manager.PropertyManager.tr;
+import static enums.TranslationKey.EMPTY_CART_MESSAGE;
 
 public class ShoppingCartTable {
     public By cartEmptyMessagePanel = By.xpath("//div[@class='contentpanel']");
@@ -72,6 +76,6 @@ public class ShoppingCartTable {
         var debug = basePage.locateElement(cartEmptyMessagePanel).getText();
         return basePage.locateElement(cartEmptyMessagePanel)
                 .getText()
-                .contains("Your shopping cart is empty!");
+                .contains(EMPTY_CART_MESSAGE.getTranslation());
     }
 }
