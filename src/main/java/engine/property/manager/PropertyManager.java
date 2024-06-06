@@ -16,12 +16,15 @@ import java.util.logging.Logger;
 public class PropertyManager {
     private static PropertyManager propertyManagerInstance;
     private static final Properties properties;
+    private static final Logger LOGGER = Logger.getLogger(PropertyManager.class.getName());
+
 
     static {
         properties = new Properties();
         var configPath = "src/main/resources/config.properties";
         try (FileInputStream input = new FileInputStream(configPath)) {
             properties.load(input);
+            logProperties(properties);
         } catch (IOException ex) {
             Logger.getLogger(PropertyManager.class.getName()).log(Level.SEVERE, "Error loading properties", ex);
         }
@@ -34,6 +37,12 @@ public class PropertyManager {
         return propertyManagerInstance;
     }
 
+    private static void logProperties(Properties properties) {
+        for (String key : properties.stringPropertyNames()) {
+            LOGGER.log(Level.INFO, key + ": " + properties.getProperty(key));
+        }
+    }
+
     public static String getProperty(PropertyKeys key) {
         return properties.getProperty(key.toString());
     }
@@ -44,7 +53,6 @@ public class PropertyManager {
 
     public static BrowserName getBrowserName() {
         return BrowserName.valueOf(getProperty(PropertyKeys.BROWSER_NAME));
-
     }
 
     public enum PropertyKeys {
