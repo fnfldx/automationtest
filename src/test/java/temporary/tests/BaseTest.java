@@ -1,9 +1,9 @@
 package temporary.tests;
 
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static engine.cookie.manager.CookieManager.getCookieManagerInstance;
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
@@ -18,17 +18,17 @@ import static steps.BaseSteps.validateGlobalCurrency;
 
 public class BaseTest {
 
-    @BeforeClass
+    @BeforeAll
     public static void baseClassSetUp() {
         getPropertyManagerInstance();
     }
 
-    @AfterClass
+    @AfterAll
     public static void baseTearDown() {
         quitWebDriver();
     }
 
-    @Before
+    @BeforeEach
     public void baseSetUp() {
         getWebDriverInstance();
         openPage();

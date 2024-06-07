@@ -1,8 +1,9 @@
 package temporary.tests;
 
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import pages.OrderConfirmationPage;
 
 import static engine.drivers.WebDriverFactory.quitWebDriver;
@@ -16,17 +17,18 @@ import static steps.OrderConfirmationSteps.*;
 public class TestOrderConfirmation extends BaseTest {
     protected static OrderConfirmationPage orderConfirmationPage;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         orderConfirmationPage = new OrderConfirmationPage();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         quitWebDriver();
     }
 
     @Test
+    @Tag("EndToEnd")
     public void proceedToInvoicePage() {
         // Given:
         openPage();
@@ -47,6 +49,7 @@ public class TestOrderConfirmation extends BaseTest {
     }
 
     @Test
+    @Tag("EndToEnd")
     public void proceedToContactPage() {
         // Given:
         openPage();
@@ -67,6 +70,7 @@ public class TestOrderConfirmation extends BaseTest {
     }
 
     @Test
+    @Tag("EndToEnd")
     public void continueShopping() {
         // Given:
         openPage();

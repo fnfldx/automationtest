@@ -2,6 +2,7 @@ package engine.drivers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import static engine.property.manager.PropertyManager.PropertyKeys.FIREFOX_DRIVER;
 import static engine.property.manager.PropertyManager.getProperty;
@@ -18,6 +19,10 @@ public class FirefoxDriverManager implements WebDriverInterface {
     @Override
     public WebDriver getDriver() {
         setWebDriverPath();
-        return new FirefoxDriver();
+
+        FirefoxOptions options = new FirefoxOptions();
+        options.addArguments("--headless");
+
+        return new FirefoxDriver(options);
     }
 }
