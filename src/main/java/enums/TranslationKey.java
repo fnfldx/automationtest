@@ -40,7 +40,9 @@ public enum TranslationKey {
     //Empty Cart Message
     EMPTY_CART_MESSAGE("emptyCartMessage"),
     //Products Names
-    SKINSHEEN_BRONZER_STICK("skinsheenBronzerStick");
+    SKINSHEEN_BRONZER_STICK("skinsheenBronzerStick"),
+    //Checkout
+    SUCCESS_CHECKOUT_MESSAGE("successCheckoutMessage");
 
     private final String key;
 

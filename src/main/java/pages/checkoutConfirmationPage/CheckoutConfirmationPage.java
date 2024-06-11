@@ -19,6 +19,7 @@ public class CheckoutConfirmationPage {
     public By editCartButtonLocator = By.xpath("//h4/a");
     public By backButtonLocator = By.id("back");
     public By confirmOrderButtonLocator = By.id("checkout_btn");
+    public By loadingSpinnerLocator = By.xpath("//i[contains(@class,'fa-spin')]");
     protected BasePage basePage;
     protected ConfirmPaymentOptionsTable confirmPaymentOptionsTable;
     protected ConfirmProductsTable confirmProductsTable;
@@ -72,5 +73,9 @@ public class CheckoutConfirmationPage {
     public boolean isReturnPolicyModalVisible() {
         var style = basePage.getAttributeFromElement(returnPolicyModalLocator, "style");
         return !style.contains("display: none");
+    }
+
+    public void waitForLoadingSpinnerToDisappear() {
+        basePage.waitUntilElementDisappear(loadingSpinnerLocator);
     }
 }
