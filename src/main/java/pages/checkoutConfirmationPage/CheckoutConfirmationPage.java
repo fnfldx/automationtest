@@ -76,6 +76,6 @@ public class CheckoutConfirmationPage {
     }
 
     public void waitForLoadingSpinnerToDisappear() {
-        basePage.waitUntilElementDisappear(loadingSpinnerLocator);
+        basePage.waitUntilElementDisappears(loadingSpinnerLocator);
     }
 }
