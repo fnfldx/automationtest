@@ -155,4 +155,8 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return getWebDriverInstance().findElement(locator);
     }
+
+    public void waitUntilElementDisappears(By locator) {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
 }

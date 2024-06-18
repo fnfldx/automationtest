@@ -24,6 +24,7 @@ public class WebDriverFactory {
         return switch (getBrowserName()) {
             case CHROME -> new ChromeDriverManager().getDriver();
             case FIREFOX -> new FirefoxDriverManager().getDriver();
+
             default -> throw new UnsupportedBrowserException(getBrowserName().toString());
         };
     }
