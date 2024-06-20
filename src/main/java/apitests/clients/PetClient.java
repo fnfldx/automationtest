@@ -1,11 +1,13 @@
 package apitests.clients;
 
 import apitests.model.Pet;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+
+import java.io.File;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
+import static io.restassured.http.ContentType.MULTIPART;
 
 public class PetClient extends BaseClient {
 
@@ -30,6 +32,15 @@ public class PetClient extends BaseClient {
                 .body(pet)
                 .when()
                 .post(PET_URL);
+    }
+
+    public Response postPetUploadImage(final long petId, final File file) {
+        return given()
+                .accept(JSON)
+                .contentType(MULTIPART)
+                .multiPart("file", file)
+                .when()
+                .post(PET_URL + petId + "/uploadImage");
     }
 
     public Response putPet(final Pet pet) {

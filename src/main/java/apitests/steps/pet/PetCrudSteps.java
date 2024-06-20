@@ -8,6 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import io.restassured.mapper.ObjectMapperType;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -53,6 +54,14 @@ public class PetCrudSteps extends BaseSteps {
     @When("Finds Pets by status {string}")
     public void finds_pets_by_status(String status) {
         response.setResponse(petClient.getPetsByStatus(status));
+    }
+
+    @When("Upload an image for a pet")
+    public void upload_an_image_for_a_pet() {
+        add_a_new_pet_to_the_store();
+        final var imageFile = new File("src/test/resources/cucumber/features/pet/test_image.jpg");
+
+        response.setResponse(petClient.postPetUploadImage(newPet.getId(), imageFile));
     }
 
     @And("Check if status {string} is returned")
