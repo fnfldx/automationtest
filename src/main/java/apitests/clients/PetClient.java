@@ -18,6 +18,12 @@ public class PetClient extends BaseClient {
                 .get(PET_URL + "findByStatus");
     }
 
+    public Response getPetById(final long petId) {
+        return given()
+                .when()
+                .get(PET_URL + petId);
+    }
+
     public Response postPet(final Pet pet) {
         return given()
                 .contentType(JSON)
@@ -32,5 +38,11 @@ public class PetClient extends BaseClient {
                 .body(pet)
                 .when()
                 .put(PET_URL);
+    }
+
+    public Response deletePet(final long petId) {
+        return given()
+                .when()
+                .delete(PET_URL + petId);
     }
 }

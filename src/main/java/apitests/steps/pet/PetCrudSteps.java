@@ -31,11 +31,16 @@ public class PetCrudSteps extends BaseSteps {
     @When("Update an existing pet")
     public void update_an_existing_pet() {
         add_a_new_pet_to_the_store();
-
-        final var petId = newPet.getId();
-        updatedPet = generatePetWithRandomTestData(petId);
+        updatedPet = generatePetWithRandomTestData(newPet.getId());
 
         response.setResponse(petClient.putPet(updatedPet));
+    }
+
+    @When("Delete an existing pet")
+    public void delete_an_existing_pet() {
+        add_a_new_pet_to_the_store();
+
+        response.setResponse(petClient.deletePet(newPet.getId()));
     }
 
     @When("Finds Pets by status {string}")
@@ -64,5 +69,15 @@ public class PetCrudSteps extends BaseSteps {
         final var updatedPetFromResponse = response.getResponse().getBody().as(Pet.class);
 
         assertThat(updatedPetFromResponse).isEqualToComparingFieldByFieldRecursively(updatedPet);
+    }
+
+    @And("Check if pet is not found")
+    public void check_if_pet_is_not_found() {
+        final var petId = newPet.getId();
+        final var response = petClient.getPetById(petId);
+        final var message = response.jsonPath().getString("message");
+
+        assertThat(message).isEqualTo("Pet not found");
+        assertThat(response.getStatusCode()).isEqualTo(404);
     }
 }

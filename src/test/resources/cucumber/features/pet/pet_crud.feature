@@ -14,6 +14,12 @@ Feature: CRUD pet and body validation
     Then The response with status code 200 is returned
     And Check the response body of updated pet is correct
 
+  @issue:BA-54-deletePet
+  Scenario: Checks if pet is deleted correctly
+    When Delete an existing pet
+    Then The response with status code 200 is returned
+    And Check if pet is not found
+
   @issue:BA-56-findingPetByStatus
   Scenario: Checks if pets with certain status are correctly returned
     When Finds Pets by status "available"
