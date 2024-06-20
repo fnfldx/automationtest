@@ -11,8 +11,16 @@ public class PetUtils {
     private static final String PET_STATUS = AVAILABLE.toString().toLowerCase();
 
     public static Pet generatePetWithRandomTestData() {
+        return createPet(idGenerator());
+    }
+
+    public static Pet generatePetWithRandomTestData(Long id) {
+        return createPet(id);
+    }
+
+    private static Pet createPet(Long id) {
         return Pet.builder()
-                .id(idGenerator())
+                .id(id)
                 .category(Category.builder()
                         .id(idGenerator())
                         .name(nameGenerator()).build())

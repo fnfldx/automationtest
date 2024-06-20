@@ -25,4 +25,12 @@ public class PetClient extends BaseClient {
                 .when()
                 .post(PET_URL);
     }
+
+    public Response putPet(final Pet pet) {
+        return given()
+                .contentType(JSON)
+                .body(pet)
+                .when()
+                .put(PET_URL);
+    }
 }

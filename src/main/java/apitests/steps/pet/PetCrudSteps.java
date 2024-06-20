@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PetCrudSteps extends BaseSteps {
 
     private static final Pet newPet = generatePetWithRandomTestData();
+    private static Pet updatedPet;
 
     public PetCrudSteps(ResponseDetails response, PetClient petClient) {
         super(response, petClient);
@@ -25,6 +26,16 @@ public class PetCrudSteps extends BaseSteps {
     @When("Add a new pet to the store")
     public void add_a_new_pet_to_the_store() {
         response.setResponse(petClient.postPet(newPet));
+    }
+
+    @When("Update an existing pet")
+    public void update_an_existing_pet() {
+        add_a_new_pet_to_the_store();
+
+        final var petId = newPet.getId();
+        updatedPet = generatePetWithRandomTestData(petId);
+
+        response.setResponse(petClient.putPet(updatedPet));
     }
 
     @When("Finds Pets by status {string}")
@@ -46,5 +57,12 @@ public class PetCrudSteps extends BaseSteps {
         final Pet createdPet = response.getResponse().getBody().as(Pet.class);
 
         assertThat(createdPet).isEqualToComparingFieldByFieldRecursively(newPet);
+    }
+
+    @And("Check the response body of updated pet is correct")
+    public void check_the_response_body_of_updated_pet_is_correct() {
+        final var updatedPetFromResponse = response.getResponse().getBody().as(Pet.class);
+
+        assertThat(updatedPetFromResponse).isEqualToComparingFieldByFieldRecursively(updatedPet);
     }
 }
