@@ -43,6 +43,13 @@ public class PetCrudSteps extends BaseSteps {
         response.setResponse(petClient.deletePet(newPet.getId()));
     }
 
+    @When("Find pet by id")
+    public void find_pet_by_id() {
+        add_a_new_pet_to_the_store();
+
+        response.setResponse(petClient.getPetById(newPet.getId()));
+    }
+
     @When("Finds Pets by status {string}")
     public void finds_pets_by_status(String status) {
         response.setResponse(petClient.getPetsByStatus(status));
@@ -69,6 +76,13 @@ public class PetCrudSteps extends BaseSteps {
         final var updatedPetFromResponse = response.getResponse().getBody().as(Pet.class);
 
         assertThat(updatedPetFromResponse).isEqualToComparingFieldByFieldRecursively(updatedPet);
+    }
+
+    @And("Check the response body of found pet is correct")
+    public void check_the_response_body_of_found_pet_is_correct() {
+        final var foundPet = response.getResponse().getBody().as(Pet.class);
+
+        assertThat(foundPet).isEqualToComparingFieldByFieldRecursively(newPet);
     }
 
     @And("Check if pet is not found")
