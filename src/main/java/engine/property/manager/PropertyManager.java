@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertyManager {
     private static final Properties properties;
+    private static final Logger LOGGER = Logger.getLogger(PropertyManager.class.getName());
     public static ResourceBundle tr;
     private static PropertyManager propertyManagerInstance;
     private static Locale locale;
@@ -30,6 +31,7 @@ public class PropertyManager {
         try (FileInputStream input = new FileInputStream(configPath)) {
             properties.load(input);
             setTranslation();
+            logProperties(properties);
         } catch (IOException ex) {
             Logger.getLogger(PropertyManager.class.getName()).log(Level.SEVERE, "Error loading properties", ex);
         }
@@ -40,6 +42,12 @@ public class PropertyManager {
             propertyManagerInstance = new PropertyManager();
         }
         return propertyManagerInstance;
+    }
+
+    private static void logProperties(Properties properties) {
+        for (String key : properties.stringPropertyNames()) {
+            LOGGER.log(Level.INFO, key + ": " + properties.getProperty(key));
+        }
     }
 
     public static String getProperty(PropertyKeys key) {
