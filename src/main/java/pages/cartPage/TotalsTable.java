@@ -3,23 +3,30 @@ package pages.cartPage;
 import org.openqa.selenium.By;
 import pages.BasePage;
 
+import java.math.BigDecimal;
+
+import static enums.Currency.getPriceAsBigDecimal;
+
 public class TotalsTable {
-
-    protected BasePage basePage;
     public final String totalsTable = "//table[@id='totals_table']";
-    public By subTotalLocator = By.xpath(totalsTable + "//tbody/tr[1]/td[2]/span");
-    public By flatShippingRateLocator = By.xpath(totalsTable + "//tbody/tr[2]/td[2]/span");
-    public By totalLocator = By.xpath(totalsTable + "//tbody/tr[3]/td[2]/span");
+    public By subTotalLocator = By.xpath(totalsTable + "/tbody/tr[1]/td[2]");
+    public By flatShippingRateLocator = By.xpath(totalsTable + "/tbody/tr[2]/td[2]");
+    public By totalLocator = By.xpath(totalsTable + "/tbody/tr[3]/td[2]");
+    protected BasePage basePage;
 
-    void getSubTotalValue() {
-        basePage.getTextFromElement(subTotalLocator);
+    public TotalsTable() {
+        this.basePage = new BasePage();
     }
 
-    void getFlatShippingRateValue() {
-        basePage.getTextFromElement(flatShippingRateLocator);
+    public BigDecimal getSubTotalPrize() {
+        return getPriceAsBigDecimal(basePage.getTextFromElement(subTotalLocator));
     }
 
-    void getTotalValue() {
-        basePage.getTextFromElement(totalLocator);
+    public BigDecimal getFlatShippingRatePrize() {
+        return getPriceAsBigDecimal(basePage.getTextFromElement(flatShippingRateLocator));
+    }
+
+    public BigDecimal getTotalPrize() {
+        return getPriceAsBigDecimal(basePage.getTextFromElement(totalLocator));
     }
 }

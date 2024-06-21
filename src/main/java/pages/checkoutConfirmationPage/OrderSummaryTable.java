@@ -5,23 +5,53 @@ import pages.BasePage;
 
 import java.math.BigDecimal;
 
+import static engine.drivers.WebDriverFactory.getWebDriverInstance;
+import static enums.Currency.getPriceAsBigDecimal;
+
 public class OrderSummaryTable {
-
+    public final String orderSummaryXpath = "//div[@class='sidewidt']";
+    public final String productXpath = "//div[@class='sidewidt']/table[1]//tr";
+    public By productListTableLocator = By.xpath(orderSummaryXpath + "/table[1]");
+    public By totalsTableLocator = By.xpath(orderSummaryXpath + "/table[2]");
+    public By subTotalLocator = By.xpath(orderSummaryXpath + "/table[2]/tbody/tr[1]/td[2]");
+    public By flatShippingRateLocator = By.xpath(orderSummaryXpath + "/table[2]/tbody/tr[2]/td[2]");
+    public By totalLocator = By.xpath(orderSummaryXpath + "/table[2]/tbody/tr[3]/td[2]");
     protected BasePage basePage;
-    public final String totalsTable = "//*[@id='maincontainer']/div/div[2]/div[1]/table[2]";
-    public By subTotalLocator = By.xpath(totalsTable + "/tbody/tr[1]/td[2]/span");
-    public By flatShippingRateLocator = By.xpath(totalsTable + "/tbody/tr[2]/td[2]/span");
-    public By totalLocator = By.xpath(totalsTable + "/tbody/tr[3]/td[2]/span");
 
-    public BigDecimal getSubTotalValue() {
-        return new BigDecimal(basePage.getTextFromElement(subTotalLocator).trim());
+    public OrderSummaryTable() {
+        this.basePage = new BasePage();
     }
 
-    public BigDecimal getFlatShippingRateValue() {
-        return new BigDecimal(basePage.getTextFromElement(flatShippingRateLocator).trim());
+    public int getProductsListSize() {
+        return getWebDriverInstance().findElements(By.xpath(orderSummaryXpath)).size();
     }
 
-    public BigDecimal getTotalValue() {
-        return new BigDecimal(basePage.getTextFromElement(totalLocator).trim());
+    public String getProductNameFromProductsList(int productIndex) {
+        var formattedProductXpath = String.format("%s[%d]/td[1]/a", productXpath, productIndex);
+        return getWebDriverInstance().findElement(By.xpath(formattedProductXpath)).getText();
+    }
+
+    public int getProductQuantityFromProductsList(int productIndex) {
+        var formattedProductXpath = String.format("%s[%d]/td[1]", productXpath, productIndex);
+        var quantityText = getWebDriverInstance().findElement(By.xpath(formattedProductXpath)).getText();
+        var splitText = quantityText.split(" ");
+        return Integer.parseInt(splitText[0]);
+    }
+
+    public BigDecimal getProductPriceFromProductsList(int productIndex) {
+        var formattedProductXpath = String.format("%s[%d]/td[2]", productXpath, productIndex);
+        return getPriceAsBigDecimal(getWebDriverInstance().findElement(By.xpath(formattedProductXpath)).getText());
+    }
+
+    public BigDecimal getSubTotalPrice() {
+        return getPriceAsBigDecimal(basePage.getTextFromElement(subTotalLocator));
+    }
+
+    public BigDecimal getFlatShippingRatePrice() {
+        return getPriceAsBigDecimal(basePage.getTextFromElement(flatShippingRateLocator));
+    }
+
+    public BigDecimal getTotalPrice() {
+        return getPriceAsBigDecimal(basePage.getTextFromElement(totalLocator));
     }
 }

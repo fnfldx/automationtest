@@ -3,14 +3,13 @@ package pages.checkoutConfirmationPage;
 import org.openqa.selenium.By;
 import pages.BasePage;
 
-public class TableConfirmPaymentOptions {
-
+public class ConfirmPaymentOptionsTable {
+    public final String confirmPaymentOptionsTableXpath = "//table[contains(@class,'confirm_payment_options')]";
+    public By editPaymentButtonLocator = By.xpath(confirmPaymentOptionsTableXpath + "//a[1]");
+    public By editCouponButtonLocator = By.xpath(confirmPaymentOptionsTableXpath + "//a[2]");
     protected BasePage basePage;
 
-    public By editPaymentButtonLocator = By.xpath("//a[normalize-space()='Edit Payment']");
-    public By editCouponButtonLocator = By.xpath("//a[normalize-space()='Edit Coupon']");
-
-    public TableConfirmPaymentOptions() {
+    public ConfirmPaymentOptionsTable() {
         this.basePage = new BasePage();
     }
 
