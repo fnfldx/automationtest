@@ -1,6 +1,7 @@
 package engine.property.manager;
 
 import enums.BrowserName;
+import enums.Currency;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
