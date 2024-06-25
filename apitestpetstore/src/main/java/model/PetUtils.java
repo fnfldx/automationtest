@@ -1,8 +1,9 @@
-package apitests.model;
+package model;
 
+import java.util.Arrays;
 import java.util.Random;
 
-import static apitests.model.Status.AVAILABLE;
+import static model.Status.AVAILABLE;
 import static java.lang.Math.abs;
 import static java.util.Arrays.asList;
 import static java.util.UUID.randomUUID;
@@ -26,7 +27,7 @@ public class PetUtils {
                         .name(nameGenerator()).build())
                 .name(nameGenerator())
                 .photoUrls(asList(urlGenerator(), urlGenerator()))
-                .tags(asList(Tag.builder()
+                .tags(Arrays.asList(Tag.builder()
                         .id(idGenerator())
                         .name(nameGenerator()).build()))
                 .status(PET_STATUS)
