@@ -1,28 +1,22 @@
 package temporary.tests;
 
+import enums.MainPageSectionId;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import pages.checkoutConfirmationPage.CheckoutConfirmationPage;
 
 import static engine.drivers.WebDriverFactory.quitWebDriver;
-import static steps.BaseSteps.*;
+import static steps.BaseSteps.goToCart;
+import static steps.BaseSteps.openPage;
 import static steps.CartPageSteps.goToCheckout;
 import static steps.CheckoutConfirmationPageSteps.confirmOrder;
+import static steps.CheckoutConfirmationPageSteps.validateCheckoutSuccess;
 import static steps.GuestCheckoutPageSteps.fillGuestCheckoutForm;
 import static steps.GuestCheckoutPageSteps.submitGuestCheckoutForm;
 import static steps.LoginPageSteps.proceedAsGuest;
+import static steps.MainPageSteps.addProductToCart;
 
-public class TestCheckoutConfirmationPage extends BaseTest {
-
-    protected static CheckoutConfirmationPage checkoutConfirmationPage;
-
-    @BeforeAll
-    public static void setUp() {
-        checkoutConfirmationPage = new CheckoutConfirmationPage();
-    }
-
+public class TestBuyProductAsGuest extends BaseTest {
     @AfterEach
     public void tearDown() {
         quitWebDriver();
@@ -30,10 +24,10 @@ public class TestCheckoutConfirmationPage extends BaseTest {
 
     @Test
     @Tag("EndToEnd")
-    public void proceedToCheckout() {
+    public void buyProductAsGuest() {
         // Given:
         openPage();
-        addToCart();
+        addProductToCart(MainPageSectionId.FEATURES, 0);
         goToCart();
         goToCheckout();
         proceedAsGuest();
@@ -44,6 +38,6 @@ public class TestCheckoutConfirmationPage extends BaseTest {
         confirmOrder();
 
         // Then:
-        validateURL("https://automationteststore.com/index.php?rt=checkout/success");
+        validateCheckoutSuccess();
     }
 }

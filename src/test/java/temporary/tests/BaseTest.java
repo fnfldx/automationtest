@@ -1,38 +1,60 @@
 package temporary.tests;
 
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
+import static engine.cookie.manager.CookieManager.getCookieManagerInstance;
 import static engine.drivers.WebDriverFactory.getWebDriverInstance;
 import static engine.drivers.WebDriverFactory.quitWebDriver;
 import static engine.property.manager.PropertyManager.getPropertyManagerInstance;
-import static steps.BaseSteps.openPage;
-import static steps.BaseSteps.validateNewTabURL;
-import static steps.BaseSteps.clickOnFacebookHeaderButton;
-import static steps.BaseSteps.clickOnTwitterHeaderButton;
-import static steps.BaseSteps.clickOnLinkedinHeaderButton;
+import static enums.Currency.EUR;
+import static enums.Currency.GBP;
+import static enums.Currency.USD;
 import static steps.BaseSteps.clickOnFacebookFooterButton;
-import static steps.BaseSteps.clickOnTwitterFooterButton;
+import static steps.BaseSteps.clickOnFacebookHeaderButton;
 import static steps.BaseSteps.clickOnLinkedinFooterButton;
+import static steps.BaseSteps.clickOnLinkedinHeaderButton;
+import static steps.BaseSteps.clickOnTwitterFooterButton;
+import static steps.BaseSteps.clickOnTwitterHeaderButton;
+import static steps.BaseSteps.openPage;
+import static steps.BaseSteps.setGlobalCurrencyAndRefresh;
+import static steps.BaseSteps.validateGlobalCurrency;
+import static steps.BaseSteps.validateNewTabURL;
 
 public class BaseTest {
 
-    @BeforeClass
+    @BeforeAll
     public static void baseClassSetUp() {
         getPropertyManagerInstance();
     }
 
-    @Before
-    public void baseSetUp() {
-        getWebDriverInstance();
-    }
-
-    @AfterClass
+    @AfterAll
     public static void baseTearDown() {
         quitWebDriver();
+    }
+
+    @BeforeEach
+    public void baseSetUp() {
+        getWebDriverInstance();
+        openPage();
+        getCookieManagerInstance().setCookiesFromProperties();
+    }
+
+    @Test
+    public void setGlobalCurrency() {
+        // Given:
+        openPage();
+        // When and Then:
+        setGlobalCurrencyAndRefresh(EUR);
+        validateGlobalCurrency(EUR);
+        setGlobalCurrencyAndRefresh(GBP);
+        validateGlobalCurrency(GBP);
+        setGlobalCurrencyAndRefresh(USD);
+        validateGlobalCurrency(USD);
     }
 
     @Test

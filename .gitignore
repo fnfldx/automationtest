@@ -67,5 +67,7 @@ allure-results/
 schema/
 allure-report/
 *.properties
+!translation.properties
+!translation_en.properties
 *.cmd
 *.exe
