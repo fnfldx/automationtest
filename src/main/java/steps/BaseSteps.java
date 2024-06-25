@@ -4,9 +4,6 @@ import enums.Currency;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import pages.BasePage;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.BasePage;
 import pages.cartPage.CartPage;
 
 import static engine.cookie.manager.CookieManager.getCookieManagerInstance;
