@@ -63,4 +63,49 @@ public class BaseSteps {
         Assert.assertTrue("Current URL does not contain the expected part: " + expectedURLPart,
                 currentURL.contains(expectedURLPart));
     }
+
+    public static void validateNewTabURL(String expectedUrl) {
+        var driver = getWebDriverInstance();
+        var windowHandles = driver.getWindowHandles();
+        var newTabHandle = windowHandles.stream()
+                .filter(handle -> !handle.equals(driver.getWindowHandle()))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("New tab did not open"));
+        driver.switchTo().window(newTabHandle);
+        var actualUrl = driver.getCurrentUrl();
+        Assert.assertEquals("URL is not valid", expectedUrl, actualUrl);
+    }
+
+    public static void clickOnFacebookHeaderButton() {
+        var basePage = new BasePage();
+        basePage.clickOnElement(basePage.facebookHeaderButtonLocator);
+    }
+
+    public static void clickOnFacebookFooterButton() {
+        var basePage = new BasePage();
+        basePage.scrollToElement(basePage.facebookFooterButtonLocator);
+        basePage.clickOnElement(basePage.facebookFooterButtonLocator);
+    }
+
+    public static void clickOnTwitterHeaderButton() {
+        var basePage = new BasePage();
+        basePage.clickOnElement(basePage.twitterHeaderButtonLocator);
+    }
+
+    public static void clickOnTwitterFooterButton() {
+        var basePage = new BasePage();
+        basePage.scrollToElement(basePage.twitterFooterButtonLocator);
+        basePage.clickOnElement(basePage.twitterFooterButtonLocator);
+    }
+
+    public static void clickOnLinkedinHeaderButton() {
+        var basePage = new BasePage();
+        basePage.clickOnElement(basePage.linkedinHeaderButtonLocator);
+    }
+
+    public static void clickOnLinkedinFooterButton() {
+        var basePage = new BasePage();
+        basePage.scrollToElement(basePage.linkedinFooterButtonLocator);
+        basePage.clickOnElement(basePage.linkedinFooterButtonLocator);
+    }
 }
