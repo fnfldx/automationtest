@@ -55,21 +55,23 @@ Due to this fact the cucumber `features files` must be linked with java code `te
 Please see the following structure:
 
 ```bash
-src
-├── main
-│   ├── java
-│   │   ├── apitests
-│   │   │   ├── clients # methods implementations of the requests
-│   │   │   ├── model # objects usually represents the json objects from the response/request body
-│   │   │   ├── runner # runner of the test cases
-│   │   │   ├── steps # cucumber test steps implementations
-├── test
-│   ├── resources
-│   │   ├── cucumber
-│   │   │   ├── features # cucumber files with gherkin syntax
+├──src
+│   ├───main
+│   │   └───java
+│   │       ├───clients # methods implementations of the requests
+│   │       ├───model # objects usually represents the json objects from the response/request body
+│   │       └───steps # cucumber test steps implementations
+│   │          
+│   │          
+│   │   
+│   └── test
+│       ├───java
+│       │   └───runner # runner of the test cases
+│       │   
+│       └───resources
+│           └───cucumber 
+│               └───features # cucumber files with gherkin syntax
 ```
-
-
 
 ### Installation
 
