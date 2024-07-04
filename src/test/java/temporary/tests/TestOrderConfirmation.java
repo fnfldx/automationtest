@@ -11,6 +11,8 @@ import static steps.BaseSteps.*;
 import static steps.CartPageSteps.goToCheckout;
 import static steps.CartPageSteps.updateCart;
 import static steps.CheckoutConfirmationPageSteps.confirmOrder;
+import static steps.GuestCheckoutPageSteps.fillGuestCheckoutForm;
+import static steps.GuestCheckoutPageSteps.submitGuestCheckoutForm;
 import static steps.LoginPageSteps.proceedAsGuest;
 import static steps.OrderConfirmationSteps.*;
 
@@ -37,8 +39,8 @@ public class TestOrderConfirmation extends BaseTest {
         updateCart();
         goToCheckout();
         proceedAsGuest();
-        // TODO: Ilona's part with entering the data into fields
-        // TODO: Ilona's part with clicking a continue button
+        fillGuestCheckoutForm();
+        submitGuestCheckoutForm();
         confirmOrder();
 
         // When:
@@ -58,8 +60,8 @@ public class TestOrderConfirmation extends BaseTest {
         updateCart();
         goToCheckout();
         proceedAsGuest();
-        // TODO: Ilona's part with entering the data into fields
-        // TODO: Ilona's part with clicking a continue button
+        fillGuestCheckoutForm();
+        submitGuestCheckoutForm();
         confirmOrder();
 
         // When:
@@ -79,8 +81,8 @@ public class TestOrderConfirmation extends BaseTest {
         updateCart();
         goToCheckout();
         proceedAsGuest();
-        // TODO: Ilona's part with entering the data into fields
-        // TODO: Ilona's part with clicking a continue button
+        fillGuestCheckoutForm();
+        submitGuestCheckoutForm();
         confirmOrder();
 
         // When:
