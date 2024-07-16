@@ -14,8 +14,6 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class PetCrudSteps extends BaseSteps {
 
     private static final Pet newPet = PetUtils.generatePetWithRandomTestData();
@@ -85,14 +83,14 @@ public class PetCrudSteps extends BaseSteps {
     public void check_the_response_body_of_updated_pet_is_correct() {
         final var updatedPetFromResponse = response.getResponse().getBody().as(Pet.class);
 
-        assertThat(updatedPetFromResponse).isEqualToComparingFieldByFieldRecursively(updatedPet);
+        Assertions.assertThat(updatedPetFromResponse).isEqualToComparingFieldByFieldRecursively(updatedPet);
     }
 
     @And("Check the response body of found pet is correct")
     public void check_the_response_body_of_found_pet_is_correct() {
         final var foundPet = response.getResponse().getBody().as(Pet.class);
 
-        assertThat(foundPet).isEqualToComparingFieldByFieldRecursively(newPet);
+        Assertions.assertThat(foundPet).isEqualToComparingFieldByFieldRecursively(newPet);
     }
 
     @And("Check if pet is not found")
@@ -101,7 +99,7 @@ public class PetCrudSteps extends BaseSteps {
         final var response = petClient.getPetById(petId);
         final var message = response.jsonPath().getString("message");
 
-        assertThat(message).isEqualTo("Pet not found");
-        assertThat(response.getStatusCode()).isEqualTo(404);
+        Assertions.assertThat(message).isEqualTo("Pet not found");
+        Assertions.assertThat(response.getStatusCode()).isEqualTo(404);
     }
 }
