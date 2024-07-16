@@ -8,7 +8,7 @@ import pages.mainPage.MainPageSection;
 import static engine.drivers.WebDriverFactory.quitWebDriver;
 import static steps.BaseSteps.openPage;
 
-public class MainPageProductTest extends BaseTest {
+public class TestMainPageProduct extends BaseTest {
     @AfterEach
     public void tearDown() {
         quitWebDriver();
@@ -35,5 +35,4 @@ public class MainPageProductTest extends BaseTest {
 
         mainPageProduct.clickAddToCartButton();
     }
-
 }
