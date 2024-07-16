@@ -21,7 +21,7 @@ public class ChromeDriverManager implements WebDriverInterface {
         setWebDriverPath();
 
         var options = new ChromeOptions();
-        options.addArguments("--headless=new");
+        //options.addArguments("--headless=new");
         options.addArguments("start-maximized");
 
         return new ChromeDriver(options);
