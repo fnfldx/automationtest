@@ -18,17 +18,24 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Compile') {
             steps {
-                // Run Maven clean verify
-                sh 'mvn clean verify'
+                // Run Maven clean compile test-compile
+                sh 'mvn clean compile test-compile'
+            }
+        }
+
+        stage('Integration Test') {
+            steps {
+                // Run Maven failsafe:integration-test
+                sh 'mvn failsafe:integration-test'
             }
         }
 
         stage('Allure Report') {
             steps {
                 // Generate Allure report
-                allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
+                sh 'mvn allure:report'
             }
         }
     }
