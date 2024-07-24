@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         jdk 'JDK21'
-        maven 'Maven3' // Ensure this matches the name configured in Jenkins
+        maven 'Maven3'
     }
 
     environment {
