@@ -21,21 +21,21 @@ pipeline {
         stage('Compile') {
             steps {
                 // Run Maven clean compile test-compile
-                sh 'mvn clean compile test-compile'
+                bat 'mvn clean compile test-compile'
             }
         }
 
         stage('Integration Test') {
             steps {
                 // Run Maven failsafe:integration-test
-                sh 'mvn failsafe:integration-test'
+                bat 'mvn failsafe:integration-test'
             }
         }
 
         stage('Allure Report') {
             steps {
                 // Generate Allure report
-                sh 'mvn allure:report'
+                bat 'mvn allure:report'
             }
         }
     }
