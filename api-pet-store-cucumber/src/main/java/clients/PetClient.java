@@ -1,9 +1,10 @@
 package clients;
 
+import endpoints.Routes;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import model.Pet;
 import io.restassured.response.Response;
+import model.Pet;
 
 import java.io.File;
 
@@ -15,13 +16,14 @@ public class PetClient extends BaseClient {
         return RestAssured.given()
                 .when()
                 .queryParams(Pet.Fields.status, status)
-                .get(PET_URL + "findByStatus");
+                .get(Routes.PET_FIND_BY_STATUS);
     }
 
     public Response getPetById(final long petId) {
         return RestAssured.given()
+                .pathParam("petId", petId)
                 .when()
-                .get(PET_URL + petId);
+                .get(Routes.PET_FIND_BY_ID);
     }
 
     public Response postPet(final Pet pet) {
@@ -29,16 +31,17 @@ public class PetClient extends BaseClient {
                 .contentType(ContentType.JSON)
                 .body(pet)
                 .when()
-                .post(PET_URL);
+                .post(Routes.PET_ADD);
     }
 
     public Response postPetUploadImage(final long petId, final File file) {
         return RestAssured.given()
                 .accept(ContentType.JSON)
                 .contentType(ContentType.MULTIPART)
+                .pathParam("petId", petId)
                 .multiPart("file", file)
                 .when()
-                .post(PET_URL + petId + "/uploadImage");
+                .post(Routes.PET_UPLOAD_IMAGE);
     }
 
     public Response putPet(final Pet pet) {
@@ -46,12 +49,13 @@ public class PetClient extends BaseClient {
                 .contentType(ContentType.JSON)
                 .body(pet)
                 .when()
-                .put(PET_URL);
+                .put(Routes.PET_UPDATE);
     }
 
     public Response deletePet(final long petId) {
         return RestAssured.given()
+                .pathParam("petId", petId)
                 .when()
-                .delete(PET_URL + petId);
+                .delete(Routes.PET_DELETE);
     }
 }
