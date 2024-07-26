@@ -9,9 +9,9 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>uiautomationteststore</module>
-        <module>apipetstorecucumber</module>
-        <module>apipetstore</module>
+        <module>ui-automation-test-store</module>
+        <module>api-pet-store-cucumber</module>
+        <module>api-pet-store</module>
     </modules>
 
     <properties>
