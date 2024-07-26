@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>apipetstorecucumber</artifactId>
+    <artifactId>api-pet-store-cucumber</artifactId>
 
     <properties>
         <maven.compiler.source>22</maven.compiler.source>
