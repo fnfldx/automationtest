@@ -52,7 +52,7 @@ pipeline {
 
     post {
         always {
-            junit 'target/failsafe-reports/*.xml'
+            junit 'target/failsafe-reports/TEST-*.xml'
         }
 
         failure {
