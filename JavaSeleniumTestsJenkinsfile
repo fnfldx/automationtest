@@ -11,6 +11,12 @@ pipeline {
     }
 
     stages {
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()  // Clean the workspace
+            }
+        }
+
         stage('Checkout') {
             steps {
                 // Checkout the repository
