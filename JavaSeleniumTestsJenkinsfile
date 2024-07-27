@@ -30,8 +30,8 @@ pipeline {
 
         stage('Compile') {
             steps {
-                // Run Maven clean compile test-compile
-                bat 'mvn clean compile test-compile'
+                // Run Maven clean compile test-compile excluding Cucumber module
+                bat 'mvn clean compile test-compile -pl !api-pet-store-cucumber'
             }
         }
 
