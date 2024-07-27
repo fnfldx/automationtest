@@ -31,21 +31,21 @@ pipeline {
         stage('Compile') {
             steps {
                 // Run Maven clean compile test-compile excluding Cucumber module
-                bat 'mvn clean compile test-compile -pl !api-pet-store-cucumber'
+                bat 'mvn clean compile test-compile -pl ui-automation-test-store'
             }
         }
 
         stage('Integration Test') {
             steps {
                 // Run Maven failsafe:integration-test
-                bat 'mvn failsafe:integration-test'
+                bat 'mvn failsafe:integration-test -pl ui-automation-test-store'
             }
         }
 
         stage('Allure Report') {
             steps {
                 // Generate Allure report
-                bat 'mvn allure:report'
+                bat 'mvn allure:report -pl ui-automation-test-store'
             }
         }
     }
