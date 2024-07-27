@@ -59,8 +59,6 @@ pipeline {
 
     post {
         always {
-            // Archive test results and other artifacts
-            archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
             junit 'target/failsafe-reports/*.xml'
         }
 
