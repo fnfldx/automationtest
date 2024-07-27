@@ -53,7 +53,7 @@ pipeline {
     post {
         always {
             script {
-                bat 'dir target\\failsafe-reports'
+                bat 'dir **\\target\\failsafe-reports'
             }
             junit 'target/failsafe-reports/TEST-*.xml'
         }
