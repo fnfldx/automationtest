@@ -18,6 +18,14 @@ pipeline {
             }
         }
 
+        stage('Environment Info') {
+            steps {
+                // Print Java and Maven versions to verify
+                bat 'java -version'
+                bat 'mvn -version'
+            }
+        }
+
         stage('Compile') {
             steps {
                 // Run Maven clean compile test-compile
