@@ -54,7 +54,7 @@ pipeline {
         always {
             // Archive test results and other artifacts
             archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
-            junit 'target/surefire-reports/*.xml'
+            junit 'target/failsafe-reports/*.xml'
         }
 
         failure {
