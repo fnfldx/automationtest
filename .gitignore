@@ -66,8 +66,6 @@ temp/
 allure-results/
 schema/
 allure-report/
-*.properties
-!config.properties
 !translation.properties
 !translation_en.properties
 *.cmd
