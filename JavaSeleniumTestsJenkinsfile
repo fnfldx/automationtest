@@ -28,13 +28,6 @@ pipeline {
             }
         }
 
-        stage('Prepare Config') {
-            steps {
-                // Ensure the config.properties file is present in the expected directory
-                bat 'copy /Y C:\\Git\\automationteststore\\ui-automation-test-store\\src\\main\\resources\\config.properties src\\main\\resources\\config.properties'
-            }
-        }
-
         stage('Compile') {
             steps {
                 // Run Maven clean compile test-compile excluding Cucumber module
