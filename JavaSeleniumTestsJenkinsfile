@@ -56,7 +56,7 @@ pipeline {
             script {
                 bat 'dir ui-automation-test-store\\target\\failsafe-reports'
             }
-            junit 'ui-automation-test-store/target/failsafe-reports/TEST-*.xml'
+            junit testResults: 'ui-automation-test-store/target/failsafe-reports/TEST-*.xml', skipPublishingChecks: true
             archiveArtifacts 'ui-automation-test-store\\target\\allure-results\\**'
             allure([
                 includeProperties: false,
