@@ -56,6 +56,12 @@ pipeline {
                 bat 'dir ui-automation-test-store\\target\\failsafe-reports'
             }
             junit 'ui-automation-test-store/target/failsafe-reports/TEST-*.xml'
+            archiveArtifacts 'ui-automation-test-store\\target\\allure-results\\**'
+            allure([
+                includeProperties: false,
+                jdk: '',
+                results: [[path: 'ui-automation-test-store\\target\\allure-results']]
+            ])
         }
 
         failure {
