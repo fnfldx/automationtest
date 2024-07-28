@@ -9,7 +9,7 @@ pipeline {
 
     environment {
         JAVA_HOME = 'C:\\Java\\jdk-21'
-        PATH = "${env.JAVA_HOME}\\bin;${env.PATH}"
+        PATH = "${env.JAVA_HOME}\\bin;C:\\Java\\allure-2.30.0\\bin;${env.PATH}"
         MAVEN_OPTS = "-Xms256m -Xmx512m"
     }
 
@@ -61,7 +61,7 @@ pipeline {
             allure([
                 includeProperties: false,
                 jdk: '',
-                results: [[path: 'ui-automation-test-store\\target\\allure-results']]
+                results: [[path: 'ui-automation-test-store/target/allure-results']]
             ])
         }
 
