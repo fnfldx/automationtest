@@ -23,6 +23,7 @@ public class ChromeDriverManager implements WebDriverInterface {
         var options = new ChromeOptions();
         //options.addArguments("--headless=new");
         options.addArguments("start-maximized");
+        options.addArguments("--search-engine-choice-country");
 
         return new ChromeDriver(options);
     }
