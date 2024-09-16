@@ -14,10 +14,10 @@ import java.util.logging.Logger;
 @Getter
 public class PropertyManager {
     private static final Logger LOGGER = Logger.getLogger(PropertyManager.class.getName());
+    public static ResourceBundle tr;
     private static ConfigurationProvider configProvider;
     private static PropertyManager propertyManagerInstance;
     private static Locale locale;
-    public static ResourceBundle tr;
 
     private PropertyManager(ConfigurationProvider configProvider) {
         this.configProvider = configProvider;
