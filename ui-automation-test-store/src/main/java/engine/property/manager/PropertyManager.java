@@ -2,56 +2,45 @@ package engine.property.manager;
 
 import enums.BrowserName;
 import enums.Currency;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.openqa.selenium.Cookie;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Locale;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PropertyManager {
-    private static final Properties properties;
     private static final Logger LOGGER = Logger.getLogger(PropertyManager.class.getName());
     public static ResourceBundle tr;
+    private static ConfigurationProvider configProvider;
     private static PropertyManager propertyManagerInstance;
     private static Locale locale;
 
-    static {
-        properties = new Properties();
-        var configPath = "src/main/resources/config.properties";
-        try (FileInputStream input = new FileInputStream(configPath)) {
-            properties.load(input);
-            setTranslation();
-            logProperties(properties);
-        } catch (IOException ex) {
-            Logger.getLogger(PropertyManager.class.getName()).log(Level.SEVERE, "Error loading properties", ex);
-        }
+    private PropertyManager(ConfigurationProvider configProvider) {
+        this.configProvider = configProvider;
+        setTranslation();
+        logProperties();
     }
 
     public static synchronized PropertyManager getPropertyManagerInstance() {
         if (propertyManagerInstance == null) {
-            propertyManagerInstance = new PropertyManager();
+            var configFileProvider = new PropertiesFileConfigurationProvider("src/main/resources/config.properties");
+            propertyManagerInstance = new PropertyManager(configFileProvider);
         }
         return propertyManagerInstance;
     }
 
-    private static void logProperties(Properties properties) {
-        for (String key : properties.stringPropertyNames()) {
-            LOGGER.log(Level.INFO, key + ": " + properties.getProperty(key));
+    private static void logProperties() {
+        for (PropertyKeys key : PropertyKeys.values()) {
+            LOGGER.log(Level.INFO, key + ": " + getProperty(key));
         }
     }
 
     public static String getProperty(PropertyKeys key) {
-        return properties.getProperty(key.toString());
+        return configProvider.getProperty(key.toString());
     }
 
     public static void setProperty(String systemProperty, String systemStringValue) {

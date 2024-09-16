@@ -23,6 +23,7 @@ public class ChromeDriverManager implements WebDriverInterface {
         var options = new ChromeOptions();
         //options.addArguments("--headless=new");
         options.addArguments("start-maximized");
+        options.addArguments("--disable-search-engine-choice-screen");
 
         return new ChromeDriver(options);
     }
